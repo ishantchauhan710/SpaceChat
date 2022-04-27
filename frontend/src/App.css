@@ -22,10 +22,6 @@ html, body {
     flex: 1;
 }
 
-.container-login-page-form {
-    background-color: #355bc1;
-}
-
 .text-h1 {
     font-weight: 600;
     font-size: 2.8rem;
@@ -76,7 +72,7 @@ html, body {
 
 
 .container-login-page-side-screen {
-    background-color: #FFFFFF;
+    background-color: #EEEEEE;
     position: relative;
 }
 
@@ -100,3 +96,43 @@ html, body {
 .container-login-side-screen-buttons {
     margin-top: 30px;
 }
+
+
+/* Form */
+.container-login-form {
+    width: 60%;
+    background-color: #FFFFFF;
+    box-shadow: 1px 7px 10px rgba(0,0,0,0.2); 
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.text-secondary {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    color: #666666;
+}
+
+.container-login-page-form {
+    /* background-color: #355bc1; */
+    background-image: url("https://cdn.pixabay.com/photo/2016/11/18/22/58/stars-1837306_960_720.jpg");
+    /* background-color: rgba(0,0,0,1);  */
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.8);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.container-login-form-header-image img {
+    width: 50px;
+    height: 50px;
+}
+

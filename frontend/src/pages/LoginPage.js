@@ -1,51 +1,34 @@
 import React from 'react';
-import {Button, IconButton} from '@mui/material';
+import {Button, IconButton, TextField} from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ChatIcon from '@mui/icons-material/Chat';
+import SideScreenComponent from '../components/LoginPage/SideScreenComponent';
 
 export const LoginPage = () => {
   return (
     <div className='container-login-page'>
 
       <div className='container-login-page-form'>
+        <div className='container-login-form'>
 
+        
+
+          <div className="container-login-form-header-image"> 
+            <img src="https://cdn.shopify.com/s/files/1/1061/1924/products/Rocket_Emoji_1024x1024.png?v=1571606064" />
+          </div>
+
+          <span className='text-h2'>Login</span>
+          <TextField id="filled-basic" label="Email or Username" variant="outlined" size="small" fullWidth style={{marginTop: 15}} />
+          <TextField id="filled-basicc" type="password" label="Password" variant="outlined" size="small" fullWidth style={{marginTop: 15}} />
+          <Button variant="contained" style={{width: '100%', marginTop: 20}}>Login</Button>
+          <span className='text-secondary'>or</span>
+          <Button variant="outlined" style={{width: '100%', marginTop: 10}}>Create a new account</Button>
+          
+        </div>
       </div>
 
       <div className='container-login-page-side-screen'>
-         
-         <div className='container-login-page-side-screen-body'>
-         <span className='text-h1'>Welcome to SpaceChat</span>
-
-          <span className='text-h3' style={{marginTop: "10px"}}>
-            Discover people and make friends! SpaceChat provides an easy and secure way to chat with anyone around the world! Built with the power of NodeJs and Socket.io, SpaceChat is one of the best open source chat solutions for startups.
-          </span>
-          <br />
-          <span className='text-h2'>Why choose SpaceChat?</span>
-          <ul className='list-why-choose-us'>
-          <li>Free to use</li>
-          <li>Unlimited messages</li>
-          <li>Secure and fast</li>
-          <li>Strong data encryption</li>
-          <li>Open source</li>
-          </ul>
-
-          <div className='container-login-side-screen-buttons'>
-
-      
-
-            <Button style={{backgroundColor: "#171515"}} variant="contained" endIcon={<GitHubIcon />}>
-              Source Code
-            </Button>
-
-          </div>
-
-         </div>
-
-         <div className='container-login-footer'>
-           Made with &nbsp; <i className='material-icons'>favorite</i> &nbsp; by Ishant Chauhan
-         </div>
-
-
+         <SideScreenComponent />
       </div>
 
     
