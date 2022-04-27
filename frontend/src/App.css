@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.container-login-page {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container-login-page-form, .container-login-page-side-screen  {
+    height: 100%;
+    flex: 1;
+}
+
+.container-login-page-form {
+    background-color: #355bc1;
+}
+
+.text-h1 {
+    font-weight: 600;
+    font-size: 2.8rem;
+    color: #001014;
+    display: block;
+}
+
+.text-h2 {
+    font-weight: 600;
+    font-size: 2rem;
+    color: #001014;
+    display: block;
+}
+
+.text-h3 {
+    font-weight: 400;
+    font-size: 1.05rem;
+    color: #071a1e;
+    display: block;
+    line-height: 23px;
+}
+
+.list-why-choose-us {
+      list-style-type: none;
+      padding: 0;
+      margin: 0px 15px;
+  }
+
+  .list-why-choose-us li:first-child {
+      margin-top: 15px;
+  }
+
+.list-why-choose-us li {
+    margin: 7px 0;
+  }
+  
+.list-why-choose-us li::before {
+    font-family: sans-serif;
+    content: "✔";
+    color: white;
+    display: inline-block;
+    width: 1em;
+    background: #4caf50;
+    padding-left: 3px;
+    border-radius: 50%;
+    margin-right: 1em;
+  }
+
+
+.container-login-page-side-screen {
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+
+.container-login-page-side-screen-body {
+    margin: 50px;
+}
+
+.container-login-footer {
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid rgba(0,0,0,0.15);
+    width: 100%;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.container-login-side-screen-buttons {
+    margin-top: 30px;
+}
