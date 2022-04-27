@@ -1,0 +1,16 @@
+{
+  "name": "spacechat",
+  "version": "1.0.0",
+  "description": "An app that can let you chat with anyone around the globe",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon backend/server.js"
+  },
+  "author": "ishant chauhan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.0",
+    "nodemon": "^2.0.15"
+  }
+}
