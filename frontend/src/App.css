@@ -8,14 +8,57 @@
 html, body {
     margin: 0;
     padding: 0;
+    background-color: red;
+}
+
+.landing-page {
+    max-height: 100vh;
+    background-image: linear-gradient(#0a091c,#000000); 
+    overflow: hidden;
 }
 
 .container-landing-page {
-    min-height: 100vh;
     display: flex;
-    background-image: linear-gradient(#0a091c,#000000); 
-    /* background-image: linear-gradient(#020520,#102953); */
+    height: 90vh
 }
+
+.container-header {
+    height: 10vh;
+    border-bottom: 0px solid #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10px;
+}
+
+.container-header ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-header ul li {
+    margin-left: 20px;
+}
+
+.container-header ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.app-logo {
+    background-color: #fff;
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 
 .container-login-content, .container-login-animation {
     flex: 1;
