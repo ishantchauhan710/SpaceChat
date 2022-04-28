@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/system';
 import './App.css';
-import { LoginPage } from './pages/LoginPage';
+import { LandingPage } from './pages/LandingPage';
 import { appTheme } from './themes/appTheme';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   return (
     <ThemeProvider theme={mainTheme}>
       <div className="App">
-        <LoginPage />
+        <LandingPage />
       </div>
     </ThemeProvider>
   );
