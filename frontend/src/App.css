@@ -13,13 +13,12 @@ html, body {
 .container-landing-page {
     min-height: 100vh;
     display: flex;
-    /* background-image: linear-gradient(#5a6dff,#a33aff); */
-    background-image: linear-gradient(#020520,#102953);
+    background-image: linear-gradient(#0a091c,#000000); 
+    /* background-image: linear-gradient(#020520,#102953); */
 }
 
 .container-login-content, .container-login-animation {
     flex: 1;
-    padding: 40px;
 }
 
 .container-login-content {
@@ -27,13 +26,16 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0px 50px;
 }
+
+
 
 .login-content {
 }
 
 .text-h1 {
-    font-size: 4rem;
+    font-size: 3.6rem;
     font-weight: 800;
     line-height: 70px;
     display: block;
@@ -47,8 +49,12 @@ html, body {
     display: block;
 }
 
+.container-landing-page-buttons {
+    margin-top: 30px;
+}
 
 
 .container-login-animation {
-    border-left: 4px solid #999;
+    border-left: 0px solid #999;
+    padding: 50px 50px 0px 0px;
 }
