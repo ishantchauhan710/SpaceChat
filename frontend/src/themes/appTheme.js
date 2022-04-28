@@ -14,5 +14,12 @@ export const appTheme = createTheme({
       dark: '#ba000d',
       contrastText: '#000',
     },
+    success: {
+      light: '#76d275',
+      main: '#43a047',
+      dark: '#00701a',
+      contrastText: '#fff',
+    },
+    
   },
 });

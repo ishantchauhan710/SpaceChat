@@ -34,6 +34,7 @@ export const LandingPage = () => {
                 borderColor: "rgba(0,0,0,0)",
                 color: "#ffffff",
                 marginRight: 20,
+                fontSize: '1rem'
               }}
             >
               Login
@@ -45,7 +46,7 @@ export const LandingPage = () => {
                 textTransform: "none",
                 borderColor: "#ffffff",
                 color: "#ffffff",
-                marginRight: 20,
+                fontSize: '1rem'
               }}
             >
               Sign Up
@@ -67,11 +68,11 @@ export const LandingPage = () => {
               <div className="container-landing-page-buttons">
                 <Button
                   variant="contained"
+                  color="success"
                   style={{
                     fontSize: 18,
                     fontWeight: "bold",
-                    textTransform: "none",
-                    backgroundColor: "#388e3c",
+                    textTransform: "none"
                   }}
                 >
                   Get Started

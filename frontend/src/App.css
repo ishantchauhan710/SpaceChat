@@ -23,6 +23,8 @@ html, body {
 }
 
 .container-header {
+    width: 90vw;
+    margin: auto;
     height: 10vh;
     border-bottom: 0px solid #aaa;
     display: flex;
@@ -36,7 +38,14 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+    padding: 0;
 }
+
+.container-header ul li:first-child {
+    margin-left: 0px;
+}
+
 
 .container-header ul li {
     margin-left: 20px;
@@ -56,20 +65,21 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer
 }
 
 
 
 .container-login-content, .container-login-animation {
     flex: 1;
+    padding: 0px 50px 50px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container-login-content {
     color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px 50px;
 }
 
 
@@ -99,5 +109,4 @@ html, body {
 
 .container-login-animation {
     border-left: 0px solid #999;
-    padding: 50px 50px 0px 0px;
 }
