@@ -1,10 +1,17 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import Lottie from "lottie-react";
 import landingPageAnimation from "../data/anim/landing_page_animation.json";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import AuthModalComponent from "../components/LandingPage/AuthModalComponent";
 
 export const LandingPage = () => {
+  const [showAuthModal, setShowAuthModal] = useState(true);
+
+  const handleAuthModal = () => {
+    setShowAuthModal(!showAuthModal)
+  }
+
   return (
     <>
       <div className="landing-page">
@@ -26,7 +33,7 @@ export const LandingPage = () => {
             </li>
           </ul>
 
-          <div style={{marginLeft: "auto"}}>
+          <div style={{ marginLeft: "auto" }}>
             <Button
               variant="outlined"
               style={{
@@ -34,7 +41,7 @@ export const LandingPage = () => {
                 borderColor: "rgba(0,0,0,0)",
                 color: "#ffffff",
                 marginRight: 20,
-                fontSize: '1rem'
+                fontSize: "1rem",
               }}
             >
               Login
@@ -46,7 +53,7 @@ export const LandingPage = () => {
                 textTransform: "none",
                 borderColor: "#ffffff",
                 color: "#ffffff",
-                fontSize: '1rem'
+                fontSize: "1rem",
               }}
             >
               Sign Up
@@ -72,8 +79,9 @@ export const LandingPage = () => {
                   style={{
                     fontSize: 18,
                     fontWeight: "bold",
-                    textTransform: "none"
+                    textTransform: "none",
                   }}
+                  onClick={handleAuthModal}
                 >
                   Get Started
                 </Button>
@@ -90,6 +98,7 @@ export const LandingPage = () => {
                 >
                   View Source Code
                 </Button>
+                <AuthModalComponent open={showAuthModal} handleClose={handleAuthModal} />
               </div>
             </div>
           </div>
