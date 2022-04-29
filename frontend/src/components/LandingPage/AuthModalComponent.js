@@ -23,26 +23,14 @@ const AuthModalComponent = ({ open, handleClose, tabNum }) => {
     borderRadius: "7px",
   };
 
- 
-
   console.log(tabNum);
 
-  
-
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={style} className='container-auth-modal'>
+    <Modal open={open} onClose={handleClose}>
+      <Box sx={style} className="container-auth-modal">
         <TabContext value={tabNum}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList
-              aria-label="lab API tabs example"
-              variant="fullWidth"
-            >
+            <TabList variant="fullWidth">
               <Tab label="Login" value={1} />
               <Tab label="Signup" value={2} />
             </TabList>

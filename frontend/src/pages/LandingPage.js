@@ -4,21 +4,21 @@ import Lottie from "lottie-react";
 import landingPageAnimation from "../data/anim/landing_page_animation.json";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import AuthModalComponent from "../components/LandingPage/AuthModalComponent";
-import { colorOnPrimary, colorPrimaryVariant, colorTransparent } from "../data/color/appColor";
-import '../stylesheets/LandingPage.css';
+import {
+  colorOnPrimary,
+  colorPrimaryVariant,
+  colorTransparent,
+} from "../data/color/appColor";
+import "../stylesheets/LandingPage.css";
 
 export const LandingPage = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authModalTab, setAuthModalTab] = useState(1); // 0: Login, 1: Signup
-  
-
 
   const handleAuthModalTab = (tabNumber) => {
     setAuthModalTab(tabNumber);
     setShowAuthModal(!showAuthModal);
   };
-
-  
 
   return (
     <>
@@ -27,7 +27,9 @@ export const LandingPage = () => {
           <ul>
             <li style={{ marginRight: 20 }}>
               <div className="app-logo">
-                <RocketLaunchIcon style={{ color: "#0a091c", width: '65%', height: '65%' }} />
+                <RocketLaunchIcon
+                  style={{ color: "#0a091c", width: "65%", height: "65%" }}
+                />
               </div>
             </li>
             <li>
@@ -52,7 +54,7 @@ export const LandingPage = () => {
                 fontSize: "1.2rem",
               }}
               onClick={() => handleAuthModalTab(1)}
-              className='landing-page-login-signup-btn'
+              className="landing-page-login-signup-btn"
             >
               Login
             </Button>
@@ -62,9 +64,9 @@ export const LandingPage = () => {
               style={{
                 textTransform: "none",
                 borderColor: colorOnPrimary,
-                color: colorOnPrimary
+                color: colorOnPrimary,
               }}
-              className='landing-page-login-signup-btn'
+              className="landing-page-login-signup-btn"
               onClick={() => handleAuthModalTab(2)}
             >
               Sign Up
@@ -92,7 +94,7 @@ export const LandingPage = () => {
                     textTransform: "none",
                   }}
                   onClick={() => handleAuthModalTab(1)}
-                  className='landing-page-control-btn'
+                  className="landing-page-control-btn"
                 >
                   Get Started
                 </Button>
@@ -104,7 +106,7 @@ export const LandingPage = () => {
                     borderColor: colorOnPrimary,
                     color: colorOnPrimary,
                   }}
-                  className='landing-page-control-btn btn-view-source-code'
+                  className="landing-page-control-btn btn-view-source-code"
                 >
                   View Source Code
                 </Button>

@@ -5,7 +5,6 @@ import { LandingPage } from "./pages/LandingPage";
 import { appTheme } from "./data/themes/appTheme";
 import "./data/color/appColor.css";
 
-
 function App() {
   const mainTheme = createTheme(appTheme);
 
