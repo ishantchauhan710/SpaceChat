@@ -26,10 +26,8 @@ export const LandingPage = () => {
         <div className="container-header">
           <ul>
             <li style={{ marginRight: 20 }}>
-              <div className="app-logo">
-                <RocketLaunchIcon
-                  style={{ color: "#0a091c", width: "65%", height: "65%" }}
-                />
+              <div className="container-app-logo">
+                <img className="app-logo" src="./icons/app_logo_light.png" />
               </div>
             </li>
             <li>
@@ -104,7 +102,7 @@ export const LandingPage = () => {
                     fontWeight: "bold",
                     textTransform: "none",
                     borderColor: colorOnPrimary,
-                    color: colorOnPrimary,
+                    color: colorOnPrimary
                   }}
                   className="landing-page-control-btn btn-view-source-code"
                 >
