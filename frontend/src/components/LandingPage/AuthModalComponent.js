@@ -7,12 +7,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 
-const AuthModalComponent = ({ open, handleClose }) => {
+const AuthModalComponent = ({ open, handleClose, tabNum }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -23,11 +23,11 @@ const AuthModalComponent = ({ open, handleClose }) => {
     borderRadius: "7px",
   };
 
-  const [value, setValue] = React.useState("1");
+ 
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  console.log(tabNum);
+
+  
 
   return (
     <Modal
@@ -37,18 +37,17 @@ const AuthModalComponent = ({ open, handleClose }) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style} className='container-auth-modal'>
-        <TabContext value={value}>
+        <TabContext value={tabNum}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
-              onChange={handleChange}
               aria-label="lab API tabs example"
               variant="fullWidth"
             >
-              <Tab label="Login" value="1" />
-              <Tab label="Signup" value="2" />
+              <Tab label="Login" value={1} />
+              <Tab label="Signup" value={2} />
             </TabList>
           </Box>
-          <TabPanel value="1">
+          <TabPanel value={1}>
             <form autoComplete="off">
               <TextField
                 fullWidth
@@ -73,7 +72,7 @@ const AuthModalComponent = ({ open, handleClose }) => {
             </form>
           </TabPanel>
 
-          <TabPanel value="2">
+          <TabPanel value={2}>
             <form autoComplete="off">
               <TextField
                 fullWidth
