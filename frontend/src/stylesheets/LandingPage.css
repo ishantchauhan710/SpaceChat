@@ -71,8 +71,8 @@
     font-size: 1rem !important;
 }
 
-.landing-page-login-signup-btn:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+.landing-page-login-signup-btn:hover, .btn-view-source-code:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 
@@ -118,6 +118,18 @@
     width: 50vw;
 }
 
+.container-app-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    cursor: pointer
+}
+
+.app-logo {
+    width: 100%;
+    height: 100%;
+}
+
 /* Responsive Code */
 @media only screen and (min-width: 555px) and (max-width: 899px) {
     .container-login-animation {
@@ -144,15 +156,6 @@
     }
 
 
-    .app-logo {
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer
-    }
 
     .landing-page-login-signup-btn {
         font-size: 1.5rem !important;
@@ -186,7 +189,7 @@
 }
 
 
-@media only screen and (min-width: 0px) and (max-width: 554px) {
+@media only screen and (min-width: 400px) and (max-width: 554px) {
     .container-login-animation {
         display: none
     }
@@ -207,16 +210,6 @@
         display: none;
     }
 
-
-    .app-logo {
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer
-    }
 
     .landing-page-login-signup-btn {
         font-size: 1.5rem !important;
@@ -259,3 +252,71 @@
     }
 
 }
+
+
+@media only screen and (min-width: 0px) and (max-width: 399px) {
+    .container-login-animation {
+        display: none
+    }
+
+    .container-login-content {
+        flex: 1;
+        padding: 50px 50px 50px 50px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .container-header ul li:first-child {
+        display: inline;
+    }
+
+    .container-header ul li {
+        display: none;
+    }
+
+    
+
+
+    .landing-page-login-signup-btn {
+        display: none !important;
+    }
+
+    .landing-page-text-h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 50px;
+        display: block;
+    }
+
+    .landing-page-text-h2 {
+        font-size: 1.2rem;
+        font-weight: 400;
+        opacity: 0.75;
+        line-height: 30px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        display: block;
+    }
+
+    .landing-page-control-btn {
+        font-size: 1.2rem !important;
+    }
+
+    .container-landing-page-buttons {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .btn-view-source-code {
+        margin-left: 0px !important;
+        margin-top: 20px !important;
+    }
+
+    .container-auth-modal {
+        width: 95vw;
+    }
+
+}
+
