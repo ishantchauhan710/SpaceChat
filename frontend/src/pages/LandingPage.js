@@ -4,6 +4,8 @@ import Lottie from "lottie-react";
 import landingPageAnimation from "../data/anim/landing_page_animation.json";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import AuthModalComponent from "../components/LandingPage/AuthModalComponent";
+import { colorOnPrimary, colorPrimaryVariant, colorTransparent } from "../data/color/appColor";
+import '../stylesheets/LandingPage.css';
 
 export const LandingPage = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -38,8 +40,8 @@ export const LandingPage = () => {
               variant="outlined"
               style={{
                 textTransform: "none",
-                borderColor: "rgba(0,0,0,0)",
-                color: "#ffffff",
+                borderColor: colorTransparent,
+                color: colorOnPrimary,
                 marginRight: 20,
                 fontSize: "1.2rem",
               }}
@@ -53,8 +55,8 @@ export const LandingPage = () => {
               variant="outlined"
               style={{
                 textTransform: "none",
-                borderColor: "#ffffff",
-                color: "#ffffff"
+                borderColor: colorOnPrimary,
+                color: colorOnPrimary
               }}
               className='landing-page-login-signup-btn'
               onClick={handleAuthModal}
@@ -67,10 +69,10 @@ export const LandingPage = () => {
         <div className="container-landing-page">
           <div className="container-login-content">
             <div className="login-content">
-              <span className="text-h1">
+              <span className="landing-page-text-h1">
                 Discover friends and people around you
               </span>
-              <span className="text-h2">
+              <span className="landing-page-text-h2">
                 SpaceChat is the place where you can meet and chat with anyone
                 in this world! Built using the power of NodeJs and Socket.io,
                 this app is completely free and open source!
@@ -93,8 +95,8 @@ export const LandingPage = () => {
                   style={{
                     fontWeight: "bold",
                     textTransform: "none",
-                    borderColor: "#ffffff",
-                    color: "#ffffff",
+                    borderColor: colorOnPrimary,
+                    color: colorOnPrimary,
                   }}
                   className='landing-page-control-btn btn-view-source-code'
                 >

@@ -1,0 +1,6 @@
+:root {
+    --colorPrimary: #0a091c;
+    --colorPrimaryVariant: #000000;
+    --colorOnPrimary: #ffffff;
+    --colorTransparent: rgba(0,0,0,0);
+}

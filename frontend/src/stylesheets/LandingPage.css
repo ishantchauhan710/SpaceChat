@@ -1,0 +1,261 @@
+/* Landing Page */
+
+.landing-page {
+    max-height: 100vh;
+    background-image: linear-gradient(var(--colorPrimary), var(--colorPrimaryVariant));
+}
+
+.container-landing-page {
+    display: flex;
+    height: 90vh
+}
+
+.container-landing-page-buttons {
+    margin-top: 30px;
+}
+
+/* Header */
+
+.container-header {
+    width: 90vw;
+    margin: auto;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10px;
+}
+
+.container-header ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container-header ul li:first-child {
+    margin-left: 0px;
+}
+
+
+.container-header ul li {
+    margin-left: 20px;
+}
+
+.container-header ul li a {
+    color: var(--colorOnPrimary);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+/* Headings */
+
+.landing-page-text-h1 {
+    font-size: 3.6rem;
+    font-weight: 800;
+    line-height: 70px;
+    display: block;
+}
+
+.landing-page-text-h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    opacity: 0.75;
+    margin-top: 20px;
+    display: block;
+}
+
+.landing-page-login-signup-btn {
+    font-size: 1rem !important;
+}
+
+.landing-page-login-signup-btn:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+
+
+.landing-page-control-btn {
+    font-size: 1.1rem !important;
+}
+
+.btn-view-source-code {
+    margin-left: 20px !important;
+}
+
+
+/* Login Content*/
+
+.container-login-content {
+    color: var(--colorOnPrimary);
+    padding-left: 65px;
+}
+
+/* Animation Content */
+
+.container-login-animation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Other */
+
+.container-login-content,
+.container-login-animation {
+    flex: 1;
+    padding: 0px 50px 50px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-auth-modal {
+    width: 50vw;
+}
+
+/* Responsive Code */
+@media only screen and (min-width: 555px) and (max-width: 899px) {
+    .container-login-animation {
+        display: none
+    }
+
+    .container-login-content {
+        flex: 1;
+        padding: 50px 50px 50px 50px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: center;
+        align-content: center;
+    }
+
+
+    .container-header ul li:first-child {
+        display: inline;
+    }
+
+    .container-header ul li {
+        display: none;
+    }
+
+
+    .app-logo {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer
+    }
+
+    .landing-page-login-signup-btn {
+        font-size: 1.5rem !important;
+    }
+
+    .landing-page-text-h1 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        line-height: 70px;
+        display: block;
+    }
+
+    .landing-page-text-h2 {
+        font-size: 1.6rem;
+        font-weight: 400;
+        opacity: 0.75;
+        line-height: 40px;
+        margin-top: 20px;
+        display: block;
+    }
+
+
+    .landing-page-control-btn {
+        font-size: 1.6rem !important;
+    }
+
+    .container-auth-modal {
+        width: 95vw;
+    }
+
+}
+
+
+@media only screen and (min-width: 0px) and (max-width: 554px) {
+    .container-login-animation {
+        display: none
+    }
+
+    .container-login-content {
+        flex: 1;
+        padding: 50px 50px 50px 50px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .container-header ul li:first-child {
+        display: inline;
+    }
+
+    .container-header ul li {
+        display: none;
+    }
+
+
+    .app-logo {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer
+    }
+
+    .landing-page-login-signup-btn {
+        font-size: 1.5rem !important;
+    }
+
+    .landing-page-text-h1 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        line-height: 70px;
+        display: block;
+    }
+
+    .landing-page-text-h2 {
+        font-size: 1.8rem;
+        font-weight: 400;
+        opacity: 0.75;
+        line-height: 40px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        display: block;
+    }
+
+    .landing-page-control-btn {
+        font-size: 1.6rem !important;
+    }
+
+    .container-landing-page-buttons {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .btn-view-source-code {
+        margin-left: 0px !important;
+        margin-top: 20px !important;
+    }
+
+    .container-auth-modal {
+        width: 95vw;
+    }
+  
+}
