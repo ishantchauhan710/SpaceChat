@@ -6,11 +6,11 @@ import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import AuthModalComponent from "../components/LandingPage/AuthModalComponent";
 
 export const LandingPage = () => {
-  const [showAuthModal, setShowAuthModal] = useState(true);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const handleAuthModal = () => {
-    setShowAuthModal(!showAuthModal)
-  }
+    setShowAuthModal(!showAuthModal);
+  };
 
   return (
     <>
@@ -43,6 +43,7 @@ export const LandingPage = () => {
                 marginRight: 20,
                 fontSize: "1rem",
               }}
+              onClick={handleAuthModal}
             >
               Login
             </Button>
@@ -55,6 +56,7 @@ export const LandingPage = () => {
                 color: "#ffffff",
                 fontSize: "1rem",
               }}
+              onClick={handleAuthModal}
             >
               Sign Up
             </Button>
@@ -98,7 +100,10 @@ export const LandingPage = () => {
                 >
                   View Source Code
                 </Button>
-                <AuthModalComponent open={showAuthModal} handleClose={handleAuthModal} />
+                <AuthModalComponent
+                  open={showAuthModal}
+                  handleClose={handleAuthModal}
+                />
               </div>
             </div>
           </div>
