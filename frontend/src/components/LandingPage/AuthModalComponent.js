@@ -12,7 +12,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 
-const AuthModalComponent = ({ open, handleClose, tabNum }) => {
+const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -30,7 +30,7 @@ const AuthModalComponent = ({ open, handleClose, tabNum }) => {
       <Box sx={style} className="container-auth-modal">
         <TabContext value={tabNum}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList variant="fullWidth">
+            <TabList onChange={(event,tabValue) => setTabNum(tabValue)} variant="fullWidth">
               <Tab label="Login" value={1} />
               <Tab label="Signup" value={2} />
             </TabList>

@@ -113,6 +113,7 @@ export const LandingPage = () => {
                   open={showAuthModal}
                   handleClose={handleAuthModalTab}
                   tabNum={authModalTab}
+                  setTabNum={setAuthModalTab}
                 />
               </div>
             </div>
