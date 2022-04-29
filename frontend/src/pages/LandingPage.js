@@ -19,7 +19,7 @@ export const LandingPage = () => {
           <ul>
             <li style={{ marginRight: 20 }}>
               <div className="app-logo">
-                <RocketLaunchIcon style={{ color: "#0a091c" }} />
+                <RocketLaunchIcon style={{ color: "#0a091c", width: '65%', height: '65%' }} />
               </div>
             </li>
             <li>
@@ -41,9 +41,10 @@ export const LandingPage = () => {
                 borderColor: "rgba(0,0,0,0)",
                 color: "#ffffff",
                 marginRight: 20,
-                fontSize: "1rem",
+                fontSize: "1.2rem",
               }}
               onClick={handleAuthModal}
+              className='landing-page-login-signup-btn'
             >
               Login
             </Button>
@@ -53,9 +54,9 @@ export const LandingPage = () => {
               style={{
                 textTransform: "none",
                 borderColor: "#ffffff",
-                color: "#ffffff",
-                fontSize: "1rem",
+                color: "#ffffff"
               }}
+              className='landing-page-login-signup-btn'
               onClick={handleAuthModal}
             >
               Sign Up
@@ -79,27 +80,27 @@ export const LandingPage = () => {
                   variant="contained"
                   color="success"
                   style={{
-                    fontSize: 18,
                     fontWeight: "bold",
                     textTransform: "none",
                   }}
                   onClick={handleAuthModal}
+                  className='landing-page-control-btn'
                 >
                   Get Started
                 </Button>
                 <Button
                   variant="outlined"
                   style={{
-                    marginLeft: 20,
-                    fontSize: 18,
                     fontWeight: "bold",
                     textTransform: "none",
                     borderColor: "#ffffff",
                     color: "#ffffff",
                   }}
+                  className='landing-page-control-btn btn-view-source-code'
                 >
                   View Source Code
                 </Button>
+
                 <AuthModalComponent
                   open={showAuthModal}
                   handleClose={handleAuthModal}

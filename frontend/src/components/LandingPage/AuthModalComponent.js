@@ -18,7 +18,6 @@ const AuthModalComponent = ({ open, handleClose }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "50vw",
     bgcolor: "background.paper",
     boxShadow: 24,
     borderRadius: "7px",
@@ -37,7 +36,7 @@ const AuthModalComponent = ({ open, handleClose }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box sx={style} className='container-auth-modal'>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
