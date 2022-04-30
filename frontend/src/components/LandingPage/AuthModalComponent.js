@@ -13,7 +13,13 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { SnackbarComponent } from "../Common/SnackbarComponent";
 import { AppState } from "../../AppContext";
-import axios from 'axios';
+import axios from "axios";
+import { CONFIG_JSON } from "../../constants/config";
+import {
+  configureProfilePicture,
+  signupUserAccount,
+} from "../../logic/signupFunctions";
+import { SIGNUP_ENDPOINT } from "../../constants/endpoints";
 
 const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
   const style = {
@@ -26,14 +32,7 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
     borderRadius: "7px",
   };
 
-  const {
-    showSnackbar,
-    setShowSnackbar,
-    snackbarVariant,
-    setSnackbarVariant,
-    snackbarMessage,
-    setSnackbarMessage,
-  } = AppState();
+  const { setLoading, showSuccess, showError } = AppState();
 
   const [registerUserName, setRegisterUserName] = useState();
   const [registerUserEmail, setRegisterUserEmail] = useState();
@@ -43,90 +42,17 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
   const [registerUserProfilePicture, setRegisterUserProfilePicture] =
     useState();
 
-
-  const [loading, setLoading] = useState(false);
-
-  const showError = (errMsg) => {
-    setSnackbarMessage(errMsg);
-    setSnackbarVariant("error");
-    setShowSnackbar(true);
-  };
-
-  const showSuccess = (successMsg) => {
-    setSnackbarMessage(successMsg);
-    setSnackbarVariant("success");
-    setShowSnackbar(true);
-  };
-
-  
-
-  const configureProfilePicture = (picture) => {
-    if (!picture) {
-      showError("Please select an image");
-    }
-
-    if (picture.type === "image/jpeg" || picture.type === "image/png") {
-      const data = new FormData();
-      data.append("file", picture);
-      data.append("upload_preset", "notescout");
-      data.append("cloud_name", "ishantchauhan");
-      fetch("https://api.cloudinary.com/v1_1/ishantchauhan/image/upload", {
-        method: "post",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("Data:", data);
-          setRegisterUserProfilePicture(data.url.toString());
-        })
-        .catch((e) => {
-          showError(e);
-        });
-    } else {
-      return showError("Image format not supported");
-    }
-  };
-
- 
-
-  const signupUser = async () => {
-    setLoading(true);
-    if (!registerUserName) {
-      showError("Name cannot be blank");
-      return;
-    } else if (!registerUserEmail) {
-      showError("Email cannot be blank");
-      return;
-    } else if (!registerUserPassword) {
-      showError("Password cannot be blank");
-      return;
-    } else if (registerUserPassword !== registerUserConfirmPassword) {
-      showError("Passwords do not match");
-      return;
-    } else {
-      try {
-
-        const config = {headers: {
-          "Content-type":"application/json"
-        }}
-
-        console.log(registerUserName)
-
-        const {data} = await axios.post("/user/signup",{
-          userName:registerUserName,
-          userEmail:registerUserEmail,
-          userPassword:registerUserPassword,
-          userProfilePicture:registerUserProfilePicture
-        },config);
-
-        showSuccess("Account created successfully!");
-        setLoading(false);
-
-      } catch(error) {
-          showError(error.response.data.message);
-          setLoading(false);
-      }
-    }
+  const signupUser = () => {
+    signupUserAccount(
+      setLoading,
+      showError,
+      registerUserName,
+      registerUserEmail,
+      registerUserPassword,
+      registerUserConfirmPassword,
+      showSuccess,
+      registerUserProfilePicture
+    );
   };
 
   return (
@@ -218,7 +144,14 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
               <input
                 id="filePicker"
                 type="file"
-                onChange={(e) => configureProfilePicture(e.target.files[0])}
+                onChange={(e) =>
+                  configureProfilePicture(
+                    e.target.files[0],
+                    showError,
+                    setRegisterUserProfilePicture,
+                    setLoading
+                  )
+                }
                 style={{ display: "none" }}
               />
 
