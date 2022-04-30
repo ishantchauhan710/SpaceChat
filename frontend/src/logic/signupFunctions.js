@@ -91,9 +91,7 @@ export const signupUserAccount = async (
       registerUserName,
       registerUserEmail,
       registerUserPassword,
-      registerUserConfirmPassword,
-      showSuccess,
-      setLoading
+      registerUserConfirmPassword
     ) === false
   ) {
     setLoading(false)

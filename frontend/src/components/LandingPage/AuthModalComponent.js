@@ -21,8 +21,8 @@ import {
 } from "../../logic/signupFunctions";
 import { SIGNUP_ENDPOINT } from "../../constants/endpoints";
 
-import {useNavigate} from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
+import { loginUserAccount } from "../../logic/loginFunctions";
 
 const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
   const style = {
@@ -47,6 +47,9 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
   const [registerUserProfilePicture, setRegisterUserProfilePicture] =
     useState();
 
+  const [loginUserEmail, setLoginUserEmail] = useState();
+  const [loginUserPassword, setLoginUserPassword] = useState();
+
   const signupUser = () => {
     signupUserAccount(
       setLoading,
@@ -57,6 +60,17 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
       registerUserConfirmPassword,
       showSuccess,
       registerUserProfilePicture,
+      navigate
+    );
+  };
+
+  const loginUser = () => {
+    loginUserAccount(
+      setLoading,
+      showError,
+      loginUserEmail,
+      loginUserPassword,
+      showSuccess,
       navigate
     );
   };
@@ -78,8 +92,9 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
             <form autoComplete="off">
               <TextField
                 fullWidth
-                label="Email or Username"
+                label="Email"
                 variant="outlined"
+                onChange={(e) => setLoginUserEmail(e.target.value)}
               />
               <TextField
                 style={{ marginTop: 15 }}
@@ -87,10 +102,12 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
                 type="password"
                 label="Password"
                 variant="outlined"
+                onChange={(e) => setLoginUserPassword(e.target.value)}
               />
               <Button
                 style={{ width: "100%", marginTop: 20 }}
                 variant="contained"
+                onClick={loginUser}
               >
                 Login
               </Button>

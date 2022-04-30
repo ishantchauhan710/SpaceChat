@@ -72,6 +72,9 @@ const loginUserController = expressAsyncHandler(async (req, res) => {
         userProfilePicture: user.sc_userProfilePicture,
         token: generateToken(user._id),
       });
+    } else {
+      res.status(400);
+      throw new Error("Incorrect Password");
     }
   } else {
     res.status(400);
