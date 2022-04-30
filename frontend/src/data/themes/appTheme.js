@@ -9,9 +9,9 @@ export const appTheme = createTheme({
       contrastText: '#fff',
     },
     secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
+      light: '#fd6eec',
+      main: '#C738B9',
+      dark: '#930089',
       contrastText: '#000',
     },
     success: {
@@ -20,6 +20,7 @@ export const appTheme = createTheme({
       dark: '#00701a',
       contrastText: '#fff',
     },
+    
     
   },
 });

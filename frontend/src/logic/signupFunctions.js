@@ -42,6 +42,8 @@ export const configureProfilePicture = (
 
   if (!picture) {
     showError("Please select an image");
+    setLoading(false);
+    return;
   }
 
   if (picture.type === "image/jpeg" || picture.type === "image/png") {
@@ -64,8 +66,9 @@ export const configureProfilePicture = (
         setLoading(false);
       });
   } else {
-    return showError("Image format not supported");
+    showError("Image format not supported");
     setLoading(false);
+    return;
   }
 };
 
@@ -92,6 +95,7 @@ export const signupUserAccount = async (
       setLoading
     ) === false
   ) {
+    setLoading(false)
     return;
   }
 

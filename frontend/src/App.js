@@ -8,10 +8,15 @@ import { appTheme } from "./data/themes/appTheme";
 import "./data/color/appColor.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { SnackbarComponent } from "./components/Common/SnackbarComponent";
+import { LoadingComponent } from "./components/Common/LoadingComponent";
+import { AppState } from "./AppContext";
+
 
 function App() {
   const mainTheme = createTheme(appTheme);
 
+  const {loading} = AppState();
+  
   return (
     <ThemeProvider theme={mainTheme}>
       <Router>
@@ -20,7 +25,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
         </Routes>
       </Router>
-
+      {loading && <LoadingComponent />}
       <SnackbarComponent />
     </ThemeProvider>
   );
