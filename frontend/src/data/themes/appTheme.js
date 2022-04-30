@@ -19,6 +19,12 @@ export const appTheme = createTheme({
       main: '#43a047',
       dark: '#00701a',
       contrastText: '#fff',
+    },    
+    homePrimaryVariant: {
+      light: '#4a4c52',
+      main: '#22242A',
+      dark: '#4a4c52',
+      contrastText: '#fff',
     },
     
     

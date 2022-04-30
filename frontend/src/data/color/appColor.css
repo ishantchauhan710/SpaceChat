@@ -3,4 +3,10 @@
     --colorPrimaryVariant: #000000;
     --colorOnPrimary: #ffffff;
     --colorTransparent: rgba(0,0,0,0);
+
+    --colorHomePrimary: #0f0e13;
+    --colorHomePrimaryVariant: #22242A;
+
+    --colorOnline: #009124;
+
 }
