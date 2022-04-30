@@ -68,8 +68,19 @@ body {
     color: var(--colorOnPrimary);
 }
 
-.input-search-chat::placeholder {
-    color: var(255, 255, 255, 1);
+.input-search-user {
+    width: 100%;
+    background-color: var(--colorHomePrimary);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-size: 1.1rem;
+    color: var(--colorOnPrimary);
+}
+
+.container-create-chat-modal {
+    width: 50vw;
 }
 
 .container-home-label-control {
@@ -92,7 +103,7 @@ body {
 }
 
 .chat:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 
@@ -117,6 +128,12 @@ body {
     font-size: 0.9rem;
     margin-bottom: 5px;
     flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .chat-date-time {
@@ -127,6 +144,12 @@ body {
 .chat-last-message {
     font-size: 0.8rem;
     opacity: 0.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .online-status {
@@ -142,20 +165,20 @@ body {
 
 ::-webkit-scrollbar {
     width: 5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+
+/* Track */
+::-webkit-scrollbar-track {
     background: #f1f1f1;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
     background: #555;
-  } 
+}

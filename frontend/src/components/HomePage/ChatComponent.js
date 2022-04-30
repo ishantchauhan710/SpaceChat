@@ -1,4 +1,5 @@
 import React from "react";
+import { CreateChatModalComponent } from "./CreateChatModalComponent";
 
 export const ChatComponent = () => {
   return (
@@ -14,9 +15,10 @@ export const ChatComponent = () => {
           <span className="chat-date-time">27 Jan 2022</span>
         </div>
         <span className="chat-last-message">
-          Lorem ipsum lorem ipsum lorem ipsum
+        Lorem ipsum lorem ipsum lorem ipsum Lorem ipsum lorem ipsum lorem ipsum
         </span>
       </div>
+      <CreateChatModalComponent />
     </div>
   );
 };
