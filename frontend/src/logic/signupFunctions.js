@@ -80,7 +80,8 @@ export const signupUserAccount = async (
   registerUserPassword,
   registerUserConfirmPassword,
   showSuccess,
-  registerUserProfilePicture
+  registerUserProfilePicture,
+  navigate
 ) => {
   setLoading(true);
 
@@ -111,6 +112,8 @@ export const signupUserAccount = async (
       CONFIG_JSON
     );
 
+    localStorage.setItem("userInfo",JSON.stringify(data));
+    navigate('/home');
     showSuccess("Account created successfully!");
     setLoading(false);
   } catch (error) {

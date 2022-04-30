@@ -21,6 +21,9 @@ import {
 } from "../../logic/signupFunctions";
 import { SIGNUP_ENDPOINT } from "../../constants/endpoints";
 
+import {useNavigate} from 'react-router-dom';
+
+
 const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
   const style = {
     position: "absolute",
@@ -33,6 +36,8 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
   };
 
   const { setLoading, showSuccess, showError } = AppState();
+
+  const navigate = useNavigate();
 
   const [registerUserName, setRegisterUserName] = useState();
   const [registerUserEmail, setRegisterUserEmail] = useState();
@@ -51,7 +56,8 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
       registerUserPassword,
       registerUserConfirmPassword,
       showSuccess,
-      registerUserProfilePicture
+      registerUserProfilePicture,
+      navigate
     );
   };
 

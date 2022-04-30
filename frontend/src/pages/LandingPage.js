@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import React, { useState } from "react";
 import Lottie from "lottie-react";
 import landingPageAnimation from "../data/anim/landing_page_animation.json";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import AuthModalComponent from "../components/LandingPage/AuthModalComponent";
 import {
   colorOnPrimary,
@@ -19,6 +18,7 @@ export const LandingPage = () => {
     setAuthModalTab(tabNumber);
     setShowAuthModal(!showAuthModal);
   };
+
 
   return (
     <>
