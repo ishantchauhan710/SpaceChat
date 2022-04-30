@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import landingPageAnimation from "../data/anim/landing_page_animation.json";
 import AuthModalComponent from "../components/LandingPage/AuthModalComponent";
@@ -9,15 +9,23 @@ import {
   colorTransparent,
 } from "../data/color/appColor";
 import "../stylesheets/LandingPage.css";
+import { checkIfUserIsLoggedIn } from "../logic/authorizationFunctions";
+import { useNavigate } from "react-router-dom";
 
 export const LandingPage = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authModalTab, setAuthModalTab] = useState("1"); // 1: Login, 2: Signup
 
+  const navigate = useNavigate();
+
   const handleAuthModalTab = (tabNumber) => {
     setAuthModalTab(tabNumber);
     setShowAuthModal(!showAuthModal);
   };
+
+  useEffect(() => {
+    checkIfUserIsLoggedIn(navigate)
+  },[]);
 
 
   return (

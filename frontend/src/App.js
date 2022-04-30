@@ -15,8 +15,9 @@ import { AppState } from "./AppContext";
 function App() {
   const mainTheme = createTheme(appTheme);
 
-  const {loading} = AppState();
-  
+  const { loading } = AppState();
+
+
   return (
     <ThemeProvider theme={mainTheme}>
       <Router>
