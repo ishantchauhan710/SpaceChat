@@ -20,7 +20,7 @@ const signupUserController = expressAsyncHandler(async (req, res) => {
     throw new Error("Password cannot be blank");
   }
 
-  const userExists = await User.findOne({ userEmail });
+  const userExists = await User.findOne({ sc_userEmail:userEmail });
 
   if (userExists) {
     res.status(400);
