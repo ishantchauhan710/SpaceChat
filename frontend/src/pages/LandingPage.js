@@ -13,7 +13,7 @@ import "../stylesheets/LandingPage.css";
 
 export const LandingPage = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authModalTab, setAuthModalTab] = useState(1); // 0: Login, 1: Signup
+  const [authModalTab, setAuthModalTab] = useState("1"); // 1: Login, 2: Signup
 
   const handleAuthModalTab = (tabNumber) => {
     setAuthModalTab(tabNumber);
@@ -51,7 +51,7 @@ export const LandingPage = () => {
                 marginRight: 20,
                 fontSize: "1.2rem",
               }}
-              onClick={() => handleAuthModalTab(1)}
+              onClick={() => handleAuthModalTab("1")}
               className="landing-page-login-signup-btn"
             >
               Login
@@ -65,7 +65,7 @@ export const LandingPage = () => {
                 color: colorOnPrimary,
               }}
               className="landing-page-login-signup-btn"
-              onClick={() => handleAuthModalTab(2)}
+              onClick={() => handleAuthModalTab("2")}
             >
               Sign Up
             </Button>
@@ -91,7 +91,7 @@ export const LandingPage = () => {
                     fontWeight: "bold",
                     textTransform: "none",
                   }}
-                  onClick={() => handleAuthModalTab(1)}
+                  onClick={() => handleAuthModalTab("1")}
                   className="landing-page-control-btn"
                 >
                   Get Started

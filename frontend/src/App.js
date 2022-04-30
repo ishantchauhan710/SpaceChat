@@ -7,6 +7,7 @@ import { HomePage } from "./pages/HomePage";
 import { appTheme } from "./data/themes/appTheme";
 import "./data/color/appColor.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { SnackbarComponent } from "./components/Common/SnackbarComponent";
 
 function App() {
   const mainTheme = createTheme(appTheme);
@@ -19,6 +20,8 @@ function App() {
           <Route path="/home" element={<HomePage />} />
         </Routes>
       </Router>
+
+      <SnackbarComponent />
     </ThemeProvider>
   );
 }

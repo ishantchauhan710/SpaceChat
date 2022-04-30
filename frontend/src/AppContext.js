@@ -5,7 +5,7 @@ const AppContextProvider = createContext();
 const AppContext = ({children}) => {
 
     const [showSnackbar,setShowSnackbar] = useState(false);
-    const [snackbarVariant,setSnackbarVariant] = useState("");
+    const [snackbarVariant,setSnackbarVariant] = useState("success");
     const [snackbarMessage,setSnackbarMessage] = useState("");
     
     

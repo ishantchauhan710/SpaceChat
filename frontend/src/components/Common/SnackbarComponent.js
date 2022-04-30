@@ -6,7 +6,7 @@ import { AppState } from "../../AppContext";
   Usage: <SnackbarComponent variant="warning" message="ishant" />
 */
 
-export const SnackbarComponent = ({ variant, message }) => {
+export const SnackbarComponent = () => {
   const {
     showSnackbar,
     setShowSnackbar,
@@ -16,11 +16,6 @@ export const SnackbarComponent = ({ variant, message }) => {
     setSnackbarMessage,
   } = AppState();
 
-  useEffect(() => {
-    setSnackbarVariant(variant);
-    setSnackbarMessage(message);
-    setShowSnackbar(true);
-  });
 
   const positionState = {
     vertical: "bottom",
