@@ -1,5 +1,7 @@
 node_modules
 
+.env
+
 # dependencies
 frontend/node_modules
 frontend/.pnp

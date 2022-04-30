@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { Alert, Snackbar } from "@mui/material";
-import { useState } from "react";
 import { AppState } from "../../AppContext";
+
+/*
+  Usage: <SnackbarComponent variant="warning" message="ishant" />
+*/
 
 export const SnackbarComponent = ({ variant, message }) => {
   const {
@@ -17,14 +20,14 @@ export const SnackbarComponent = ({ variant, message }) => {
     setSnackbarVariant(variant);
     setSnackbarMessage(message);
     setShowSnackbar(true);
-  }, []);
-
-  const [positionState, setPositionState] = useState({
-    vertical: "bottom",
-    horizontal: "center",
   });
 
-  const { vertical, horizontal, open } = positionState;
+  const positionState = {
+    vertical: "bottom",
+    horizontal: "center",
+  };
+
+  const { vertical, horizontal } = positionState;
 
   const handleClose = () => {
     setShowSnackbar(false);
