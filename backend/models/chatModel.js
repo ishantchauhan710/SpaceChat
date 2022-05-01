@@ -22,7 +22,8 @@ const chatSchema = mongoose.Schema(
     },
     chatAdmin: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "chatAdmin",
+      ref: "SpaceChat_User",
+      default: null,
     },
   },
   { timestamps: true }
