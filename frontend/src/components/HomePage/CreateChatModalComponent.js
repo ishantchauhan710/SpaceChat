@@ -26,11 +26,11 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
   const { currentUser, setCurrentUser } = AppState();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchGroupUserQuery, setSearchGroupUserQuery] = useState("");
-  
 
   useEffect(() => {
     setCurrentUser(JSON.parse(localStorage.getItem("userInfo")));
   }, []);
+
 
   const style = {
     position: "absolute",
@@ -47,36 +47,36 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
   const [tabNum, setTabNum] = useState("1");
   const [searchResults, setSearchResults] = useState([]);
   const [searchGroupUserResults, setSearchGroupUserResults] = useState([]);
-  
+
   const [loading, setLoading] = useState(false);
 
   const { showError } = AppState();
 
+  const [groupMembers, setGroupMembers] = useState([]);
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSearchResults([]);
-      searchUser(searchQuery,setSearchResults);
+      searchUser(searchQuery, setSearchResults);
     }, 600);
     return () => {
       clearTimeout(timeout);
     };
   }, [searchQuery]);
 
-
-
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSearchGroupUserResults([]);
-      searchUser(searchGroupUserQuery,setSearchGroupUserResults);
+      searchUser(searchGroupUserQuery, setSearchGroupUserResults);
     }, 600);
     return () => {
       clearTimeout(timeout);
     };
   }, [searchGroupUserQuery]);
 
-  
 
-  const searchUser = async (searchWhom,setSearchWhom) => {
+
+  const searchUser = async (searchWhom, setSearchWhom) => {
     let trimmedSearchQuery = trimString(searchWhom);
     if (trimmedSearchQuery === null) {
       return;
@@ -99,7 +99,19 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
     }
   };
 
-  const handleDelete = () => {};
+  const removeMemberFromGroup = (member) => {
+    try {
+      const updatedGroupMembers = groupMembers.filter((groupMember) => {
+        console.log("Group Member", groupMember);
+        console.log("Member", member);
+        return groupMember !== member;
+      });
+      setGroupMembers(updatedGroupMembers);
+      console.log("Chip Deleted", updatedGroupMembers);
+    } catch (e) {
+      console.log("Error", e.message);
+    }
+  };
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -150,20 +162,7 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
           </TabPanel>
 
           <TabPanel value="2">
-            <input
-              className="input-search-user"
-              placeholder="Group Name"
-            />
-
-            <div className="container-group-member-chips">
-              <Chip
-                size="small"
-                color="success"
-                label="Deletable"
-                onDelete={handleDelete}
-              />
-            </div>
-
+            <input className="input-search-user" placeholder="Group Name" />
             <input
               className="input-search-user"
               placeholder="Add Members"
@@ -191,10 +190,29 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
                 {!loading &&
                   searchGroupUserResults.length > 0 &&
                   searchGroupUserResults.map((searchItem) => (
-                    <UserSearchResultComponent user={searchItem} />
+                    <UserSearchResultComponent
+                      key={searchItem.sc_userEmail}
+                      groupMembers={groupMembers}
+                      setGroupMembers={setGroupMembers}
+                      user={searchItem}
+                    />
                   ))}
               </div>
+              
             </div>
+            <div className="container-group-member-chips">
+                {groupMembers.length > 0 &&
+                  groupMembers.map((member) => (
+                    <Chip
+                      size="small"
+                      color="homePrimary"
+                      label={member}
+                      onDelete={() => removeMemberFromGroup(member)}
+                      style={{ marginLeft: 10, marginTop: 7 }}
+                    />
+                  ))}
+              </div>
+              <Button color="success" variant="contained" style={{width: "100%", margin: "20px 20px 10px 10px"}}>Create Group</Button>
           </TabPanel>
         </TabContext>
       </Box>
