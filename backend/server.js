@@ -2,7 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const app = express();
+const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+
 const { urlNotFoundMiddleware, handleErrorFoundMiddleware } = require("./middlewares/errorMiddleware");
 
 dotenv.config();
@@ -15,7 +17,8 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use("/user", userRoutes);
+app.use("/auth", authRoutes);
+app.use("/user",userRoutes);
 
 const PORT = process.env.PORT;
 

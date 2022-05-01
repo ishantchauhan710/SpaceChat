@@ -1,2 +1,2 @@
-export const SIGNUP_ENDPOINT = "/user/signup"
-export const LOGIN_ENDPOINT = "/user/login"
+export const SIGNUP_ENDPOINT = "/auth/signup"
+export const LOGIN_ENDPOINT = "/auth/login"
