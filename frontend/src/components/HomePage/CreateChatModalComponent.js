@@ -26,33 +26,16 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
   const { currentUser, setCurrentUser } = AppState();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchGroupUserQuery, setSearchGroupUserQuery] = useState("");
+  const [tabNum, setTabNum] = useState("1");
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchGroupUserResults, setSearchGroupUserResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [groupMembers, setGroupMembers] = useState([]);
+  const { showError } = AppState();
 
   useEffect(() => {
     setCurrentUser(JSON.parse(localStorage.getItem("userInfo")));
   }, []);
-
-
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    borderRadius: "7px",
-    backgroundColor: "#22242A",
-    color: "#fff",
-  };
-
-  const [tabNum, setTabNum] = useState("1");
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchGroupUserResults, setSearchGroupUserResults] = useState([]);
-
-  const [loading, setLoading] = useState(false);
-
-  const { showError } = AppState();
-
-  const [groupMembers, setGroupMembers] = useState([]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -74,7 +57,17 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
     };
   }, [searchGroupUserQuery]);
 
-
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    borderRadius: "7px",
+    backgroundColor: "#22242A",
+    color: "#fff",
+  };
 
   const searchUser = async (searchWhom, setSearchWhom) => {
     let trimmedSearchQuery = trimString(searchWhom);
@@ -198,21 +191,26 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
                     />
                   ))}
               </div>
-              
             </div>
             <div className="container-group-member-chips">
-                {groupMembers.length > 0 &&
-                  groupMembers.map((member) => (
-                    <Chip
-                      size="small"
-                      color="secondary"
-                      label={member}
-                      onDelete={() => removeMemberFromGroup(member)}
-                      style={{ marginLeft: 10, marginTop: 7 }}
-                    />
-                  ))}
-              </div>
-              <Button color="success" variant="contained" style={{width: "100%", margin: "20px 20px 10px 10px"}}>Create Group</Button>
+              {groupMembers.length > 0 &&
+                groupMembers.map((member) => (
+                  <Chip
+                    size="small"
+                    color="secondary"
+                    label={member}
+                    onDelete={() => removeMemberFromGroup(member)}
+                    style={{ marginLeft: 10, marginTop: 7 }}
+                  />
+                ))}
+            </div>
+            <Button
+              color="success"
+              variant="contained"
+              style={{ width: "100%", margin: "20px 20px 10px 10px" }}
+            >
+              Create Group
+            </Button>
           </TabPanel>
         </TabContext>
       </Box>

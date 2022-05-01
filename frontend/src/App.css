@@ -31,9 +31,12 @@ body {
     color: var(--colorOnPrimary);
 }
 
-.container-chats,
-.container-messages {
+.container-chats {
     padding: 10px;
+}
+
+.container-messages {
+    padding: 0px;
 }
 
 .container-chats {
@@ -260,4 +263,38 @@ body {
 
 .container-group-member-chips {
     padding: 0px 10px 0px 10px;
+}
+
+.message-app-bar {
+    background-color: var(--colorHomePrimary);
+    padding: 10px 20px;
+    font-size: 1.3rem;
+    box-shadow: 1px 5px 5px rgba(0,0,0,0.27);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.message-details {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.message-profile-picture {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.message-user-name {
+    font-size: 1.5rem;
+    display: block;
+    margin-left: 15px;
+}
+
+.container-settings-icon {
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 10px;
 }
