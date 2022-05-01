@@ -17,7 +17,7 @@ const createChatController = expressAsyncHandler(async (req, res) => {
       { chatUsers: { $elemMatch: { $eq: userId } } },
     ],
   })
-    .populate("chatUsers", "-password")
+    .populate("chatUsers", "-sc_userPassword")
     .populate("lastMessage");
 
   if (chatExists.length > 0) {
@@ -35,7 +35,7 @@ const createChatController = expressAsyncHandler(async (req, res) => {
 
     const finalChat = await Chat.findOne({ _id: newChat._id }).populate(
       "chatUsers",
-      "-password"
+      "-sc_userPassword"
     );
 
     res.status(200).send(finalChat);
@@ -45,4 +45,30 @@ const createChatController = expressAsyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createChatController };
+const getChatsController = expressAsyncHandler(async (req, res) => {
+  try {
+    Chat.find({
+      chatUsers: {
+        $elemMatch: { $eq: req.user._id },
+      },
+    })
+      .populate("chatUsers", "-sc_userPassword")
+      .populate("chatAdmin", "-sc_userPassword")
+      .sort({
+        updatedAt: -1,
+      })
+      .then(async (results) => {
+        results = await User.populate(results, {
+          path: "lastMessage.messageSender",
+          select: "sc_userName sc_userEmail sc_userProfilePicture",
+        });
+
+        res.status(200).send(results);
+      });
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
+});
+
+module.exports = { createChatController, getChatsController };
