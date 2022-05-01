@@ -183,9 +183,17 @@ body {
     background: #555;
 }
 
+.container-group-search {
+    padding: 0px 10px 10px 10px;
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
 .container-user-search {
-    padding: 20px 10px 10px 10px;
-    max-height: 400px;
+    padding: 0px 10px 10px 10px;
+    margin-top: 20px;
+    max-height: 300px;
     overflow-y: auto;
 }
 
@@ -202,6 +210,7 @@ body {
     margin-bottom: 2px;
     position: relative;
 }
+
 
 .user-search-result:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -249,3 +258,6 @@ body {
     -webkit-box-orient: vertical;
 }
 
+.container-group-member-chips {
+    padding: 10px;
+}
