@@ -3,3 +3,12 @@ export const CONFIG_JSON = {
     "Content-type": "application/json",
   },
 };
+
+export const getAuthorizedConfig = (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer: ${token}`,
+    },
+  };
+  return config;
+}

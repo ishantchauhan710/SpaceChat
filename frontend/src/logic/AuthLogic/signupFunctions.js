@@ -1,6 +1,6 @@
 import axios from "axios";
-import { CONFIG_JSON } from "../constants/config";
-import { SIGNUP_ENDPOINT } from "../constants/endpoints";
+import { CONFIG_JSON } from "../../constants/config";
+import { SIGNUP_ENDPOINT } from "../../constants/endpoints";
 
 export const validateSignup = (
   showError,

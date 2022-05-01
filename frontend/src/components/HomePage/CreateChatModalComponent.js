@@ -1,35 +1,75 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
-    Box,
-    Button,
-    Modal,
-    Tab,
-    Tabs,
-    TextField,
-    Typography,
-  } from "@mui/material";
-  import TabContext from "@mui/lab/TabContext";
-  import TabList from "@mui/lab/TabList";
-  import TabPanel from "@mui/lab/TabPanel";
-  
+  Box,
+  Button,
+  Modal,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+} from "@mui/material";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import { SEARCH_USER_ENDPOINT } from "../../constants/endpoints";
+import axios from "axios";
 
-    const style = {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      bgcolor: "background.paper",
-      boxShadow: 24,
-      borderRadius: "7px",
-      backgroundColor: "#22242A",
-      color: "#fff"
-};
-  
+import { AppState } from "../../AppContext";
+import { trimString } from "../../util/StringUtil";
+import { getAuthorizedConfig } from "../../constants/config";
 
-export const CreateChatModalComponent = ({ open, handleClose}) => {
+export const CreateChatModalComponent = ({ open, handleClose }) => {
+  const { currentUser, setCurrentUser } = AppState();
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const [tabNum,setTabNum] = useState("1");
+  useEffect(() => {
+    setCurrentUser(JSON.parse(localStorage.getItem("userInfo")));
+  }, []);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    borderRadius: "7px",
+    backgroundColor: "#22242A",
+    color: "#fff",
+  };
+
+  const [tabNum, setTabNum] = useState("1");
+
+  const {showError} = AppState();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      searchUser(searchQuery);
+    }, 600);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [searchQuery]);
+
+  const searchUser = async () => {
+    let trimmedSearchQuery = trimString(searchQuery);
+    if (trimmedSearchQuery === null) {
+      return;
+    }
+
+    const searchUrl = SEARCH_USER_ENDPOINT + `?search=${trimmedSearchQuery}`;
+    console.log(searchUrl);
+
+    try {
+      //console.log('Token: ',currentUser.token)
+      const config = getAuthorizedConfig(currentUser.token);
+      const { data } = await axios.get(searchUrl, config);
+      console.log(data);
+    } catch (e) {
+      showError(e.message)
+    }
+  };
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -39,7 +79,7 @@ export const CreateChatModalComponent = ({ open, handleClose}) => {
             <TabList
               onChange={(event, tabValue) => setTabNum(tabValue)}
               variant="fullWidth"
-              TabIndicatorProps={{style: {background:'#fff'}}}
+              TabIndicatorProps={{ style: { background: "#fff" } }}
               textColor="success"
             >
               <Tab label="Single Chat" value="1" />
@@ -47,13 +87,14 @@ export const CreateChatModalComponent = ({ open, handleClose}) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            
-        <input className="input-search-user" placeholder="Username or Email" />
+            <input
+              className="input-search-user"
+              placeholder="Username or Email"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </TabPanel>
 
-          <TabPanel value="2">
-            Ishant
-          </TabPanel>
+          <TabPanel value="2">Ishant</TabPanel>
         </TabContext>
       </Box>
     </Modal>

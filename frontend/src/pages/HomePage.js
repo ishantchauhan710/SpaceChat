@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { checkIfUserIsLoggedOut } from "../logic/authorizationFunctions";
+import { checkIfUserIsLoggedOut } from "../logic/AuthLogic/authorizationFunctions";
 
+import { AppState } from "../AppContext";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { ChatComponent } from "../components/HomePage/ChatComponent";
@@ -10,11 +11,18 @@ import { CreateChatModalComponent } from "../components/HomePage/CreateChatModal
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
 
+  const { currentUser, setCurrentUser } = AppState();
   const handleCreateChatModalTab = (tabNumber) => {
     setShowCreateChatModal(!showCreateChatModal);
   };
 
   const chatCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    checkIfUserIsLoggedOut(navigate);
+  }, []);
 
   return (
     <div className="container-home-page">
@@ -28,9 +36,7 @@ export const HomePage = () => {
             aria-label="add"
             onClick={() => setShowCreateChatModal(true)}
           >
-            <AddIcon
-              style={{ transform: "scale(1.4)" }}
-            />
+            <AddIcon style={{ transform: "scale(1.4)" }} />
           </Fab>
         </div>
 

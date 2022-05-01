@@ -9,7 +9,7 @@ import {
   colorTransparent,
 } from "../data/color/appColor";
 import "../stylesheets/LandingPage.css";
-import { checkIfUserIsLoggedIn } from "../logic/authorizationFunctions";
+import { checkIfUserIsLoggedIn } from "../logic/AuthLogic/authorizationFunctions";
 import { useNavigate } from "react-router-dom";
 
 export const LandingPage = () => {

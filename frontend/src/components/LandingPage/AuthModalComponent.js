@@ -1,28 +1,17 @@
-import {
-  Box,
-  Button,
-  Modal,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Modal, Tab, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { SnackbarComponent } from "../Common/SnackbarComponent";
 import { AppState } from "../../AppContext";
-import axios from "axios";
-import { CONFIG_JSON } from "../../constants/config";
+
+import { useNavigate } from "react-router-dom";
+import { loginUserAccount } from "../../logic/AuthLogic/loginFunctions";
+
 import {
   configureProfilePicture,
   signupUserAccount,
-} from "../../logic/signupFunctions";
-import { SIGNUP_ENDPOINT } from "../../constants/endpoints";
-
-import { useNavigate } from "react-router-dom";
-import { loginUserAccount } from "../../logic/loginFunctions";
+} from "../../logic/AuthLogic/signupFunctions.js";
 
 const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
   const style = {

@@ -21,6 +21,8 @@ const AppContext = ({ children }) => {
     setShowSnackbar(true);
   };
 
+  const [currentUser, setCurrentUser] = useState();
+
   return (
     <AppContextProvider.Provider
       value={{
@@ -34,6 +36,8 @@ const AppContext = ({ children }) => {
         setLoading,
         showSuccess,
         showError,
+        currentUser,
+        setCurrentUser,
       }}
     >
       {children}

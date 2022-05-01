@@ -1,6 +1,6 @@
 import axios from "axios";
-import { LOGIN_ENDPOINT } from "../constants/endpoints";
-import { CONFIG_JSON } from "../constants/config";
+import { LOGIN_ENDPOINT } from "../../constants/endpoints";
+import { CONFIG_JSON } from "../../constants/config";
 
 export const validateLogin = (
     showError,
