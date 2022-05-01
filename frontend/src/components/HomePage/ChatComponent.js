@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CreateChatModalComponent } from "./CreateChatModalComponent";
 
-export const ChatComponent = () => {
+export const ChatComponent = (chat) => {
+
+  useEffect(() => {
+    console.log("Chats: ",chat);
+    console.log("ChatsItem: ",chat.chatItem);
+    console.log("ChatsItem Chat Name: ",chat.chatItem.chatName);
+    console.log("ChatsItem Chat Users: ",chat.chatItem.chatUsers);
+    console.log("ChatsItem Chat Users First User Name: ",chat.chatItem.chatUsers[1].sc_userName);
+    
+    
+  },[])
+
   return (
     <div className="chat">
       <div className="online-status" />
       <img
         className="chat-user-profile-picture"
-        src="https://static.vecteezy.com/system/resources/previews/002/275/847/original/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
+        src={chat.chatItem.chatUsers[0].sc_userProfilePicture}
       />
       <div className="chat-data">
         <div className="chat-name-time-container">
-          <span className="chat-username">Ishant Chauhan</span>
+          <span className="chat-username">
+          {chat.chatItem.isGroupChat?chat.chatItem.chatName:chat.chatItem.chatUsers[1].sc_userName}
+          </span>
           <span className="chat-date-time">27 Jan 2022</span>
         </div>
         <span className="chat-last-message">
-        Lorem ipsum lorem ipsum lorem ipsum Lorem ipsum lorem ipsum lorem ipsum
+        Start a Conversation Now!
         </span>
       </div>
       <CreateChatModalComponent />

@@ -8,26 +8,58 @@ import AddIcon from "@mui/icons-material/Add";
 import { ChatComponent } from "../components/HomePage/ChatComponent";
 import { CreateChatModalComponent } from "../components/HomePage/CreateChatModalComponent";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { getAuthorizedConfig } from "../constants/config";
+import axios from "axios";
+import { GET_CHATS_ENDPOINT } from "../constants/endpoints";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
-  const [selectedChat, setSelectedChat] = useState();
+  const [chats, setChats] = useState([]);
 
-  const { currentUser, setCurrentUser } = AppState();
+  const [selectedChat, setSelectedChat] = useState();
+  const [chatLoading, setChatLoading] = useState(false);
 
   const navigate = useNavigate();
-
-  const chatCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  useEffect(() => {
-    checkIfUserIsLoggedOut(navigate);
-    setCurrentUser(JSON.parse(localStorage.getItem("userInfo")));
-    console.log("Current User: ", currentUser);
-  }, []);
 
   const handleCreateChatModalTab = (tabNumber) => {
     setShowCreateChatModal(!showCreateChatModal);
   };
+
+  // useEffect(() => {
+  //   checkIfUserIsLoggedOut(navigate);
+  // }, []);
+
+  const getChats = async () => {
+    if (!currentUser) {
+      return;
+    }
+
+    try {
+      setChatLoading(true);
+
+      const config = getAuthorizedConfig(currentUser.token);
+      const { data } = await axios.get(GET_CHATS_ENDPOINT, config);
+      console.log(data);
+      setChats(data);
+      setChatLoading(false);
+    } catch (e) {
+      showError(e.message);
+      setChatLoading(false);
+    }
+  };
+
+  const { currentUser, setCurrentUser, showError } = AppState();
+
+  useEffect(() => {
+    let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    console.log("User Info: ", userInfo);
+    setCurrentUser(userInfo);
+  }, []);
+
+  useEffect(() => {
+    console.log("Current User ", currentUser);
+    getChats();
+  }, [currentUser]);
 
   return (
     <div className="container-home-page">
@@ -46,9 +78,9 @@ export const HomePage = () => {
         </div>
 
         <div className="chats">
-          {chatCount.map((c) => (
-            <ChatComponent />
-          ))}
+          {chats &&
+            chats.length > 0 &&
+            chats.map((c) => <ChatComponent key={c._id} chatItem={c} />)}
         </div>
 
         <CreateChatModalComponent
@@ -62,9 +94,11 @@ export const HomePage = () => {
           <div className="message-details">
             <img
               className="message-profile-picture"
-              src={currentUser.userProfilePicture}
+              src={currentUser && currentUser.userProfilePicture}
             />
-            <span className="message-user-name">{currentUser.userName}</span>
+            <span className="message-user-name">
+              {currentUser && currentUser.userName}
+            </span>
           </div>
           <div className="container-settings-icon">
             <Fab
