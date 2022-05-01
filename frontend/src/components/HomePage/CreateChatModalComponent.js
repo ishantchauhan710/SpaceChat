@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   Box,
   Button,
+  CircularProgress,
   Modal,
   Tab,
   Tabs,
@@ -18,6 +19,7 @@ import axios from "axios";
 import { AppState } from "../../AppContext";
 import { trimString } from "../../util/StringUtil";
 import { getAuthorizedConfig } from "../../constants/config";
+import { UserSearchResultComponent } from "./UserSearchResultComponent";
 
 export const CreateChatModalComponent = ({ open, handleClose }) => {
   const { currentUser, setCurrentUser } = AppState();
@@ -40,11 +42,14 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
   };
 
   const [tabNum, setTabNum] = useState("1");
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const {showError} = AppState();
+  const { showError } = AppState();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      setSearchResults([]);
       searchUser(searchQuery);
     }, 600);
     return () => {
@@ -62,12 +67,16 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
     console.log(searchUrl);
 
     try {
+      setLoading(true);
       //console.log('Token: ',currentUser.token)
       const config = getAuthorizedConfig(currentUser.token);
       const { data } = await axios.get(searchUrl, config);
       console.log(data);
+      setSearchResults(data);
+      setLoading(false);
     } catch (e) {
-      showError(e.message)
+      showError(e.message);
+      setLoading(false);
     }
   };
 
@@ -92,6 +101,18 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
               placeholder="Username or Email"
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+
+            <div className="container-user-search">
+              {loading ? <div style={{width: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}><CircularProgress color="secondary" /></div> : <></>}
+
+              <div className="container-user-search-results">
+
+              {!loading && searchResults.length>0 && searchResults.map((searchItem) => (
+                <UserSearchResultComponent user={searchItem} />
+              ))}
+
+              </div>
+            </div>
           </TabPanel>
 
           <TabPanel value="2">Ishant</TabPanel>
