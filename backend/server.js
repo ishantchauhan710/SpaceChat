@@ -4,6 +4,8 @@ const connectDB = require("./config/db");
 const app = express();
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const chatRoutes = require("./routes/chatRoutes");
+
 
 const { urlNotFoundMiddleware, handleErrorFoundMiddleware } = require("./middlewares/errorMiddleware");
 
@@ -19,6 +21,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", authRoutes);
 app.use("/user",userRoutes);
+app.use("/chat",chatRoutes);
 
 const PORT = process.env.PORT;
 

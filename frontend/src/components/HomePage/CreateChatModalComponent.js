@@ -205,7 +205,7 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
                   groupMembers.map((member) => (
                     <Chip
                       size="small"
-                      color="homePrimary"
+                      color="secondary"
                       label={member}
                       onDelete={() => removeMemberFromGroup(member)}
                       style={{ marginLeft: 10, marginTop: 7 }}
