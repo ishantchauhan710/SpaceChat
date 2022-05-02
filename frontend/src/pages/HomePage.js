@@ -95,16 +95,15 @@ export const HomePage = () => {
   return (
     <div className="container-home-page">
       <div className="container-chats">
-        <input className="input-search-chat" placeholder="Search" />
         <div className="container-home-label-control">
           <span className="home-text-h3">CHATS</span>
           <Fab
-            style={{ transform: "scale(0.475)" }}
+            style={{ transform: "scale(0.55)", boxShadow: "0px 0px rgba(0,0,0,0)" }}
             color="homePrimaryVariant"
             aria-label="add"
             onClick={() => setShowCreateChatModal(true)}
           >
-            <AddIcon style={{ transform: "scale(1.4)" }} />
+            <AddIcon style={{ transform: "scale(1.6)" }} />
           </Fab>
         </div>
 

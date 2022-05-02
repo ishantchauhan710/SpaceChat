@@ -1,14 +1,14 @@
 .chats {
-    padding: 0px 5px 10px 5px;
+    padding: 0px;
 }
 
 .chat {
     display: flex;
     cursor: pointer;
-    padding: 8px 10px;
-    border-radius: 5px;
-    margin-bottom: 2px;
+    padding: 13px 15px;
+    border-radius: 0px;
     position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .chat:hover {
