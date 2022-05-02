@@ -19,7 +19,7 @@ const createChatController = expressAsyncHandler(async (req, res) => {
       { chatUsers: { $elemMatch: { $eq: userId } } },
     ],
   })
-    .populate("chatUsers", "-sc_userPassword")
+    .populate("chatUsers", "-userPassword")
     .populate("lastMessage");
 
   if (chatExists.length > 0) {
@@ -37,7 +37,7 @@ const createChatController = expressAsyncHandler(async (req, res) => {
 
     const finalChat = await Chat.findOne({ _id: newChat._id }).populate(
       "chatUsers",
-      "-sc_userPassword"
+      "-userPassword"
     );
 
     res.status(200).send(finalChat);
@@ -54,15 +54,15 @@ const getChatsController = expressAsyncHandler(async (req, res) => {
         $elemMatch: { $eq: req.user._id },
       },
     })
-      .populate("chatUsers", "-sc_userPassword")
-      .populate("chatAdmin", "-sc_userPassword")
+      .populate("chatUsers", "-userPassword")
+      .populate("chatAdmin", "-userPassword")
       .sort({
         updatedAt: -1,
       })
       .then(async (results) => {
         results = await User.populate(results, {
           path: "lastMessage.messageSender",
-          select: "sc_userName sc_userEmail sc_userProfilePicture",
+          select: "userName userEmail userProfilePicture",
         });
 
         res.status(200).send(results);
@@ -97,8 +97,8 @@ const createGroupChatController = expressAsyncHandler(async (req, res) => {
     const finalGroupChat = await Chat.findOne({
       _id: groupChat._id,
     })
-      .populate("chatUsers", "-sc_userPassword")
-      .populate("chatAdmin", "-sc_userPassword");
+      .populate("chatUsers", "-userPassword")
+      .populate("chatAdmin", "-userPassword");
 
     res.status(200).json(finalGroupChat);
   } catch (error) {

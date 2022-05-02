@@ -12,7 +12,7 @@ const messageSchema = mongoose.Schema(
     },
     messageChat: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "SpaceChat_Chats",
+      ref: "SpaceChat_Chat",
     },
   },
   {

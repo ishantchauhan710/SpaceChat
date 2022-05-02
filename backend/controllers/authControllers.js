@@ -20,7 +20,7 @@ const signupUserController = expressAsyncHandler(async (req, res) => {
     throw new Error("Password cannot be blank");
   }
 
-  const userExists = await User.findOne({ sc_userEmail: userEmail });
+  const userExists = await User.findOne({ userEmail: userEmail });
 
   if (userExists) {
     res.status(400);
@@ -28,18 +28,18 @@ const signupUserController = expressAsyncHandler(async (req, res) => {
   }
 
   const user = await User.create({
-    sc_userName: userName,
-    sc_userEmail: userEmail,
-    sc_userPassword: userPassword,
-    sc_userProfilePicture: userProfilePicture,
+    userName: userName,
+    userEmail: userEmail,
+    userPassword: userPassword,
+    userProfilePicture: userProfilePicture,
   });
 
   if (user) {
     res.status(201).json({
       _id: user._id,
-      sc_userName: user.sc_userEmail,
-      sc_userEmail: user.sc_userEmail,
-      sc_userProfilePicture: user.sc_userProfilePicture,
+      userName: user.userEmail,
+      userEmail: user.userEmail,
+      userProfilePicture: user.userProfilePicture,
       token: generateToken(user._id),
     });
   } else {
@@ -61,15 +61,15 @@ const loginUserController = expressAsyncHandler(async (req, res) => {
     throw new Error("Password cannot be blank");
   }
 
-  const dbUser = await User.findOne({ sc_userEmail: userEmail });
+  const dbUser = await User.findOne({ userEmail: userEmail });
 
   if (dbUser) {
     if (await dbUser.matchPassword(userPassword)) {
       res.status(201).json({
         _id: dbUser._id,
-        userName: dbUser.sc_userName,
-        userEmail: dbUser.sc_userEmail,
-        userProfilePicture: dbUser.sc_userProfilePicture,
+        userName: dbUser.userName,
+        userEmail: dbUser.userEmail,
+        userProfilePicture: dbUser.userProfilePicture,
         token: generateToken(dbUser._id),
       });
     } else {

@@ -5,8 +5,8 @@ const searchUserController = expressAsyncHandler(async (req, res) => {
   const searchKeyword = req.query.search
     ? {
         $or: [
-          { sc_userName: { $regex: req.query.search, $options: "i" } },
-          { sc_userEmail: { $regex: req.query.search, $options: "i" } },
+          { userName: { $regex: req.query.search, $options: "i" } },
+          { userEmail: { $regex: req.query.search, $options: "i" } },
         ],
       }
     : {};

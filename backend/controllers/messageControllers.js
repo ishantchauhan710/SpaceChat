@@ -21,14 +21,14 @@ const sendMessageController = expressAsyncHandler(async (req, res) => {
 
     message = await message.populate(
       "messageSender",
-      "sc_userName sc_userProfilePicture"
+      "userName userProfilePicture"
     );
 
     message = await message.populate("messageChat");
 
     message = await message.populate("messageContent", {
         path: "messageChat.chatUsers",
-        select: "sc_userName, sc_userEmail, sc_userProfilePicture",
+        select: "userName, userEmail, userProfilePicture",
       });
     
 
@@ -46,7 +46,7 @@ const sendMessageController = expressAsyncHandler(async (req, res) => {
 const getAllMessagesController = expressAsyncHandler(async (req, res) => {
   try {
     const messages = await Message.find({ messageChat: req.params.chatId })
-      .populate("messageSender", "sc_userName, sc_userPic, sc_userEmail")
+      .populate("messageSender", "userName, userPic, userEmail")
       .populate("messageChat");
 
     res.json(messages);

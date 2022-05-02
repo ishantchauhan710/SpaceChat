@@ -18,7 +18,7 @@ const chatSchema = mongoose.Schema(
     ],
     lastMessage: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "SpaceChat_Messages",
+      ref: "SpaceChat_Message",
     },
     chatAdmin: {
       type: mongoose.Schema.Types.ObjectId,
@@ -29,5 +29,5 @@ const chatSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const Chat = mongoose.model("SpaceChat_Chats", chatSchema);
+const Chat = mongoose.model("SpaceChat_Chat", chatSchema);
 module.exports = Chat;

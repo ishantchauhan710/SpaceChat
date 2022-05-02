@@ -7,7 +7,7 @@ export const ChatComponent = ({chat,setChat}) => {
     // console.log("Chats: ",chat);
     // console.log("Chat Name: ",chat.chatItem.chatName);
     // console.log("ChatsItem Chat Users: ",chat.chatItem.chatUsers);
-    // console.log("ChatsItem Chat Users First User Name: ",chat.chatItem.chatUsers[1].sc_userName);
+    // console.log("ChatsItem Chat Users First User Name: ",chat.chatItem.chatUsers[1].userName);
   
   },[])
 
@@ -17,12 +17,12 @@ export const ChatComponent = ({chat,setChat}) => {
       <div className="online-status" />
       <img
         className="chat-user-profile-picture"
-        src={chat.chatUsers[1].sc_userProfilePicture}
+        src={chat.chatUsers[1].userProfilePicture}
       />
       <div className="chat-data">
         <div className="chat-name-time-container">
           <span className="chat-username">
-          {chat.isGroupChat?chat.chatName:chat.chatUsers[1].sc_userName}
+          {chat.isGroupChat?chat.chatName:chat.chatUsers[1].userName}
           </span>
           <span className="chat-date-time">27 Jan 2022</span>
         </div>

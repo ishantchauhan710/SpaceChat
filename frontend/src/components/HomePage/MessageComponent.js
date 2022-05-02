@@ -13,7 +13,7 @@ const MessageComponent = ({message}) => {
       </div>
       <div className="container-message-item-data">
         <div className="container-message-item-name-date">
-          <span className="message-item-sender-text">{message.messageSender.sc_userEmail}</span>
+          <span className="message-item-sender-text">{message.messageSender.userEmail}</span>
           <span className="message-item-time-text">12:00 Am</span>
         </div>
 

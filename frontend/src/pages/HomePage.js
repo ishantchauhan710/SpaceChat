@@ -14,7 +14,7 @@ import {
   CREATE_CHAT_ENDPOINT,
   GET_CHATS_ENDPOINT,
   GET_MESSAGES_ENDPOINT,
-  SEND_MESSAGE_ENDPOINT
+  SEND_MESSAGE_ENDPOINT,
 } from "../constants/endpoints";
 import SendIcon from "@mui/icons-material/Send";
 import MessageComponent from "../components/HomePage/MessageComponent";
@@ -25,7 +25,7 @@ export const HomePage = () => {
 
   const [selectedChat, setSelectedChat] = useState();
 
-  const [messageContent,setMessageContent] = useState();
+  const [messageContent, setMessageContent] = useState();
 
   const setChat = (chat) => {
     setSelectedChat(chat);
@@ -85,13 +85,10 @@ export const HomePage = () => {
     try {
       const config = getAuthorizedConfig(currentUser.token);
       const getMessagesUrl = GET_MESSAGES_ENDPOINT + `/${selectedChat._id}`;
-      console.log("Auth User: ",currentUser);
+      console.log("Auth User: ", currentUser);
       console.log("Get Messages URL", getMessagesUrl);
 
-      const { data } = await axios.get(
-        getMessagesUrl,
-        config
-      );
+      const { data } = await axios.get(getMessagesUrl, config);
       //console.log("Messages: ", data);
       setMessages(data);
     } catch (e) {
@@ -100,8 +97,7 @@ export const HomePage = () => {
   };
 
   const sendMessage = async () => {
-
-    if(!messageContent || !selectedChat) {
+    if (!messageContent || !selectedChat) {
       return;
     }
 
@@ -111,7 +107,7 @@ export const HomePage = () => {
         SEND_MESSAGE_ENDPOINT,
         {
           chatId: selectedChat._id,
-          messageContent: messageContent
+          messageContent: messageContent,
         },
         config
       );
@@ -121,7 +117,7 @@ export const HomePage = () => {
     } catch (e) {
       showError(e.message);
     }
-  }
+  };
 
   const { currentUser, setCurrentUser, showError } = AppState();
 
@@ -185,14 +181,14 @@ export const HomePage = () => {
                   className="message-profile-picture"
                   src={
                     selectedChat &&
-                    selectedChat.chatUsers[1].sc_userProfilePicture
+                    selectedChat.chatUsers[1].userProfilePicture
                   }
                 />
                 <span className="message-user-name">
                   {selectedChat &&
                     (selectedChat.isGroupChat
                       ? selectedChat.chatName
-                      : selectedChat.chatUsers[1].sc_userName)}
+                      : selectedChat.chatUsers[1].userName)}
                 </span>
               </>
             ) : (
@@ -213,7 +209,10 @@ export const HomePage = () => {
         </div>
 
         <div className="container-message-items">
-          {messages && messages.map((message) => <MessageComponent key={message._id} message={message} />)}
+          {messages &&
+            messages.map((message) => (
+              <MessageComponent key={message._id} message={message} />
+            ))}
         </div>
 
         <div className="container-input-send-message">
@@ -231,7 +230,7 @@ export const HomePage = () => {
                 transform: "scale(0.75)",
               }}
               aria-label="add"
-              onClick={()=>sendMessage()}
+              onClick={() => sendMessage()}
             >
               <SendIcon style={{ color: "#fff", transform: "scale(1.45)" }} />
             </Fab>

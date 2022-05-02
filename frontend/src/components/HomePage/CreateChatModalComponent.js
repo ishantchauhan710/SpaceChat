@@ -184,7 +184,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
                   searchGroupUserResults.length > 0 &&
                   searchGroupUserResults.map((searchItem) => (
                     <UserSearchResultComponent
-                      key={searchItem.sc_userEmail}
+                      key={searchItem.userEmail}
                       groupMembers={groupMembers}
                       setGroupMembers={setGroupMembers}
                       user={searchItem}

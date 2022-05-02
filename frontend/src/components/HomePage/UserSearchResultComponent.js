@@ -7,8 +7,8 @@ export const UserSearchResultComponent = ({
   createChat
 }) => {
   const addToGroup = () => {
-    if (!groupMembers.includes(user.sc_userEmail)) {
-      setGroupMembers([...groupMembers, user.sc_userEmail]);
+    if (!groupMembers.includes(user.userEmail)) {
+      setGroupMembers([...groupMembers, user.userEmail]);
     }
     console.log("\nGroup Members",groupMembers);
   };
@@ -22,15 +22,15 @@ export const UserSearchResultComponent = ({
     <div onClick={() => createChat(user._id)} className="user-search-result">
       <img
         className="user-search-result-profile-picture"
-        src={user.sc_userProfilePicture}
+        src={user.userProfilePicture}
       />
       <div className="user-search-result-data">
         <div className="user-search-result-name-time-container">
           <span className="user-search-result-username">
-            {user.sc_userName}
+            {user.userName}
           </span>
         </div>
-        <span className="user-search-result-email">{user.sc_userEmail}</span>
+        <span className="user-search-result-email">{user.userEmail}</span>
       </div>
     </div>
   );

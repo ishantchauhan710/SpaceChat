@@ -5,10 +5,10 @@ const { DEFAULT_PROFILE_PICTURE } = require("../constants/source");
 // sc: Space Chat
 const userSchema = mongoose.Schema(
   {
-    sc_userName: { type: String, required: true },
-    sc_userEmail: { type: String, required: true },
-    sc_userPassword: { type: String, required: true },
-    sc_userProfilePicture: {
+    userName: { type: String, required: true },
+    userEmail: { type: String, required: true },
+    userPassword: { type: String, required: true },
+    userProfilePicture: {
       type: String,
       required: false,
       default: DEFAULT_PROFILE_PICTURE,
@@ -18,15 +18,15 @@ const userSchema = mongoose.Schema(
 );
 
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("sc_userPassword")) {
+  if (!this.isModified("userPassword")) {
     next();
   }
   const salt = await bcrypt.genSalt(10);
-  this.sc_userPassword = await bcrypt.hash(this.sc_userPassword, salt);
+  this.userPassword = await bcrypt.hash(this.userPassword, salt);
 });
 
 userSchema.methods.matchPassword = async function (inputPassword) {
-  return await bcrypt.compare(inputPassword, this.sc_userPassword);
+  return await bcrypt.compare(inputPassword, this.userPassword);
 };
 
 const User = mongoose.model("SpaceChat_User", userSchema);
