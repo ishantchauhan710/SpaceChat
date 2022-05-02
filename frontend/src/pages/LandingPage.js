@@ -8,7 +8,6 @@ import {
   colorPrimaryVariant,
   colorTransparent,
 } from "../data/color/appColor";
-import "../stylesheets/LandingPage.css";
 import { checkIfUserIsLoggedIn } from "../logic/AuthLogic/authorizationFunctions";
 import { useNavigate } from "react-router-dom";
 

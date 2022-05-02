@@ -1,0 +1,136 @@
+/* Home Page */
+.container-home-page {
+    height: 100vh;
+    display: flex;
+    color: var(--colorOnPrimary);
+}
+
+.container-chats {
+    padding: 10px;
+}
+
+.container-messages {
+    padding: 0px;
+}
+
+.container-chats {
+    background-color: var(--colorHomePrimary);
+    flex: 0.25;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll
+}
+
+.container-messages {
+    background-color: var(--colorHomePrimaryVariant);
+    flex: 0.75;
+    position: relative;
+}
+
+.container-input-send-message {
+    position: absolute;
+    height: 70px;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+}
+
+.send-message-input-wrapper {
+    display: flex;
+    width: 100%;
+    background-color: var(--colorHomePrimary);
+    border-radius: 7px;
+}
+
+.input-send-message {
+    width: 100%;
+    background-color: var(--colorHomePrimary);
+    border: none;
+    outline: none;
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 7px;
+    font-size: 1.1rem;
+    color: var(--colorOnPrimary);
+}
+
+
+.home-text-h3 {
+    color: var(--colorOnPrimary);
+    font-size: 1.1rem;
+    padding: 10px;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+.input-search-chat {
+    background-color: var(--colorHomePrimaryVariant);
+    border: none;
+    outline: none;
+    padding: 7px 14px;
+    border-radius: 7px;
+    font-size: 1.1rem;
+    color: var(--colorOnPrimary);
+}
+
+.input-search-user {
+    width: 100%;
+    background-color: var(--colorHomePrimary);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    font-size: 1.1rem;
+    color: var(--colorOnPrimary);
+}
+
+.container-create-chat-modal {
+    width: 50vw;
+}
+
+.container-home-label-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.message-app-bar {
+    height: 70px;
+    background-color: var(--colorHomePrimary);
+    padding: 7px 20px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.message-details {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.message-profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.message-user-name {
+    font-size: 1.3rem;
+    display: block;
+    margin-left: 15px;
+}
+
+.container-settings-icon {
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 10px;
+}
+
+.container-message-items {
+    height: calc(100vh - 140px);
+    overflow-y: scroll;
+}

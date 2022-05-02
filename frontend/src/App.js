@@ -12,6 +12,17 @@ import { LoadingComponent } from "./components/Common/LoadingComponent";
 import { AppState } from "./AppContext";
 
 
+import "./stylesheets/LandingPage/LandingPage.css";
+import "./stylesheets/HomePage/HomePage.css";
+import "./stylesheets/HomePage/Chats.css";
+import "./stylesheets/HomePage/Messages.css";
+import "./stylesheets/HomePage/CreateChatModal.css";
+
+
+
+
+
+
 function App() {
   const mainTheme = createTheme(appTheme);
 
