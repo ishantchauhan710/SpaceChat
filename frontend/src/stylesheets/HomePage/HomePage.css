@@ -9,10 +9,6 @@
     padding: 0px;
 }
 
-.container-messages {
-    padding: 0px;
-}
-
 .container-chats {
     background-color: var(--colorHomePrimary);
     flex: 0.25;
@@ -26,14 +22,17 @@
     background-color: var(--colorHomePrimaryVariant);
     flex: 0.75;
     position: relative;
+    
 }
 
 .container-input-send-message {
     position: absolute;
+    background-color: var(--colorHomePrimary);
     height: 70px;
     bottom: 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
     width: 100%;
-    padding: 10px;
+    padding: 0px;
     display: flex;
 }
 
@@ -95,14 +94,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 15px;
+    background-color: var(--colorHomePrimary);
+    padding: 6.5px 15px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .message-app-bar {
     height: 70px;
-    background-color: var(--colorHomePrimary);
-    padding: 7px 20px;
+    background-color: var(--colorHomePrimaryVariant);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 6px 20px;
     font-size: 1.3rem;
     display: flex;
     align-items: center;
@@ -119,21 +120,61 @@
 .message-profile-picture {
     width: 40px;
     height: 40px;
+    margin-top: 1px;
     border-radius: 50%;
 }
 
-.message-user-name {
-    font-size: 1.3rem;
-    display: block;
-    margin-left: 15px;
-}
-
 .container-settings-icon {
-    border-left: 1px solid rgba(255,255,255,0.1);
+    border-left: 1px solid rgba(255,255,255,0.05);
     padding-left: 10px;
 }
 
 .container-message-items {
     height: calc(100vh - 140px);
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-message-controls {
+    background-color: var(--colorHomePrimary);
+    width: auto;
+    padding: 0px 10px 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-send-message {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: var(--colorTransparent);
+    cursor: pointer;
+}
+
+.container-app-bar-message-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-user-name {
+    font-size: 1.4rem;
+    display: block;
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+
+
+.message-user-online-status {
+    font-size: 0.8rem;
+    display: block;
+    opacity: 0.8;
+    margin-left: 15px;
 }

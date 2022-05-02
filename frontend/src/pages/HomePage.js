@@ -25,6 +25,7 @@ import {
   getMessagesForChatAsync,
   sendMessageAsync,
 } from "../logic/ChatLogic/messageFunctions";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
@@ -98,7 +99,10 @@ export const HomePage = () => {
         <div className="container-home-label-control">
           <span className="home-text-h3">CHATS</span>
           <Fab
-            style={{ transform: "scale(0.55)", boxShadow: "0px 0px rgba(0,0,0,0)" }}
+            style={{
+              transform: "scale(0.65)",
+              boxShadow: "0px 0px rgba(0,0,0,0)",
+            }}
             color="homePrimaryVariant"
             aria-label="add"
             onClick={() => setShowCreateChatModal(true)}
@@ -133,12 +137,17 @@ export const HomePage = () => {
                     selectedChat && selectedChat.chatUsers[1].userProfilePicture
                   }
                 />
+                <div className="container-app-bar-message-details">
                 <span className="message-user-name">
                   {selectedChat &&
                     (selectedChat.isGroupChat
                       ? selectedChat.chatName
                       : selectedChat.chatUsers[1].userName)}
                 </span>
+                <span className="message-user-online-status">
+                  Online
+                </span>
+                </div>
               </>
             ) : (
               <span style={{ fontSize: "1.6rem", fontWeight: 500 }}>
@@ -148,7 +157,7 @@ export const HomePage = () => {
           </div>
           <div className="container-settings-icon">
             <Fab
-              style={{ transform: "scale(0.75)" }}
+              style={{ transform: "scale(0.75)", boxShadow: "0px 0px rgba(0,0,0,0)" }}
               color="homePrimaryVariant"
               aria-label="add"
             >
@@ -172,17 +181,19 @@ export const HomePage = () => {
               onChange={(e) => setMessageContent(e.target.value)}
               value={messageContent}
             />
-            <Fab
-              style={{
-                backgroundColor: "rgba(0,0,0,0)",
-                boxShadow: "0px 0px 0px rgba(0,0,0,0)",
-                transform: "scale(0.75)",
-              }}
-              aria-label="add"
-              onClick={() => sendMessage()}
-            >
-              <SendIcon style={{ color: "#fff", transform: "scale(1.45)" }} />
-            </Fab>
+            <div className="container-message-controls">
+
+              <button className="button-send-message">
+                <EmojiEmotionsIcon style={{ color: "#fff", transform: "scale(1.5)", marginRight: 20 }} />
+              </button>
+
+              <button
+                className="button-send-message"
+                onClick={() => sendMessage()}
+              >
+                <SendIcon style={{ color: "#fff", transform: "scale(1.4)" }} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
