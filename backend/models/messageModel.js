@@ -4,7 +4,7 @@ const messageSchema = mongoose.Schema(
   {
     messageSender: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "SpaceChat_User",
     },
     messageContent: {
       type: String,
@@ -12,7 +12,7 @@ const messageSchema = mongoose.Schema(
     },
     messageChat: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "SpaceChat_Chats",
     },
   },
   {
@@ -20,5 +20,5 @@ const messageSchema = mongoose.Schema(
   }
 );
 
-const Message = mongoose.model("Message",messageSchema);
+const Message = mongoose.model("SpaceChat_Message",messageSchema);
 module.exports = Message;
