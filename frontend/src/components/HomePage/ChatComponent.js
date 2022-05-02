@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { CreateChatModalComponent } from "./CreateChatModalComponent";
 
-export const ChatComponent = ({chat,setChat}) => {
+export const ChatComponent = ({chat,setChat,showMessagePanel}) => {
 
   //useEffect(() => {
     // console.log("Chats: ",chat);
@@ -10,9 +10,14 @@ export const ChatComponent = ({chat,setChat}) => {
     // console.log("ChatsItem Chat Users First User Name: ",chat.chatItem.chatUsers[1].userName);
   //},[])
 
+  const performClickTasks = (chat) => {
+    setChat(chat);
+    showMessagePanel();
+  }
+
 
   return (
-    <div className="chat" onClick={() => setChat(chat)}>
+    <div className="chat" onClick={() => performClickTasks(chat)}>
       <div className="online-status" />
       <img
         className="chat-user-profile-picture"

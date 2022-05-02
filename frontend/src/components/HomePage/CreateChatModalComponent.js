@@ -99,7 +99,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box sx={createChatModalStyle} className="container-create-chat-modal">
+      <Box sx={createChatModalStyle} className="container-create-chat-modal modal">
         <TabContext value={tabNum.toString()}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList

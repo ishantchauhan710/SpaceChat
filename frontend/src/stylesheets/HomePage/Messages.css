@@ -52,3 +52,9 @@
     font-size: 0.75rem;
     opacity: 0.8;
 }
+
+@media only screen and (min-width: 0px) and (max-width: 699px) {
+    .container-message-item-data {
+        max-width: 150px;
+    }
+}

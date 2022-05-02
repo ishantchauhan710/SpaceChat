@@ -22,7 +22,7 @@
     background-color: var(--colorHomePrimaryVariant);
     flex: 0.75;
     position: relative;
-    
+
 }
 
 .container-input-send-message {
@@ -30,7 +30,7 @@
     background-color: var(--colorHomePrimary);
     height: 70px;
     bottom: 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
     padding: 0px;
     display: flex;
@@ -96,18 +96,27 @@
     justify-content: space-between;
     background-color: var(--colorHomePrimary);
     padding: 6.5px 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .message-app-bar {
     height: 70px;
     background-color: var(--colorHomePrimaryVariant);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    padding: 6px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 6px 10px 6px 10px;
     font-size: 1.3rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+}
+
+.back-button {
+    border: none;
+    outline: none;
+    display: none;
+    background-color: var(--colorTransparent);
+    margin-right: 10px;
+    margin-top: 5px;
 }
 
 .message-details {
@@ -125,7 +134,7 @@
 }
 
 .container-settings-icon {
-    border-left: 1px solid rgba(255,255,255,0.05);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
     padding-left: 10px;
 }
 
@@ -177,4 +186,58 @@
     display: block;
     opacity: 0.8;
     margin-left: 15px;
+}
+
+.modal {
+    width: 50vw !important;
+}
+
+/*Show Hide logic should only work on smaller screens*/
+.show {
+    display: block;
+}
+
+.hide {
+    display: block;
+}
+
+
+@media only screen and (min-width: 700px) and (max-width: 899px) {
+    .container-chats {
+        flex: 0.50;
+    }
+
+    .container-messages {
+        flex: 0.50;
+    }
+
+    .modal {
+        width: 75vw !important;
+    }
+
+}
+
+@media only screen and (min-width: 0px) and (max-width: 699px) {
+    /* .container-chats {
+        flex: 1;
+    }
+    .container-messages {
+        display: none;
+    }  */ 
+    .modal {
+        width: 90vw !important;
+    } 
+
+    .show {
+        display: block;
+        flex: 1;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .back-button {
+        display: inline;
+    }
 }

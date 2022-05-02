@@ -26,6 +26,7 @@ import {
   sendMessageAsync,
 } from "../logic/ChatLogic/messageFunctions";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
@@ -34,6 +35,9 @@ export const HomePage = () => {
   const [messageContent, setMessageContent] = useState();
   const [chatLoading, setChatLoading] = useState(false);
   const [messages, setMessages] = useState([]);
+
+  const [chatUIClass, setChatUIClass] = useState("show");
+  const [messageUIClass, setMessageUIClass] = useState("hide");
   const { currentUser, setCurrentUser, showError } = AppState();
   const navigate = useNavigate();
 
@@ -69,6 +73,17 @@ export const HomePage = () => {
     );
   };
 
+  const showChatPanel = () => {
+    setChatUIClass("show");
+    setMessageUIClass("hide");
+  }
+
+  const showMessagePanel = () => {
+    setChatUIClass("hide");
+    setMessageUIClass("show");
+  }
+
+
   useEffect(() => {
     checkIfUserIsLoggedOut(navigate);
   }, []);
@@ -95,7 +110,7 @@ export const HomePage = () => {
 
   return (
     <div className="container-home-page">
-      <div className="container-chats">
+      <div className={`container-chats ${chatUIClass}`}>
         <div className="container-home-label-control">
           <span className="home-text-h3">CHATS</span>
           <Fab
@@ -115,7 +130,7 @@ export const HomePage = () => {
           {chats &&
             chats.length > 0 &&
             chats.map((c) => (
-              <ChatComponent key={c._id} chat={c} setChat={setChat} />
+              <ChatComponent key={c._id} chat={c} setChat={setChat} showMessagePanel={showMessagePanel} />
             ))}
         </div>
 
@@ -126,11 +141,14 @@ export const HomePage = () => {
         />
       </div>
 
-      <div className="container-messages">
+      <div className={`container-messages ${messageUIClass}`}>
         <div className="message-app-bar">
           <div className="message-details">
             {selectedChat ? (
               <>
+                <button className="back-button" onClick={() => showChatPanel()}>
+                  <ArrowBackIcon style={{ color: "#fff" }} />
+                </button>
                 <img
                   className="message-profile-picture"
                   src={
@@ -138,15 +156,13 @@ export const HomePage = () => {
                   }
                 />
                 <div className="container-app-bar-message-details">
-                <span className="message-user-name">
-                  {selectedChat &&
-                    (selectedChat.isGroupChat
-                      ? selectedChat.chatName
-                      : selectedChat.chatUsers[1].userName)}
-                </span>
-                <span className="message-user-online-status">
-                  Online
-                </span>
+                  <span className="message-user-name">
+                    {selectedChat &&
+                      (selectedChat.isGroupChat
+                        ? selectedChat.chatName
+                        : selectedChat.chatUsers[1].userName)}
+                  </span>
+                  <span className="message-user-online-status">Online</span>
                 </div>
               </>
             ) : (
@@ -157,7 +173,10 @@ export const HomePage = () => {
           </div>
           <div className="container-settings-icon">
             <Fab
-              style={{ transform: "scale(0.75)", boxShadow: "0px 0px rgba(0,0,0,0)" }}
+              style={{
+                transform: "scale(0.75)",
+                boxShadow: "0px 0px rgba(0,0,0,0)",
+              }}
               color="homePrimaryVariant"
               aria-label="add"
             >
@@ -182,9 +201,14 @@ export const HomePage = () => {
               value={messageContent}
             />
             <div className="container-message-controls">
-
               <button className="button-send-message">
-                <EmojiEmotionsIcon style={{ color: "#fff", transform: "scale(1.5)", marginRight: 20 }} />
+                <EmojiEmotionsIcon
+                  style={{
+                    color: "#fff",
+                    transform: "scale(1.5)",
+                    marginRight: 20,
+                  }}
+                />
               </button>
 
               <button
