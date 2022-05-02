@@ -14,7 +14,8 @@ import {
   CREATE_CHAT_ENDPOINT,
   GET_CHATS_ENDPOINT,
 } from "../constants/endpoints";
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from "@mui/icons-material/Send";
+import MessageComponent from "../components/HomePage/MessageComponent";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
@@ -38,6 +39,8 @@ export const HomePage = () => {
   useEffect(() => {
     checkIfUserIsLoggedOut(navigate);
   }, []);
+
+  const [messages,setMessages] = useState([1,2,3,4,5,6,7,8,9]);
 
   const getChats = async () => {
     if (!currentUser) {
@@ -160,18 +163,31 @@ export const HomePage = () => {
             </Fab>
           </div>
         </div>
+
+        <div className="container-message-items">
+          
+          {messages && messages.map((message) => (
+            <MessageComponent/>
+          ))}
+
+        </div>
+
         <div className="container-input-send-message">
           <div className="send-message-input-wrapper">
-          <input
-            className="input-send-message"
-            placeholder="Write a message..."
-          />{" "}
-          <Fab
-            style={{ backgroundColor: "rgba(0,0,0,0)", boxShadow: "0px 0px 0px rgba(0,0,0,0)", transform: "scale(0.75)" }}
-            aria-label="add"
-          >
-            <SendIcon style={{ color: "#fff", transform: "scale(1.45)" }} />
-          </Fab>
+            <input
+              className="input-send-message"
+              placeholder="Write a message..."
+            />
+            <Fab
+              style={{
+                backgroundColor: "rgba(0,0,0,0)",
+                boxShadow: "0px 0px 0px rgba(0,0,0,0)",
+                transform: "scale(0.75)",
+              }}
+              aria-label="add"
+            >
+              <SendIcon style={{ color: "#fff", transform: "scale(1.45)" }} />
+            </Fab>
           </div>
         </div>
       </div>
