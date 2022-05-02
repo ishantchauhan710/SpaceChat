@@ -12,18 +12,9 @@ import {
   configureProfilePicture,
   signupUserAccount,
 } from "../../logic/AuthLogic/signupFunctions.js";
+import { authModalStyle } from "../../styles/modalStyles";
 
 const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    borderRadius: "7px",
-  };
-
   const { setLoading, showSuccess, showError } = AppState();
 
   const navigate = useNavigate();
@@ -66,7 +57,7 @@ const AuthModalComponent = ({ open, handleClose, tabNum, setTabNum }) => {
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box sx={style} className="container-auth-modal">
+      <Box sx={authModalStyle} className="container-auth-modal">
         <TabContext value={tabNum.toString()}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList

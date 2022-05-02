@@ -4,19 +4,18 @@ export const UserSearchResultComponent = ({
   user,
   groupMembers,
   setGroupMembers,
-  createChat
+  createChat,
 }) => {
   const addToGroup = () => {
     if (!groupMembers.includes(user.userEmail)) {
       setGroupMembers([...groupMembers, user.userEmail]);
     }
-    console.log("\nGroup Members",groupMembers);
+    console.log("\nGroup Members", groupMembers);
   };
 
   // useEffect(() => {
   //   console.log("Chat Users", user)
   // },[])
-
 
   return (
     <div onClick={() => createChat(user._id)} className="user-search-result">
@@ -26,9 +25,7 @@ export const UserSearchResultComponent = ({
       />
       <div className="user-search-result-data">
         <div className="user-search-result-name-time-container">
-          <span className="user-search-result-username">
-            {user.userName}
-          </span>
+          <span className="user-search-result-username">{user.userName}</span>
         </div>
         <span className="user-search-result-email">{user.userEmail}</span>
       </div>

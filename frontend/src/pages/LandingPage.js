@@ -24,9 +24,8 @@ export const LandingPage = () => {
   };
 
   useEffect(() => {
-    checkIfUserIsLoggedIn(navigate)
-  },[]);
-
+    checkIfUserIsLoggedIn(navigate);
+  }, []);
 
   return (
     <>
@@ -110,7 +109,7 @@ export const LandingPage = () => {
                     fontWeight: "bold",
                     textTransform: "none",
                     borderColor: colorOnPrimary,
-                    color: colorOnPrimary
+                    color: colorOnPrimary,
                   }}
                   className="landing-page-control-btn btn-view-source-code"
                 >

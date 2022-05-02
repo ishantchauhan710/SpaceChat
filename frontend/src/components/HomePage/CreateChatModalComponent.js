@@ -21,6 +21,7 @@ import { AppState } from "../../AppContext";
 import { trimString } from "../../util/StringUtil";
 import { getAuthorizedConfig } from "../../constants/config";
 import { UserSearchResultComponent } from "./UserSearchResultComponent";
+import { createChatModalStyle } from "../../styles/modalStyles";
 
 export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
   const { currentUser, setCurrentUser } = AppState();
@@ -37,6 +38,8 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
     setCurrentUser(JSON.parse(localStorage.getItem("userInfo")));
   }, []);
 
+  // Wait until user stops typing and then show search results
+  // For Single User Tab
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSearchResults([]);
@@ -47,6 +50,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
     };
   }, [searchQuery]);
 
+  // For Group User Tab
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSearchGroupUserResults([]);
@@ -57,24 +61,11 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
     };
   }, [searchGroupUserQuery]);
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    borderRadius: "7px",
-    backgroundColor: "#22242A",
-    color: "#fff",
-  };
-
   const searchUser = async (searchWhom, setSearchWhom) => {
     let trimmedSearchQuery = trimString(searchWhom);
     if (trimmedSearchQuery === null) {
       return;
     }
-
     const searchUrl = SEARCH_USER_ENDPOINT + `?search=${trimmedSearchQuery}`;
     console.log(searchUrl);
 
@@ -108,7 +99,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box sx={style} className="container-create-chat-modal">
+      <Box sx={createChatModalStyle} className="container-create-chat-modal">
         <TabContext value={tabNum.toString()}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
@@ -148,7 +139,10 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
                 {!loading &&
                   searchResults.length > 0 &&
                   searchResults.map((searchItem) => (
-                    <UserSearchResultComponent user={searchItem} createChat={createChat} />
+                    <UserSearchResultComponent
+                      user={searchItem}
+                      createChat={createChat}
+                    />
                   ))}
               </div>
             </div>

@@ -3,13 +3,12 @@ import { CreateChatModalComponent } from "./CreateChatModalComponent";
 
 export const ChatComponent = ({chat,setChat}) => {
 
-  useEffect(() => {
+  //useEffect(() => {
     // console.log("Chats: ",chat);
     // console.log("Chat Name: ",chat.chatItem.chatName);
     // console.log("ChatsItem Chat Users: ",chat.chatItem.chatUsers);
     // console.log("ChatsItem Chat Users First User Name: ",chat.chatItem.chatUsers[1].userName);
-  
-  },[])
+  //},[])
 
 
   return (

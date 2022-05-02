@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { checkIfUserIsLoggedOut } from "../logic/AuthLogic/authorizationFunctions";
-
 import { AppState } from "../AppContext";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
@@ -18,108 +17,60 @@ import {
 } from "../constants/endpoints";
 import SendIcon from "@mui/icons-material/Send";
 import MessageComponent from "../components/HomePage/MessageComponent";
+import {
+  createChatAsync,
+  getChatsAsync,
+} from "../logic/ChatLogic/chatFunctions";
+import {
+  getMessagesForChatAsync,
+  sendMessageAsync,
+} from "../logic/ChatLogic/messageFunctions";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
   const [chats, setChats] = useState([]);
-
   const [selectedChat, setSelectedChat] = useState();
-
   const [messageContent, setMessageContent] = useState();
+  const [chatLoading, setChatLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const { currentUser, setCurrentUser, showError } = AppState();
+  const navigate = useNavigate();
 
   const setChat = (chat) => {
     setSelectedChat(chat);
     console.log("Selected Chat", chat);
   };
 
-  const [chatLoading, setChatLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const handleCreateChatModalTab = (tabNumber) => {
+  const handleCreateChatModalTab = () => {
     setShowCreateChatModal(!showCreateChatModal);
+  };
+
+  const getChats = () => {
+    getChatsAsync(currentUser, setChatLoading, setChats, showError);
+  };
+
+  const createChat = (chatPersonId) => {
+    createChatAsync(chatPersonId, currentUser, setChat, getChats, showError);
+  };
+
+  const getMessagesForChat = () => {
+    getMessagesForChatAsync(currentUser, selectedChat, setMessages, showError);
+  };
+
+  const sendMessage = async () => {
+    sendMessageAsync(
+      messageContent,
+      selectedChat,
+      currentUser,
+      setMessageContent,
+      getMessagesForChat,
+      showError
+    );
   };
 
   useEffect(() => {
     checkIfUserIsLoggedOut(navigate);
   }, []);
-
-  const [messages, setMessages] = useState([]);
-
-  const getChats = async () => {
-    if (!currentUser) {
-      return;
-    }
-    try {
-      setChatLoading(true);
-      const config = getAuthorizedConfig(currentUser.token);
-      const { data } = await axios.get(GET_CHATS_ENDPOINT, config);
-      console.log(data);
-      setChats(data);
-      setChatLoading(false);
-    } catch (e) {
-      showError(e.message);
-      setChatLoading(false);
-    }
-  };
-
-  const createChat = async (chatPersonId) => {
-    try {
-      const config = getAuthorizedConfig(currentUser.token);
-      const { data } = await axios.post(
-        CREATE_CHAT_ENDPOINT,
-        {
-          userId: chatPersonId,
-        },
-        config
-      );
-      //console.log(data);
-      setChat(data);
-      getChats();
-    } catch (e) {
-      showError(e.message);
-    }
-  };
-
-  const getMessagesForChat = async () => {
-    try {
-      const config = getAuthorizedConfig(currentUser.token);
-      const getMessagesUrl = GET_MESSAGES_ENDPOINT + `/${selectedChat._id}`;
-      console.log("Auth User: ", currentUser);
-      console.log("Get Messages URL", getMessagesUrl);
-
-      const { data } = await axios.get(getMessagesUrl, config);
-      //console.log("Messages: ", data);
-      setMessages(data);
-    } catch (e) {
-      showError(e.message);
-    }
-  };
-
-  const sendMessage = async () => {
-    if (!messageContent || !selectedChat) {
-      return;
-    }
-
-    try {
-      const config = getAuthorizedConfig(currentUser.token);
-      const { data } = await axios.post(
-        SEND_MESSAGE_ENDPOINT,
-        {
-          chatId: selectedChat._id,
-          messageContent: messageContent,
-        },
-        config
-      );
-      setMessageContent("");
-      getMessagesForChat();
-      console.log(data);
-    } catch (e) {
-      showError(e.message);
-    }
-  };
-
-  const { currentUser, setCurrentUser, showError } = AppState();
 
   useEffect(() => {
     let userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -180,8 +131,7 @@ export const HomePage = () => {
                 <img
                   className="message-profile-picture"
                   src={
-                    selectedChat &&
-                    selectedChat.chatUsers[1].userProfilePicture
+                    selectedChat && selectedChat.chatUsers[1].userProfilePicture
                   }
                 />
                 <span className="message-user-name">
