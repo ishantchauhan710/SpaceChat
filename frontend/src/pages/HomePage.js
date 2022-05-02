@@ -10,7 +10,11 @@ import { CreateChatModalComponent } from "../components/HomePage/CreateChatModal
 import SettingsIcon from "@mui/icons-material/Settings";
 import { getAuthorizedConfig } from "../constants/config";
 import axios from "axios";
-import { CREATE_CHAT_ENDPOINT, GET_CHATS_ENDPOINT } from "../constants/endpoints";
+import {
+  CREATE_CHAT_ENDPOINT,
+  GET_CHATS_ENDPOINT,
+} from "../constants/endpoints";
+import SendIcon from '@mui/icons-material/Send';
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
@@ -55,16 +59,20 @@ export const HomePage = () => {
   const createChat = async (chatPersonId) => {
     try {
       const config = getAuthorizedConfig(currentUser.token);
-      const { data } = await axios.post(CREATE_CHAT_ENDPOINT,{
-        userId: chatPersonId
-      }, config);
+      const { data } = await axios.post(
+        CREATE_CHAT_ENDPOINT,
+        {
+          userId: chatPersonId,
+        },
+        config
+      );
       //console.log(data);
       setChat(data);
       getChats();
     } catch (e) {
       showError(e.message);
     }
-  }
+  };
 
   const { currentUser, setCurrentUser, showError } = AppState();
 
@@ -120,21 +128,27 @@ export const HomePage = () => {
       <div className="container-messages">
         <div className="message-app-bar">
           <div className="message-details">
-            {selectedChat?(
+            {selectedChat ? (
               <>
-              <img
-              className="message-profile-picture"
-              src={
-                selectedChat && selectedChat.chatUsers[1].sc_userProfilePicture
-              }
-            />
-            <span className="message-user-name">
-              {selectedChat &&
-                (selectedChat.isGroupChat
-                  ? selectedChat.chatName
-                  : selectedChat.chatUsers[1].sc_userName)}
-            </span></>
-            ):(<span style={{fontSize: "1.6rem", fontWeight: 500}}>SPACECHAT</span>)}
+                <img
+                  className="message-profile-picture"
+                  src={
+                    selectedChat &&
+                    selectedChat.chatUsers[1].sc_userProfilePicture
+                  }
+                />
+                <span className="message-user-name">
+                  {selectedChat &&
+                    (selectedChat.isGroupChat
+                      ? selectedChat.chatName
+                      : selectedChat.chatUsers[1].sc_userName)}
+                </span>
+              </>
+            ) : (
+              <span style={{ fontSize: "1.6rem", fontWeight: 500 }}>
+                SpaceChat
+              </span>
+            )}
           </div>
           <div className="container-settings-icon">
             <Fab
@@ -144,6 +158,20 @@ export const HomePage = () => {
             >
               <SettingsIcon style={{ transform: "scale(1.4)" }} />
             </Fab>
+          </div>
+        </div>
+        <div className="container-input-send-message">
+          <div className="send-message-input-wrapper">
+          <input
+            className="input-send-message"
+            placeholder="Write a message..."
+          />{" "}
+          <Fab
+            style={{ backgroundColor: "rgba(0,0,0,0)", boxShadow: "0px 0px 0px rgba(0,0,0,0)", transform: "scale(0.75)" }}
+            aria-label="add"
+          >
+            <SendIcon style={{ color: "#fff", transform: "scale(1.45)" }} />
+          </Fab>
           </div>
         </div>
       </div>
