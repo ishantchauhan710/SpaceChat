@@ -22,7 +22,7 @@ import { trimString } from "../../util/StringUtil";
 import { getAuthorizedConfig } from "../../constants/config";
 import { UserSearchResultComponent } from "./UserSearchResultComponent";
 
-export const CreateChatModalComponent = ({ open, handleClose }) => {
+export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
   const { currentUser, setCurrentUser } = AppState();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchGroupUserQuery, setSearchGroupUserQuery] = useState("");
@@ -148,7 +148,7 @@ export const CreateChatModalComponent = ({ open, handleClose }) => {
                 {!loading &&
                   searchResults.length > 0 &&
                   searchResults.map((searchItem) => (
-                    <UserSearchResultComponent user={searchItem} />
+                    <UserSearchResultComponent user={searchItem} createChat={createChat} />
                   ))}
               </div>
             </div>

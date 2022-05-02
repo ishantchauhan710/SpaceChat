@@ -10,7 +10,7 @@ import { CreateChatModalComponent } from "../components/HomePage/CreateChatModal
 import SettingsIcon from "@mui/icons-material/Settings";
 import { getAuthorizedConfig } from "../constants/config";
 import axios from "axios";
-import { GET_CHATS_ENDPOINT } from "../constants/endpoints";
+import { CREATE_CHAT_ENDPOINT, GET_CHATS_ENDPOINT } from "../constants/endpoints";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
@@ -19,9 +19,9 @@ export const HomePage = () => {
   const [selectedChat, setSelectedChat] = useState();
 
   const setChat = (chat) => {
-    setSelectedChat(chat);   
-    console.log("Selected Chat",chat)
-  }
+    setSelectedChat(chat);
+    console.log("Selected Chat", chat);
+  };
 
   const [chatLoading, setChatLoading] = useState(false);
 
@@ -31,18 +31,16 @@ export const HomePage = () => {
     setShowCreateChatModal(!showCreateChatModal);
   };
 
-   useEffect(() => {
-     checkIfUserIsLoggedOut(navigate);
-   }, []);
+  useEffect(() => {
+    checkIfUserIsLoggedOut(navigate);
+  }, []);
 
   const getChats = async () => {
     if (!currentUser) {
       return;
     }
-
     try {
       setChatLoading(true);
-
       const config = getAuthorizedConfig(currentUser.token);
       const { data } = await axios.get(GET_CHATS_ENDPOINT, config);
       console.log(data);
@@ -54,6 +52,20 @@ export const HomePage = () => {
     }
   };
 
+  const createChat = async (chatPersonId) => {
+    try {
+      const config = getAuthorizedConfig(currentUser.token);
+      const { data } = await axios.post(CREATE_CHAT_ENDPOINT,{
+        userId: chatPersonId
+      }, config);
+      //console.log(data);
+      setChat(data);
+      getChats();
+    } catch (e) {
+      showError(e.message);
+    }
+  }
+
   const { currentUser, setCurrentUser, showError } = AppState();
 
   useEffect(() => {
@@ -64,15 +76,15 @@ export const HomePage = () => {
 
   useEffect(() => {
     console.log("Current User ", currentUser);
-    if(currentUser) {
+    if (currentUser) {
       getChats();
     }
   }, [currentUser]);
 
   useEffect(() => {
     //selectedChat.chatItem.chatName:selectedChat.chatItem.chatUsers[1].sc_userName
-    console.log("Selected Chat",selectedChat)
-  },[selectedChat]);
+    console.log("Selected Chat", selectedChat);
+  }, [selectedChat]);
 
   return (
     <div className="container-home-page">
@@ -93,12 +105,15 @@ export const HomePage = () => {
         <div className="chats">
           {chats &&
             chats.length > 0 &&
-            chats.map((c) => <ChatComponent key={c._id} chat={c} setChat={setChat} />)}
+            chats.map((c) => (
+              <ChatComponent key={c._id} chat={c} setChat={setChat} />
+            ))}
         </div>
 
         <CreateChatModalComponent
           open={showCreateChatModal}
           handleClose={handleCreateChatModalTab}
+          createChat={createChat}
         />
       </div>
 
@@ -107,10 +122,15 @@ export const HomePage = () => {
           <div className="message-details">
             <img
               className="message-profile-picture"
-              src={selectedChat && selectedChat.chatUsers[0].sc_userProfilePicture}
+              src={
+                selectedChat && selectedChat.chatUsers[0].sc_userProfilePicture
+              }
             />
             <span className="message-user-name">
-            {selectedChat && (selectedChat.isGroupChat?selectedChat.chatName:selectedChat.chatUsers[1].sc_userName)}
+              {selectedChat &&
+                (selectedChat.isGroupChat
+                  ? selectedChat.chatName
+                  : selectedChat.chatUsers[1].sc_userName)}
             </span>
           </div>
           <div className="container-settings-icon">

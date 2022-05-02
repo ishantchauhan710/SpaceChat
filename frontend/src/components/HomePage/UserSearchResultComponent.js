@@ -4,17 +4,18 @@ export const UserSearchResultComponent = ({
   user,
   groupMembers,
   setGroupMembers,
+  createChat
 }) => {
   const addToGroup = () => {
     if (!groupMembers.includes(user.sc_userEmail)) {
       setGroupMembers([...groupMembers, user.sc_userEmail]);
     }
-
     console.log("\nGroup Members",groupMembers);
   };
 
+
   return (
-    <div onClick={() => addToGroup()} className="user-search-result">
+    <div onClick={() => createChat(user._id)} className="user-search-result">
       <img
         className="user-search-result-profile-picture"
         src={user.sc_userProfilePicture}
