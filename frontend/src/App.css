@@ -267,7 +267,7 @@ body {
 
 .message-app-bar {
     background-color: var(--colorHomePrimary);
-    padding: 10px 20px;
+    padding: 7px 20px;
     font-size: 1.3rem;
     box-shadow: 1px 5px 5px rgba(0,0,0,0.27);
     display: flex;
@@ -283,13 +283,13 @@ body {
 }
 
 .message-profile-picture {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
 .message-user-name {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     display: block;
     margin-left: 15px;
 }

@@ -17,6 +17,12 @@ export const HomePage = () => {
   const [chats, setChats] = useState([]);
 
   const [selectedChat, setSelectedChat] = useState();
+
+  const setChat = (chat) => {
+    setSelectedChat(chat);   
+    console.log("Selected Chat",chat)
+  }
+
   const [chatLoading, setChatLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -25,9 +31,9 @@ export const HomePage = () => {
     setShowCreateChatModal(!showCreateChatModal);
   };
 
-  // useEffect(() => {
-  //   checkIfUserIsLoggedOut(navigate);
-  // }, []);
+   useEffect(() => {
+     checkIfUserIsLoggedOut(navigate);
+   }, []);
 
   const getChats = async () => {
     if (!currentUser) {
@@ -58,8 +64,15 @@ export const HomePage = () => {
 
   useEffect(() => {
     console.log("Current User ", currentUser);
-    getChats();
+    if(currentUser) {
+      getChats();
+    }
   }, [currentUser]);
+
+  useEffect(() => {
+    //selectedChat.chatItem.chatName:selectedChat.chatItem.chatUsers[1].sc_userName
+    console.log("Selected Chat",selectedChat)
+  },[selectedChat]);
 
   return (
     <div className="container-home-page">
@@ -80,7 +93,7 @@ export const HomePage = () => {
         <div className="chats">
           {chats &&
             chats.length > 0 &&
-            chats.map((c) => <ChatComponent key={c._id} chatItem={c} />)}
+            chats.map((c) => <ChatComponent key={c._id} chat={c} setChat={setChat} />)}
         </div>
 
         <CreateChatModalComponent
@@ -94,10 +107,10 @@ export const HomePage = () => {
           <div className="message-details">
             <img
               className="message-profile-picture"
-              src={currentUser && currentUser.userProfilePicture}
+              src={selectedChat && selectedChat.chatUsers[0].sc_userProfilePicture}
             />
             <span className="message-user-name">
-              {currentUser && currentUser.userName}
+            {selectedChat && (selectedChat.isGroupChat?selectedChat.chatName:selectedChat.chatUsers[1].sc_userName)}
             </span>
           </div>
           <div className="container-settings-icon">
