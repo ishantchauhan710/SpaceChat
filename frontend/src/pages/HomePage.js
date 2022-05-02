@@ -13,6 +13,7 @@ import axios from "axios";
 import {
   CREATE_CHAT_ENDPOINT,
   GET_CHATS_ENDPOINT,
+  GET_MESSAGES_ENDPOINT,
 } from "../constants/endpoints";
 import SendIcon from "@mui/icons-material/Send";
 import MessageComponent from "../components/HomePage/MessageComponent";
@@ -40,7 +41,7 @@ export const HomePage = () => {
     checkIfUserIsLoggedOut(navigate);
   }, []);
 
-  const [messages,setMessages] = useState([1,2,3,4,5,6,7,8,9]);
+  const [messages, setMessages] = useState([]);
 
   const getChats = async () => {
     if (!currentUser) {
@@ -77,6 +78,24 @@ export const HomePage = () => {
     }
   };
 
+  const getMessagesForChat = async () => {
+    try {
+      const config = getAuthorizedConfig(currentUser.token);
+      const getMessagesUrl = GET_MESSAGES_ENDPOINT + `/${selectedChat._id}`;
+      console.log("Auth User: ",currentUser);
+      console.log("Get Messages URL", getMessagesUrl);
+
+      const { data } = await axios.get(
+        getMessagesUrl,
+        config
+      );
+      //console.log("Messages: ", data);
+      setMessages(data);
+    } catch (e) {
+      showError(e.message);
+    }
+  };
+
   const { currentUser, setCurrentUser, showError } = AppState();
 
   useEffect(() => {
@@ -93,8 +112,10 @@ export const HomePage = () => {
   }, [currentUser]);
 
   useEffect(() => {
-    //selectedChat.chatItem.chatName:selectedChat.chatItem.chatUsers[1].sc_userName
     console.log("Selected Chat", selectedChat);
+    if (selectedChat) {
+      getMessagesForChat();
+    }
   }, [selectedChat]);
 
   return (
@@ -165,11 +186,7 @@ export const HomePage = () => {
         </div>
 
         <div className="container-message-items">
-          
-          {messages && messages.map((message) => (
-            <MessageComponent/>
-          ))}
-
+          {messages && messages.map((message) => <MessageComponent key={message._id} message={message} />)}
         </div>
 
         <div className="container-input-send-message">

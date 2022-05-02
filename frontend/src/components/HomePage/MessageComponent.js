@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const MessageComponent = () => {
+const MessageComponent = ({message}) => {
+
+  useEffect(()=>{
+    console.log(message);
+  },[]);
+
   return (
     <div className="message-item">
       <div className="container-message-item-profile-picture">
@@ -8,7 +13,7 @@ const MessageComponent = () => {
       </div>
       <div className="container-message-item-data">
         <div className="container-message-item-name-date">
-          <span className="message-item-sender-text">Ishant Chauhan</span>
+          <span className="message-item-sender-text">{message.messageSender.sc_userEmail}</span>
           <span className="message-item-time-text">12:00 Am</span>
         </div>
 
