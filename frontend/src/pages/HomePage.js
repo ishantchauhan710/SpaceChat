@@ -120,10 +120,12 @@ export const HomePage = () => {
       <div className="container-messages">
         <div className="message-app-bar">
           <div className="message-details">
-            <img
+            {selectedChat?(
+              <>
+              <img
               className="message-profile-picture"
               src={
-                selectedChat && selectedChat.chatUsers[0].sc_userProfilePicture
+                selectedChat && selectedChat.chatUsers[1].sc_userProfilePicture
               }
             />
             <span className="message-user-name">
@@ -131,7 +133,8 @@ export const HomePage = () => {
                 (selectedChat.isGroupChat
                   ? selectedChat.chatName
                   : selectedChat.chatUsers[1].sc_userName)}
-            </span>
+            </span></>
+            ):(<span style={{fontSize: "1.6rem", fontWeight: 500}}>SPACECHAT</span>)}
           </div>
           <div className="container-settings-icon">
             <Fab

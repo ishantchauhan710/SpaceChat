@@ -17,7 +17,7 @@ export const ChatComponent = ({chat,setChat}) => {
       <div className="online-status" />
       <img
         className="chat-user-profile-picture"
-        src={chat.chatUsers[0].sc_userProfilePicture}
+        src={chat.chatUsers[1].sc_userProfilePicture}
       />
       <div className="chat-data">
         <div className="chat-name-time-container">

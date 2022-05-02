@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export const UserSearchResultComponent = ({
   user,
@@ -12,6 +12,10 @@ export const UserSearchResultComponent = ({
     }
     console.log("\nGroup Members",groupMembers);
   };
+
+  // useEffect(() => {
+  //   console.log("Chat Users", user)
+  // },[])
 
 
   return (
