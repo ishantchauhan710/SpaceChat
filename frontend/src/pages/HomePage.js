@@ -14,6 +14,7 @@ import {
   CREATE_CHAT_ENDPOINT,
   GET_CHATS_ENDPOINT,
   GET_MESSAGES_ENDPOINT,
+  SEND_MESSAGE_ENDPOINT
 } from "../constants/endpoints";
 import SendIcon from "@mui/icons-material/Send";
 import MessageComponent from "../components/HomePage/MessageComponent";
@@ -23,6 +24,8 @@ export const HomePage = () => {
   const [chats, setChats] = useState([]);
 
   const [selectedChat, setSelectedChat] = useState();
+
+  const [messageContent,setMessageContent] = useState();
 
   const setChat = (chat) => {
     setSelectedChat(chat);
@@ -95,6 +98,30 @@ export const HomePage = () => {
       showError(e.message);
     }
   };
+
+  const sendMessage = async () => {
+
+    if(!messageContent || !selectedChat) {
+      return;
+    }
+
+    try {
+      const config = getAuthorizedConfig(currentUser.token);
+      const { data } = await axios.post(
+        SEND_MESSAGE_ENDPOINT,
+        {
+          chatId: selectedChat._id,
+          messageContent: messageContent
+        },
+        config
+      );
+      setMessageContent("");
+      getMessagesForChat();
+      console.log(data);
+    } catch (e) {
+      showError(e.message);
+    }
+  }
 
   const { currentUser, setCurrentUser, showError } = AppState();
 
@@ -194,6 +221,8 @@ export const HomePage = () => {
             <input
               className="input-send-message"
               placeholder="Write a message..."
+              onChange={(e) => setMessageContent(e.target.value)}
+              value={messageContent}
             />
             <Fab
               style={{
@@ -202,6 +231,7 @@ export const HomePage = () => {
                 transform: "scale(0.75)",
               }}
               aria-label="add"
+              onClick={()=>sendMessage()}
             >
               <SendIcon style={{ color: "#fff", transform: "scale(1.45)" }} />
             </Fab>
