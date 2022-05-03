@@ -181,7 +181,7 @@
 }
 
 
-.message-user-online-status {
+.message-user-email {
     font-size: 0.8rem;
     display: block;
     opacity: 0.8;
@@ -224,6 +224,7 @@
     .container-messages {
         display: none;
     }  */ 
+    
     .modal {
         width: 90vw !important;
     } 

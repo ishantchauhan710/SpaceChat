@@ -76,13 +76,12 @@ export const HomePage = () => {
   const showChatPanel = () => {
     setChatUIClass("show");
     setMessageUIClass("hide");
-  }
+  };
 
   const showMessagePanel = () => {
     setChatUIClass("hide");
     setMessageUIClass("show");
-  }
-
+  };
 
   useEffect(() => {
     checkIfUserIsLoggedOut(navigate);
@@ -130,7 +129,13 @@ export const HomePage = () => {
           {chats &&
             chats.length > 0 &&
             chats.map((c) => (
-              <ChatComponent key={c._id} chat={c} setChat={setChat} showMessagePanel={showMessagePanel} />
+              <ChatComponent
+                key={c._id}
+                chat={c}
+                setChat={setChat}
+                showMessagePanel={showMessagePanel}
+                currentUser={currentUser}
+              />
             ))}
         </div>
 
@@ -151,18 +156,27 @@ export const HomePage = () => {
                 </button>
                 <img
                   className="message-profile-picture"
-                  src={
-                    selectedChat && selectedChat.chatUsers[1].userProfilePicture
-                  }
+                  src={currentUser._id === selectedChat.chatUsers[0]._id
+                    ? selectedChat.chatUsers[1].userProfilePicture
+                    : selectedChat.chatUsers[0].userProfilePicture}
                 />
                 <div className="container-app-bar-message-details">
                   <span className="message-user-name">
                     {selectedChat &&
                       (selectedChat.isGroupChat
                         ? selectedChat.chatName
-                        : selectedChat.chatUsers[1].userName)}
+                        : currentUser._id === selectedChat.chatUsers[0]._id
+                          ? selectedChat.chatUsers[1].userName
+                          : selectedChat.chatUsers[0].userName)}
                   </span>
-                  <span className="message-user-online-status">Online</span>
+                  <span className="message-user-email">
+                  {selectedChat &&
+                      (selectedChat.isGroupChat
+                        ? "Group Chat"
+                        : currentUser._id === selectedChat.chatUsers[0]._id
+                          ? selectedChat.chatUsers[1].userEmail
+                          : selectedChat.chatUsers[0].userEmail)}
+                  </span>
                 </div>
               </>
             ) : (

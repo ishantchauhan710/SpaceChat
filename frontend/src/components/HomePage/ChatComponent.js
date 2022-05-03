@@ -1,38 +1,47 @@
 import React, { useEffect } from "react";
+import { formatDate } from "../../util/DateUtil";
 import { CreateChatModalComponent } from "./CreateChatModalComponent";
 
-export const ChatComponent = ({chat,setChat,showMessagePanel}) => {
-
-  //useEffect(() => {
-    // console.log("Chats: ",chat);
+export const ChatComponent = ({
+  chat,
+  setChat,
+  showMessagePanel,
+  currentUser,
+}) => {
+  useEffect(() => {
+     console.log("Chats: ",chat);
     // console.log("Chat Name: ",chat.chatItem.chatName);
-    // console.log("ChatsItem Chat Users: ",chat.chatItem.chatUsers);
+    //console.log("ChatsItem Chat Users ID: ",chat.chatUsers[0]._id);
+    //console.log("Current User ID", currentUser._id);
     // console.log("ChatsItem Chat Users First User Name: ",chat.chatItem.chatUsers[1].userName);
-  //},[])
+  }, []);
 
   const performClickTasks = (chat) => {
     setChat(chat);
     showMessagePanel();
-  }
-
+  };
 
   return (
     <div className="chat" onClick={() => performClickTasks(chat)}>
       <div className="online-status" />
       <img
         className="chat-user-profile-picture"
-        src={chat.chatUsers[1].userProfilePicture}
+        src={
+          currentUser._id === chat.chatUsers[0]._id
+            ? chat.chatUsers[1].userProfilePicture
+            : chat.chatUsers[0].userProfilePicture
+        }
       />
       <div className="chat-data">
         <div className="chat-name-time-container">
           <span className="chat-username">
-          {chat.isGroupChat?chat.chatName:chat.chatUsers[1].userName}
+            {currentUser._id === chat.chatUsers[0]._id
+              ? chat.chatUsers[1].userName
+              : chat.chatUsers[0].userName}
           </span>
-          <span className="chat-date-time">27 Jan 2022</span>
+          <span className="chat-date-time">{formatDate(chat.lastMessage.updatedAt)}</span>
         </div>
-        <span className="chat-last-message">
-        Start a Conversation Now!
-        </span>
+        <span className="chat-last-message">{chat.lastMessage.messageContent}</span>
       </div>
       <CreateChatModalComponent />
     </div>

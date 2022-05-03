@@ -53,12 +53,10 @@
 .chat-last-message {
     font-size: 0.8rem;
     opacity: 0.6;
+    width:60%;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    line-clamp: 1;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
 }
 
 .online-status {

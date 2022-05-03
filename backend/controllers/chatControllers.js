@@ -56,6 +56,7 @@ const getChatsController = expressAsyncHandler(async (req, res) => {
     })
       .populate("chatUsers", "-userPassword")
       .populate("chatAdmin", "-userPassword")
+      .populate("lastMessage")
       .sort({
         updatedAt: -1,
       })

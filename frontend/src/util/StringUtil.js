@@ -6,3 +6,11 @@ export const trimString = (str) => {
   let trimmedStr = str.replace(/^\s+|\s+$/gm, "");
   return trimmedStr;
 };
+
+export const formatForSingleDigit = (value) => {
+  if(value<10) {
+      return "0" + value.toString();
+  } else {
+      return value.toString();
+  }
+}

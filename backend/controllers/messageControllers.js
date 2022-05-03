@@ -25,15 +25,16 @@ const sendMessageController = expressAsyncHandler(async (req, res) => {
     );
 
     message = await message.populate("messageChat");
+    
 
     message = await message.populate("messageContent", {
         path: "messageChat.chatUsers",
-        select: "userName, userEmail, userProfilePicture",
+        select: "userName userEmail userProfilePicture",
       });
     
 
     await Chat.findByIdAndUpdate(req.body.chatId, {
-      latestMessage: message,
+      lastMessage: message,
     });
 
     res.json(message);
@@ -46,7 +47,7 @@ const sendMessageController = expressAsyncHandler(async (req, res) => {
 const getAllMessagesController = expressAsyncHandler(async (req, res) => {
   try {
     const messages = await Message.find({ messageChat: req.params.chatId })
-      .populate("messageSender", "userName, userPic, userEmail")
+      .populate("messageSender", "userName userEmail userProfilePicture")
       .populate("messageChat");
 
     res.json(messages);

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { formatDate } from "../../util/DateUtil";
 
 const MessageComponent = ({ message }) => {
   useEffect(() => {
@@ -8,14 +9,14 @@ const MessageComponent = ({ message }) => {
   return (
     <div className="message-item">
       <div className="container-message-item-profile-picture">
-        <img className="message-item-profile-picture" src="/logo512.png" />
+        <img className="message-item-profile-picture" src={message.messageSender.userProfilePicture} />
       </div>
       <div className="container-message-item-data">
         <div className="container-message-item-name-date">
           <span className="message-item-sender-text">
-            {message.messageSender.userEmail}
+            {message.messageSender.userName}
           </span>
-          <span className="message-item-time-text">12:00 Am</span>
+          <span className="message-item-time-text">{formatDate(message.updatedAt)}</span>
         </div>
 
         <span className="message-item-content">{message.messageContent}</span>

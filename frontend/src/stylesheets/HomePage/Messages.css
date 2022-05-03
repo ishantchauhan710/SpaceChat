@@ -9,7 +9,6 @@
 }
 
 .container-message-item-profile-picture {
-    background-color: #9a9ad6;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -43,7 +42,7 @@
 }
 
 .message-item-time-text {
-    font-size: 0.7rem;
+    font-size: 0.55rem;
     opacity: 0.6;
     margin-left: 20px;
 }
@@ -57,4 +56,10 @@
     .container-message-item-data {
         max-width: 150px;
     }
+    .message-item-time-text {
+        font-size: 0.4rem;
+        opacity: 0.6;
+        margin-left: 20px;
+    }
+    
 }
