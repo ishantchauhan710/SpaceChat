@@ -7,9 +7,10 @@ const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 
-
-
-const { urlNotFoundMiddleware, handleErrorFoundMiddleware } = require("./middlewares/errorMiddleware");
+const {
+  urlNotFoundMiddleware,
+  handleErrorFoundMiddleware,
+} = require("./middlewares/errorMiddleware");
 
 dotenv.config();
 
@@ -22,12 +23,24 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRoutes);
-app.use("/user",userRoutes);
-app.use("/chat",chatRoutes);
-app.use("/message",messageRoutes);
+app.use("/user", userRoutes);
+app.use("/chat", chatRoutes);
+app.use("/message", messageRoutes);
 
 const PORT = process.env.PORT;
 
 app.use(urlNotFoundMiddleware);
 app.use(handleErrorFoundMiddleware);
-app.listen(PORT, console.log("Server started on port: ", PORT));
+
+const server = app.listen(PORT, console.log("Server started on port: ", PORT));
+
+const io = require("socket.io")(server, {
+  pingTimeout: 50000,
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+io.on("connection",(socket) => {
+  console.log("Connected to socket.io");
+})

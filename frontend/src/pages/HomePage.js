@@ -10,6 +10,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { getAuthorizedConfig } from "../constants/config";
 import axios from "axios";
 import {
+  BASE_URL,
   CREATE_CHAT_ENDPOINT,
   GET_CHATS_ENDPOINT,
   GET_MESSAGES_ENDPOINT,
@@ -35,6 +36,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import ProfileComponent from "../components/HomePage/ProfileComponent";
+import io from "socket.io-client";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
@@ -127,9 +129,15 @@ export const HomePage = () => {
     setAnchorEl(null);
   };
 
+  /* Code for socket.io */
+  let socket;
+
   useEffect(() => {
     checkIfUserIsLoggedOut(navigate);
+
+    socket = io(BASE_URL);
   }, []);
+
 
   useEffect(() => {
     let userInfo = JSON.parse(localStorage.getItem("userInfo"));
