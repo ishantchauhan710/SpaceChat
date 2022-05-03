@@ -1,0 +1,24 @@
+.container-profile-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.profile-modal-profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-modal-name-text {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.profile-modal-email-text {
+    font-size: 1.1rem;
+}

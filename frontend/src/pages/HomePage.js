@@ -28,6 +28,7 @@ import {
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { createTheme, Menu, MenuItem, ThemeProvider } from "@mui/material";
+import ProfileComponent from "../components/HomePage/ProfileComponent";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
@@ -36,9 +37,11 @@ export const HomePage = () => {
   const [messageContent, setMessageContent] = useState();
   const [chatLoading, setChatLoading] = useState(false);
   const [messages, setMessages] = useState([]);
-
   const [chatUIClass, setChatUIClass] = useState("show");
   const [messageUIClass, setMessageUIClass] = useState("hide");
+  const [profileModal,setProfileModal] = useState(false);
+  const [profileModalUser,setProfileModalUser] = useState();
+  
   const { currentUser, setCurrentUser, showError } = AppState();
   const navigate = useNavigate();
 
@@ -85,9 +88,19 @@ export const HomePage = () => {
   };
 
   const logout = () => {
-    handleClose()
+    handleClose();
     localStorage.removeItem("userInfo");
     navigate("/");
+  };
+
+  const showProfileModal = (currentUser) => {
+    handleClose();
+    setProfileModal(true);
+    setProfileModalUser(currentUser);
+  };
+
+  const handleProfileModalClose = () => {
+    setProfileModal(false);
   }
 
   /* Code for settings menu popup */
@@ -226,10 +239,12 @@ export const HomePage = () => {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={handleClose}>My Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Delete Chat</MenuItem>
+              <MenuItem onClick={() => showProfileModal(currentUser)}>
+                My Profile
+              </MenuItem>
               <MenuItem onClick={() => logout()}>Logout</MenuItem>
             </Menu>
+            <ProfileComponent profileModal={profileModal} handleProfileModalClose={handleProfileModalClose} user={profileModalUser} />
           </div>
         </div>
 
@@ -240,6 +255,7 @@ export const HomePage = () => {
                 key={message._id}
                 message={message}
                 currentUser={currentUser}
+                showProfileModal={showProfileModal}
               />
             ))}
         </div>

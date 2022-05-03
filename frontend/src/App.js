@@ -17,6 +17,8 @@ import "./stylesheets/HomePage/HomePage.css";
 import "./stylesheets/HomePage/Chats.css";
 import "./stylesheets/HomePage/Messages.css";
 import "./stylesheets/HomePage/CreateChatModal.css";
+import "./stylesheets/HomePage/ProfileComponent.css";
+
 
 
 
