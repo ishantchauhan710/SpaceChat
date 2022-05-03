@@ -52,6 +52,29 @@
     opacity: 0.8;
 }
 
+/* Sender Message Items */
+
+.sender-message-item {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-self: flex-end;
+    flex-direction: row-reverse;
+    margin: 5px 20px ;
+    padding-bottom: 10px;
+}
+
+.sender-container-message-item-data {
+    margin-right: 10px;
+    background-color: var(--colorMyMessage);
+    padding: 7px 20px;
+    border-radius: 10px 0px 10px 10px;
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+
+
 @media only screen and (min-width: 0px) and (max-width: 699px) {
     .container-message-item-data {
         max-width: 150px;

@@ -27,6 +27,7 @@ import {
 } from "../logic/ChatLogic/messageFunctions";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { createTheme, Menu, MenuItem, ThemeProvider } from "@mui/material";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
@@ -81,6 +82,23 @@ export const HomePage = () => {
   const showMessagePanel = () => {
     setChatUIClass("hide");
     setMessageUIClass("show");
+  };
+
+  const logout = () => {
+    handleClose()
+    localStorage.removeItem("userInfo");
+    navigate("/");
+  }
+
+  /* Code for settings menu popup */
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleSettingsMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   useEffect(() => {
@@ -156,9 +174,11 @@ export const HomePage = () => {
                 </button>
                 <img
                   className="message-profile-picture"
-                  src={currentUser._id === selectedChat.chatUsers[0]._id
-                    ? selectedChat.chatUsers[1].userProfilePicture
-                    : selectedChat.chatUsers[0].userProfilePicture}
+                  src={
+                    currentUser._id === selectedChat.chatUsers[0]._id
+                      ? selectedChat.chatUsers[1].userProfilePicture
+                      : selectedChat.chatUsers[0].userProfilePicture
+                  }
                 />
                 <div className="container-app-bar-message-details">
                   <span className="message-user-name">
@@ -166,16 +186,16 @@ export const HomePage = () => {
                       (selectedChat.isGroupChat
                         ? selectedChat.chatName
                         : currentUser._id === selectedChat.chatUsers[0]._id
-                          ? selectedChat.chatUsers[1].userName
-                          : selectedChat.chatUsers[0].userName)}
+                        ? selectedChat.chatUsers[1].userName
+                        : selectedChat.chatUsers[0].userName)}
                   </span>
                   <span className="message-user-email">
-                  {selectedChat &&
+                    {selectedChat &&
                       (selectedChat.isGroupChat
                         ? "Group Chat"
                         : currentUser._id === selectedChat.chatUsers[0]._id
-                          ? selectedChat.chatUsers[1].userEmail
-                          : selectedChat.chatUsers[0].userEmail)}
+                        ? selectedChat.chatUsers[1].userEmail
+                        : selectedChat.chatUsers[0].userEmail)}
                   </span>
                 </div>
               </>
@@ -193,16 +213,34 @@ export const HomePage = () => {
               }}
               color="homePrimaryVariant"
               aria-label="add"
+              onClick={handleSettingsMenuClick}
             >
               <SettingsIcon style={{ transform: "scale(1.4)" }} />
             </Fab>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <MenuItem onClick={handleClose}>My Profile</MenuItem>
+              <MenuItem onClick={handleClose}>Delete Chat</MenuItem>
+              <MenuItem onClick={() => logout()}>Logout</MenuItem>
+            </Menu>
           </div>
         </div>
 
         <div className="container-message-items">
           {messages &&
             messages.map((message) => (
-              <MessageComponent key={message._id} message={message} />
+              <MessageComponent
+                key={message._id}
+                message={message}
+                currentUser={currentUser}
+              />
             ))}
         </div>
 
