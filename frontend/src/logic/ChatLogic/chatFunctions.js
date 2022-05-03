@@ -7,23 +7,23 @@ import {
 
 export const getChatsAsync = async (
   currentUser,
-  setChatLoading,
   setChats,
-  showError
+  showError,
+  setLoadingChats
 ) => {
   if (!currentUser) {
     return;
   }
   try {
-    setChatLoading(true);
+    setLoadingChats(true);
     const config = getAuthorizedConfig(currentUser.token);
     const { data } = await axios.get(GET_CHATS_ENDPOINT, config);
     console.log(data);
     setChats(data);
-    setChatLoading(false);
+    setLoadingChats(false);
   } catch (e) {
     showError(e.message);
-    setChatLoading(false);
+    setLoadingChats(false);
   }
 };
 

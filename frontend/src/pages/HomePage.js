@@ -27,7 +27,13 @@ import {
 } from "../logic/ChatLogic/messageFunctions";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { createTheme, Menu, MenuItem, ThemeProvider } from "@mui/material";
+import {
+  CircularProgress,
+  createTheme,
+  Menu,
+  MenuItem,
+  ThemeProvider,
+} from "@mui/material";
 import ProfileComponent from "../components/HomePage/ProfileComponent";
 
 export const HomePage = () => {
@@ -35,13 +41,13 @@ export const HomePage = () => {
   const [chats, setChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState();
   const [messageContent, setMessageContent] = useState();
-  const [chatLoading, setChatLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const [chatUIClass, setChatUIClass] = useState("show");
   const [messageUIClass, setMessageUIClass] = useState("hide");
-  const [profileModal,setProfileModal] = useState(false);
-  const [profileModalUser,setProfileModalUser] = useState();
-  
+  const [profileModal, setProfileModal] = useState(false);
+  const [profileModalUser, setProfileModalUser] = useState();
+  const [loadingChats, setLoadingChats] = useState(false);
+  const [loadingMessages, setLoadingMessages] = useState(false);
   const { currentUser, setCurrentUser, showError } = AppState();
   const navigate = useNavigate();
 
@@ -55,7 +61,7 @@ export const HomePage = () => {
   };
 
   const getChats = () => {
-    getChatsAsync(currentUser, setChatLoading, setChats, showError);
+    getChatsAsync(currentUser, setChats, showError, setLoadingChats);
   };
 
   const createChat = (chatPersonId) => {
@@ -63,11 +69,17 @@ export const HomePage = () => {
   };
 
   const getMessagesForChat = () => {
-    getMessagesForChatAsync(currentUser, selectedChat, setMessages, showError);
+    getMessagesForChatAsync(
+      currentUser,
+      selectedChat,
+      setMessages,
+      showError,
+      setLoadingMessages
+    );
   };
 
   const sendMessage = async () => {
-    sendMessageAsync(
+    await sendMessageAsync(
       messageContent,
       selectedChat,
       currentUser,
@@ -101,7 +113,7 @@ export const HomePage = () => {
 
   const handleProfileModalClose = () => {
     setProfileModal(false);
-  }
+  };
 
   /* Code for settings menu popup */
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -133,8 +145,19 @@ export const HomePage = () => {
 
   useEffect(() => {
     console.log("Selected Chat", selectedChat);
+
+    var inputField = document.getElementById("sendMessageInput");
+
     if (selectedChat) {
       getMessagesForChat();
+      if (inputField) {
+        inputField.addEventListener("keypress", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("buttonSendMessage").click();
+          }
+        });
+      }
     }
   }, [selectedChat]);
 
@@ -156,7 +179,7 @@ export const HomePage = () => {
           </Fab>
         </div>
 
-        <div className="chats">
+        <div className="chats" style={{ position: "relative" }}>
           {chats &&
             chats.length > 0 &&
             chats.map((c) => (
@@ -168,6 +191,25 @@ export const HomePage = () => {
                 currentUser={currentUser}
               />
             ))}
+          {loadingChats ? (
+            <div
+              style={{
+                marginTop: "50px",
+                display: "flex",
+                top: 0,
+                left: "50%",
+                marginRight: "20px",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 99999,
+                position: "absolute",
+              }}
+            >
+              <CircularProgress color="secondary" />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
 
         <CreateChatModalComponent
@@ -244,11 +286,31 @@ export const HomePage = () => {
               </MenuItem>
               <MenuItem onClick={() => logout()}>Logout</MenuItem>
             </Menu>
-            <ProfileComponent profileModal={profileModal} handleProfileModalClose={handleProfileModalClose} user={profileModalUser} />
+            <ProfileComponent
+              profileModal={profileModal}
+              handleProfileModalClose={handleProfileModalClose}
+              user={profileModalUser}
+            />
           </div>
         </div>
 
-        <div className="container-message-items">
+        <div className="container-message-items" id="containerMessages">
+          {loadingMessages ? (
+            <div
+              style={{
+                width: "100%",
+                position: "absolute",
+                marginTop: "50px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress color="secondary" />
+            </div>
+          ) : (
+            <></>
+          )}
           {messages &&
             messages.map((message) => (
               <MessageComponent
@@ -260,34 +322,30 @@ export const HomePage = () => {
             ))}
         </div>
 
-        <div className="container-input-send-message">
-          <div className="send-message-input-wrapper">
-            <input
-              className="input-send-message"
-              placeholder="Write a message..."
-              onChange={(e) => setMessageContent(e.target.value)}
-              value={messageContent}
-            />
-            <div className="container-message-controls">
-              <button className="button-send-message">
-                <EmojiEmotionsIcon
-                  style={{
-                    color: "#fff",
-                    transform: "scale(1.5)",
-                    marginRight: 20,
-                  }}
-                />
-              </button>
-
-              <button
-                className="button-send-message"
-                onClick={() => sendMessage()}
-              >
-                <SendIcon style={{ color: "#fff", transform: "scale(1.4)" }} />
-              </button>
+        {selectedChat && (
+          <div className="container-input-send-message">
+            <div className="send-message-input-wrapper">
+              <input
+                className="input-send-message"
+                id="sendMessageInput"
+                placeholder="Write a message..."
+                onChange={(e) => setMessageContent(e.target.value)}
+                value={messageContent}
+              />
+              <div className="container-message-controls">
+                <button
+                id="buttonSendMessage"
+                  className="button-send-message"
+                  onClick={() => sendMessage()}
+                >
+                  <SendIcon
+                    style={{ color: "#fff", transform: "scale(1.4)" }}
+                  />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

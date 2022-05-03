@@ -9,7 +9,8 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(var(--colorPrimary), var(--colorPrimaryVariant));
+    background-image: linear-gradient(var(--colorPrimary), var(--colorPrimaryVariant));  
+    scroll-behavior: smooth;
 }
 
 .loading-component {
