@@ -8,13 +8,13 @@ export const ChatComponent = ({
   showMessagePanel,
   currentUser,
 }) => {
-  useEffect(() => {
-     console.log("Chats: ",chat);
-    // console.log("Chat Name: ",chat.chatItem.chatName);
-    //console.log("ChatsItem Chat Users ID: ",chat.chatUsers[0]._id);
-    //console.log("Current User ID", currentUser._id);
-    // console.log("ChatsItem Chat Users First User Name: ",chat.chatItem.chatUsers[1].userName);
-  }, []);
+  // useEffect(() => {
+  //   //console.log("Chats: ",chat);
+  //   // console.log("Chat Name: ",chat.chatItem.chatName);
+  //   //console.log("ChatsItem Chat Users ID: ",chat.chatUsers[0]._id);
+  //   //console.log("Current User ID", currentUser._id);
+  //   // console.log("ChatsItem Chat Users First User Name: ",chat.chatItem.chatUsers[1].userName);
+  // }, []);
 
   const performClickTasks = (chat) => {
     setChat(chat);
@@ -39,9 +39,9 @@ export const ChatComponent = ({
               ? chat.chatUsers[1].userName
               : chat.chatUsers[0].userName}
           </span>
-          <span className="chat-date-time">{formatDate(chat.lastMessage.updatedAt)}</span>
+          <span className="chat-date-time">{chat.lastMessage?formatDate(chat.lastMessage.updatedAt):"Null"}</span>
         </div>
-        <span className="chat-last-message">{chat.lastMessage.messageContent}</span>
+        <span className="chat-last-message">{chat.lastMessage?chat.lastMessage.messageContent:"Null"}</span>
       </div>
       <CreateChatModalComponent />
     </div>

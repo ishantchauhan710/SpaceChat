@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import { createChatModalStyle } from "../../styles/modalStyles";
 
 const ProfileComponent = ({ profileModal, handleProfileModalClose, user }) => {
-  useEffect(() => {
-    console.log("Profile Modal User: ", user);
-  }, [profileModal]);
+  // useEffect(() => {
+  //   console.log("Profile Modal User: ", user);
+  // }, [profileModal]);
 
   return (
     <>

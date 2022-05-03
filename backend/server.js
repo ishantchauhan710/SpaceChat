@@ -41,6 +41,54 @@ const io = require("socket.io")(server, {
   },
 });
 
-io.on("connection",(socket) => {
+io.on("connection", (socket) => {
   console.log("Connected to socket.io");
-})
+
+  socket.on("setup", (userData) => {
+    console.log("User Connected: ", userData.userName);
+
+    socket.join(userData._id);
+    socket.emit("connected");
+  });
+
+  socket.on("joinRoom", (room) => {
+    socket.join(room);
+    console.log("Chat room: ", room);
+  });
+
+  socket.on("newMessage", (newMessageReceived) => {
+    var chat = newMessageReceived.messageChat;
+    var chatUsers = chat.chatUsers;
+
+    console.log("New Message Received");
+
+    if (!chatUsers) {
+      console.log("[ERROR] Undefined chat users");
+      return;
+    }
+
+    chatUsers.forEach((user,i) => {
+     // console.log("Message Sender Id: ", newMessageReceived.messageSender._id);
+
+      //if (user._id == newMessageReceived.messageSender._id) return;
+
+      console.log("\n\n\n\nIteration: ",i)
+      console.log("Chat Users: ", user.userName);
+      console.log("Message Sender: ", newMessageReceived.messageSender.userName);
+      console.log("Message Receiver: ", user.userName);
+      console.log("Message Content: ",newMessageReceived.messageContent)
+      console.log("Message Chat: ",chat.chatName);
+      console.log("-------------------------------");
+      
+      
+      if (user._id != newMessageReceived.messageSender._id) {
+          socket.in(user._id).emit("messageReceived", newMessageReceived);
+          console.log("Message sent from: ",newMessageReceived.messageSender.userName);
+          console.log("Message sent to: ",user.userName);
+      };
+
+
+    
+    });
+  });
+});

@@ -34,11 +34,14 @@ export const getMessagesForChatAsync = async (
 };
 
 export const sendMessageAsync = async (
+  socket,
   messageContent,
   selectedChat,
   currentUser,
   setMessageContent,
   getMessagesForChat,
+  messages,
+  setMessages,
   showError
 ) => {
   if (!messageContent || !selectedChat) {
@@ -56,7 +59,10 @@ export const sendMessageAsync = async (
       config
     );
     setMessageContent("");
-    getMessagesForChat();
+    socket.emit("newMessage",data);
+    console.log("Message Transferred to Socket", data);
+    setMessages([...messages,data]);
+    //getMessagesForChat();
     console.log(data);
   } catch (e) {
     showError(e.message);

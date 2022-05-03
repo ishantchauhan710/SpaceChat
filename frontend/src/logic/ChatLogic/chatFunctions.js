@@ -18,7 +18,7 @@ export const getChatsAsync = async (
     setLoadingChats(true);
     const config = getAuthorizedConfig(currentUser.token);
     const { data } = await axios.get(GET_CHATS_ENDPOINT, config);
-    console.log(data);
+    //console.log(data);
     setChats(data);
     setLoadingChats(false);
   } catch (e) {

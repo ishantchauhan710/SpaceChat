@@ -25,12 +25,7 @@ const sendMessageController = expressAsyncHandler(async (req, res) => {
     );
 
     message = await message.populate("messageChat");
-    
-
-    message = await message.populate("messageContent", {
-        path: "messageChat.chatUsers",
-        select: "userName userEmail userProfilePicture",
-      });
+    message = await message.populate("messageChat.chatUsers");
     
 
     await Chat.findByIdAndUpdate(req.body.chatId, {

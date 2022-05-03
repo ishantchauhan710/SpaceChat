@@ -50,9 +50,36 @@ export const HomePage = () => {
   const [profileModalUser, setProfileModalUser] = useState();
   const [loadingChats, setLoadingChats] = useState(false);
   const [loadingMessages, setLoadingMessages] = useState(false);
+  const [socketConnected, setSocketConnected] = useState(false);
+  const [socket, setSocket] = useState(null);
+  let compareSelectedChat;
   let hasEnterKeyPressed = false; // For preventing firefox browser from firing click events multiple times
   const { currentUser, setCurrentUser, showError } = AppState();
   const navigate = useNavigate();
+
+  /* Code for socket.io */
+  useEffect(() => {
+    setSocket(io(BASE_URL));
+  }, []);
+
+  useEffect(() => {
+    if (!socket) {
+      return;
+    }
+
+    let user = JSON.parse(localStorage.getItem("userInfo"));
+
+    console.log("IO: ", socket);
+    console.log("Socket Current User ", user);
+
+    socket.emit("setup", user);
+    socket.on("connected", () => {
+      setSocketConnected(true);
+      console.log("Socket Connection Established");
+    });
+
+    console.log("IO Again: ", socket);
+  }, [socket]);
 
   const setChat = (chat) => {
     setSelectedChat(chat);
@@ -79,15 +106,25 @@ export const HomePage = () => {
       showError,
       setLoadingMessages
     );
+
+    socket.emit("joinRoom", selectedChat._id);
   };
 
   const sendMessage = async () => {
+    if (!socket) {
+      console.log("Send Message Socket Not Found ", socket);
+      return;
+    }
+
     await sendMessageAsync(
+      socket,
       messageContent,
       selectedChat,
       currentUser,
       setMessageContent,
       getMessagesForChat,
+      messages,
+      setMessages,
       showError
     );
   };
@@ -129,15 +166,9 @@ export const HomePage = () => {
     setAnchorEl(null);
   };
 
-  /* Code for socket.io */
-  let socket;
-
   useEffect(() => {
     checkIfUserIsLoggedOut(navigate);
-
-    socket = io(BASE_URL);
   }, []);
-
 
   useEffect(() => {
     let userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -146,19 +177,45 @@ export const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Current User ", currentUser);
+    if (!socket) {
+      return;
+    }
+
+    console.log("Looking for messages");
+
+    socket.on("messageReceived", (newMessageReceived) => {
+      console.log("Message is here");
+
+      // if(!compareSelectedChat || compareSelectedChat._id!==newMessageReceived.messageChat._id) {
+      //   // Notification
+      //   console.log("NEW NOTIFICATION IS HERE")
+      // } else {
+      //   //setMessages([...messages,newMessageReceived]);
+      //   console.log("NEW MESSAGE IS HERE")
+      // }
+
+    });
+  });
+
+  useEffect(() => {
+    // console.log("Current User ", currentUser);
     if (currentUser) {
       getChats();
     }
   }, [currentUser]);
 
   useEffect(() => {
-    console.log("Selected Chat", selectedChat);
+    //console.log("Selected Chat", selectedChat);
+
+    if (!socket) {
+      return;
+    }
 
     var inputField = document.getElementById("sendMessageInput");
 
     if (selectedChat) {
       getMessagesForChat();
+      compareSelectedChat = selectedChat;
       if (inputField) {
         inputField.addEventListener("keypress", (event) => {
           if (event.key === "Enter") {

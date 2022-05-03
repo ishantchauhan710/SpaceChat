@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { formatDate } from "../../util/DateUtil";
 
 const MessageComponent = ({ message, currentUser, showProfileModal }) => {
-  useEffect(() => {
-    console.log(message);
-  }, []);
+  // useEffect(() => {
+  //   console.log(message);
+  // }, []);
 
   return (
     <div className={message.messageSender._id===currentUser._id?"sender-message-item":"message-item"}>
