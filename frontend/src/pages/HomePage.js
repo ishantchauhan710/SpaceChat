@@ -336,6 +336,7 @@ export const HomePage = () => {
                 className="input-send-message"
                 id="sendMessageInput"
                 placeholder="Write a message..."
+                autoComplete="off"
                 onChange={(e) => setMessageContent(e.target.value)}
                 value={messageContent}
               />

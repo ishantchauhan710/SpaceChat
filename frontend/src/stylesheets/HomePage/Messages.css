@@ -20,6 +20,7 @@
     border-radius: 0px 10px 10px 10px;
     max-width: 400px;
     word-wrap: break-word;
+    box-shadow: 1px 1px 4px rgba(255,255,255,0.1);
 }
 
 .message-item-profile-picture {
@@ -71,6 +72,7 @@
     border-radius: 10px 0px 10px 10px;
     max-width: 400px;
     word-wrap: break-word;
+    box-shadow: 1px 1px 4px rgba(255,255,255,0.2);
 }
 
 
