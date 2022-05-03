@@ -56,6 +56,7 @@ export const LandingPage = () => {
                 color: colorOnPrimary,
                 marginRight: 20,
                 fontSize: "1.2rem",
+                zIndex: 9999 /* For Firefox Browser */
               }}
               onClick={() => handleAuthModalTab("1")}
               className="landing-page-login-signup-btn"
@@ -69,6 +70,7 @@ export const LandingPage = () => {
                 textTransform: "none",
                 borderColor: colorOnPrimary,
                 color: colorOnPrimary,
+                zIndex: 9999 /* For Firefox Browser */
               }}
               className="landing-page-login-signup-btn"
               onClick={() => handleAuthModalTab("2")}

@@ -48,6 +48,7 @@ export const HomePage = () => {
   const [profileModalUser, setProfileModalUser] = useState();
   const [loadingChats, setLoadingChats] = useState(false);
   const [loadingMessages, setLoadingMessages] = useState(false);
+  let hasEnterKeyPressed = false; // For preventing firefox browser from firing click events multiple times
   const { currentUser, setCurrentUser, showError } = AppState();
   const navigate = useNavigate();
 
@@ -154,7 +155,13 @@ export const HomePage = () => {
         inputField.addEventListener("keypress", (event) => {
           if (event.key === "Enter") {
             event.preventDefault();
-            document.getElementById("buttonSendMessage").click();
+            hasEnterKeyPressed = true;
+            if (hasEnterKeyPressed) {
+              document.getElementById("buttonSendMessage").click();
+              hasEnterKeyPressed = false;
+            } else {
+              return;
+            }
           }
         });
       }
@@ -334,7 +341,7 @@ export const HomePage = () => {
               />
               <div className="container-message-controls">
                 <button
-                id="buttonSendMessage"
+                  id="buttonSendMessage"
                   className="button-send-message"
                   onClick={() => sendMessage()}
                 >
