@@ -26,7 +26,7 @@ export const getMessagesForChatAsync = async (
     setTimeout(() => {
       const messageDiv = document.getElementById("containerMessages");
       messageDiv.scrollTop = messageDiv.scrollHeight + 20;
-    }, 500);
+    }, 800);
   } catch (e) {
     showError(e.message);
     setLoadingMessages(false);
@@ -63,7 +63,11 @@ export const sendMessageAsync = async (
     console.log("Message Transferred to Socket", data);
     setMessages([...messages,data]);
     //getMessagesForChat();
-    console.log(data);
+    console.log(data);  
+    setTimeout(() => {
+      const messageDiv = document.getElementById("containerMessages");
+      messageDiv.scrollTop = messageDiv.scrollHeight + 20;
+    }, 800);
   } catch (e) {
     showError(e.message);
   }

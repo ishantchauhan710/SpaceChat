@@ -176,6 +176,7 @@ export const HomePage = () => {
     setCurrentUser(userInfo);
   }, []);
 
+
   useEffect(() => {
     if (!socket) {
       return;
@@ -186,15 +187,20 @@ export const HomePage = () => {
     socket.on("messageReceived", (newMessageReceived) => {
       console.log("Message is here");
 
-      // if(!compareSelectedChat || compareSelectedChat._id!==newMessageReceived.messageChat._id) {
-      //   // Notification
-      //   console.log("NEW NOTIFICATION IS HERE")
-      // } else {
-      //   //setMessages([...messages,newMessageReceived]);
-      //   console.log("NEW MESSAGE IS HERE")
-      // }
+      console.log("Message received details: ", newMessageReceived);
 
+      if (
+        !compareSelectedChat ||
+        compareSelectedChat._id === newMessageReceived.messageChat._id
+      ) {
+        setMessages([...messages, newMessageReceived]);
+      } else {
+        console.log("NEW NOTIFICATION IS HERE");
+      }
     });
+
+    //return () => socket.emit('end');
+
   });
 
   useEffect(() => {
