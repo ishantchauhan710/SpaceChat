@@ -14,7 +14,7 @@ import {
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { SEARCH_USER_ENDPOINT } from "../../constants/endpoints";
+import { CREATE_GROUP_ENDPOINT, SEARCH_USER_ENDPOINT } from "../../constants/endpoints";
 import axios from "axios";
 
 import { AppState } from "../../AppContext";
@@ -23,7 +23,7 @@ import { getAuthorizedConfig } from "../../constants/config";
 import { UserSearchResultComponent } from "./UserSearchResultComponent";
 import { createChatModalStyle } from "../../styles/modalStyles";
 
-export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
+export const CreateChatModalComponent = ({ open, handleClose, createChat, setUpdateChat, setChat }) => {
   const { currentUser, setCurrentUser } = AppState();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchGroupUserQuery, setSearchGroupUserQuery] = useState("");
@@ -31,6 +31,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchGroupUserResults, setSearchGroupUserResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [groupNameValue,setGroupNameValue] = useState("");
   const [groupMembers, setGroupMembers] = useState([]);
   const { showError } = AppState();
 
@@ -97,6 +98,37 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
     }
   };
 
+  const createGroup = async () => {
+
+    if(trimString(groupNameValue)===null) {
+      return;
+    }
+
+
+    const groupMembersJSON = JSON.stringify(groupMembers.map((member) => member._id));
+
+    console.log("Group Members: ",groupMembers);
+    console.log("Group Members JSON: ",groupMembersJSON);
+    
+
+    try {
+      const config = getAuthorizedConfig(currentUser.token);
+      const { data } = await axios.post(
+        CREATE_GROUP_ENDPOINT,
+        {
+          groupName: groupNameValue,
+          groupUsers: groupMembersJSON
+        },
+        config
+      );
+      console.log("Group Chat Created",data);
+      setUpdateChat(true);
+      setChat(data);
+    } catch (e) {
+      showError(e.message);
+    }
+  }
+
   return (
     <Modal open={open} onClose={handleClose}>
       <Box sx={createChatModalStyle} className="container-create-chat-modal modal">
@@ -142,6 +174,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
                     <UserSearchResultComponent
                       user={searchItem}
                       createChat={createChat}
+                      mode="single"
                     />
                   ))}
               </div>
@@ -149,7 +182,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
           </TabPanel>
 
           <TabPanel value="2">
-            <input className="input-search-user" placeholder="Group Name" />
+            <input className="input-search-user" value={groupNameValue} onChange={(e) => setGroupNameValue(e.target.value)} placeholder="Group Name" />
             <input
               className="input-search-user"
               placeholder="Add Members"
@@ -182,6 +215,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
                       groupMembers={groupMembers}
                       setGroupMembers={setGroupMembers}
                       user={searchItem}
+                      mode="group"
                     />
                   ))}
               </div>
@@ -192,7 +226,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
                   <Chip
                     size="small"
                     color="secondary"
-                    label={member}
+                    label={member.userName}
                     onDelete={() => removeMemberFromGroup(member)}
                     style={{ marginLeft: 10, marginTop: 7 }}
                   />
@@ -202,6 +236,7 @@ export const CreateChatModalComponent = ({ open, handleClose, createChat }) => {
               color="success"
               variant="contained"
               style={{ width: "100%", margin: "20px 20px 10px 10px" }}
+              onClick={() => createGroup()}
             >
               Create Group
             </Button>

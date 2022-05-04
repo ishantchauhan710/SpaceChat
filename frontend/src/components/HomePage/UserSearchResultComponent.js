@@ -5,10 +5,22 @@ export const UserSearchResultComponent = ({
   groupMembers,
   setGroupMembers,
   createChat,
+  mode // "single": Single Chat, "group": Group Chat
 }) => {
+
+  const performUserItemOnClick = () => {
+    if(mode==="single") {
+      createChat(user._id)
+    } else if(mode==="group") {
+      addToGroup();
+    } else {
+      console.log("User onclick mode not defined");
+    }
+  }
+
   const addToGroup = () => {
-    if (!groupMembers.includes(user.userEmail)) {
-      setGroupMembers([...groupMembers, user.userEmail]);
+    if (!groupMembers.includes(user)) {
+      setGroupMembers([...groupMembers, user]);
     }
     console.log("\nGroup Members", groupMembers);
   };
@@ -18,7 +30,7 @@ export const UserSearchResultComponent = ({
   // },[])
 
   return (
-    <div onClick={() => createChat(user._id)} className="user-search-result">
+    <div onClick={() => performUserItemOnClick()} className="user-search-result">
       <img
         className="user-search-result-profile-picture"
         src={user.userProfilePicture}

@@ -35,13 +35,20 @@ export const ChatComponent = ({
       <div className="chat-data">
         <div className="chat-name-time-container">
           <span className="chat-username">
-            {currentUser._id === chat.chatUsers[0]._id
-              ? chat.chatUsers[1].userName
-              : chat.chatUsers[0].userName}
+            {chat &&
+              (chat.isGroupChat
+                ? chat.chatName
+                : currentUser._id === chat.chatUsers[0]._id
+                ? chat.chatUsers[1].userEmail
+                : chat.chatUsers[0].userEmail)}
           </span>
-          <span className="chat-date-time">{chat.lastMessage?formatDate(chat.lastMessage.updatedAt):"Null"}</span>
+          <span className="chat-date-time">
+            {chat.lastMessage ? formatDate(chat.lastMessage.updatedAt) : ""}
+          </span>
         </div>
-        <span className="chat-last-message">{chat.lastMessage?chat.lastMessage.messageContent:"Null"}</span>
+        <span className="chat-last-message">
+          {chat.lastMessage ? chat.lastMessage.messageContent : "Send a message"}
+        </span>
       </div>
       <CreateChatModalComponent />
     </div>

@@ -50,6 +50,7 @@ export const HomePage = () => {
   const [profileModalUser, setProfileModalUser] = useState();
   const [loadingChats, setLoadingChats] = useState(false);
   const [loadingMessages, setLoadingMessages] = useState(false);
+  const [updateChat,setUpdateChat] = useState(false);
   const [socketConnected, setSocketConnected] = useState(false);
   const [socket, setSocket] = useState(null);
   let compareSelectedChat;
@@ -207,8 +208,9 @@ export const HomePage = () => {
     // console.log("Current User ", currentUser);
     if (currentUser) {
       getChats();
+      setUpdateChat(false);
     }
-  }, [currentUser]);
+  }, [currentUser,updateChat]);
 
   useEffect(() => {
     //console.log("Selected Chat", selectedChat);
@@ -294,6 +296,8 @@ export const HomePage = () => {
           open={showCreateChatModal}
           handleClose={handleCreateChatModalTab}
           createChat={createChat}
+          setUpdateChat={setUpdateChat}
+          setChat={setChat}
         />
       </div>
 
@@ -325,7 +329,7 @@ export const HomePage = () => {
                   <span className="message-user-email">
                     {selectedChat &&
                       (selectedChat.isGroupChat
-                        ? "Group Chat"
+                        ? `${selectedChat.chatUsers.length} Members`
                         : currentUser._id === selectedChat.chatUsers[0]._id
                         ? selectedChat.chatUsers[1].userEmail
                         : selectedChat.chatUsers[0].userEmail)}

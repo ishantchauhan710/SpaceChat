@@ -75,18 +75,19 @@ const getChatsController = expressAsyncHandler(async (req, res) => {
 });
 
 const createGroupChatController = expressAsyncHandler(async (req, res) => {
-  if (!req.body.users || !req.body.groupName) {
+  if (!req.body.groupUsers || !req.body.groupName) {
     res.status(400);
     throw new Error("Incomplete group details");
   }
 
-  var groupUsers = JSON.parse(req.body.users);
-  if (groupUsers.length < 2) {
-    res.status(400);
-    throw new Error("A group must contain minimum of 3 members");
-  }
-  groupUsers.push(req.user);
+  var groupUsers = JSON.parse(req.body.groupUsers);
 
+  //console.log("Group Users: ",groupUsers);
+  //console.log("Group Users Type: ",typeof(groupUsers));
+  
+  groupUsers.push(req.user);
+  //console.log("Group Users Updated: ",groupUsers);
+  
   try {
     const groupChat = await Chat.create({
       chatName: req.body.groupName,
