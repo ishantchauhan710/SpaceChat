@@ -8,12 +8,13 @@
     --colorHomePrimaryVariant: #22242A; 
 */
 
-    --colorHomePrimary: #1d1e26;
+    --colorHomePrimary:  #22242A;
     --colorHomePrimaryVariant: #171821;
     
 
     --colorOnline: #009124;
 
-    --colorMyMessage: #7948ff;
+    --colorNotMyMessage: #4b4d50;
+    --colorMyMessage: #F34C60;
 
 }

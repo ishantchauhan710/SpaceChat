@@ -15,7 +15,7 @@
 
 .container-message-item-data {
     margin-left: 10px;
-    background-color: var(--colorHomePrimary);
+    background-color: var(--colorNotMyMessage);
     padding: 7px 20px;
     border-radius: 0px 10px 10px 10px;
     max-width: 400px;
@@ -72,7 +72,7 @@
     border-radius: 10px 0px 10px 10px;
     max-width: 400px;
     word-wrap: break-word;
-    box-shadow: 1px 1px 4px rgba(255,255,255,0.2);
+    box-shadow: 1px 1px 4px rgba(255,255,255,0.1);
 }
 
 

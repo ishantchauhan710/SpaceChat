@@ -6,7 +6,7 @@ export const ChatComponent = ({
   chat,
   setChat,
   showMessagePanel,
-  currentUser,
+  currentUser
 }) => {
   // useEffect(() => {
   //   //console.log("Chats: ",chat);
@@ -23,7 +23,7 @@ export const ChatComponent = ({
 
   return (
     <div className="chat" onClick={() => performClickTasks(chat)}>
-      <div className="online-status" />
+      <div className="online-status" style={{display: "none"}} />
       <img
         className="chat-user-profile-picture"
         src={

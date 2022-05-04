@@ -22,7 +22,7 @@ export const appTheme = createTheme({
     },
     homePrimary: {
       light: "#44454e",
-      main: "#1d1e26",
+      main: "#22242A",
       dark: "#44454e",
       contrastText: "#fff",
     },
