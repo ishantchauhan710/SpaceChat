@@ -77,7 +77,7 @@
 
 .input-search-user {
     width: 100%;
-    background-color: var(--colorHomePrimary);
+    background-color: var(--colorHomePrimaryVariant);
     border: none;
     outline: none;
     padding: 10px 15px;
