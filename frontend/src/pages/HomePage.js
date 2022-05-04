@@ -372,6 +372,8 @@ export const HomePage = () => {
               profileModal={profileModal}
               handleProfileModalClose={handleProfileModalClose}
               user={profileModalUser}
+              currentUser={currentUser}
+              createChat={createChat}
             />
           </div>
         </div>

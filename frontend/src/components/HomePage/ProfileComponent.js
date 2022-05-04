@@ -1,11 +1,16 @@
-import { Box, Modal } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
 import React, { useEffect } from "react";
 import { createChatModalStyle } from "../../styles/modalStyles";
 
-const ProfileComponent = ({ profileModal, handleProfileModalClose, user }) => {
+const ProfileComponent = ({ profileModal, handleProfileModalClose, user, currentUser, createChat }) => {
   // useEffect(() => {
   //   console.log("Profile Modal User: ", user);
   // }, [profileModal]);
+
+  const handleOnClick = () => {
+    createChat(user._id)
+    handleProfileModalClose();
+  }
 
   return (
     <>
@@ -22,6 +27,9 @@ const ProfileComponent = ({ profileModal, handleProfileModalClose, user }) => {
               />
               <span className="profile-modal-name-text">{user.userName}</span>
               <span className="profile-modal-email-text">{user.userEmail}</span>
+              {currentUser._id!==user._id && (
+                <Button onClick={() => handleOnClick()} variant="outlined" style={{color: "#fff", border: "1px solid #fff", marginTop: 20, width: "50%"}}>Message</Button>
+              )}
             </div>
           </Box>
         </Modal>
