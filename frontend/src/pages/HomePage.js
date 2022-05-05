@@ -55,6 +55,8 @@ export const HomePage = () => {
   const [loadingMessages, setLoadingMessages] = useState(false);
   const [updateChat, setUpdateChat] = useState(false);
   const [socketConnected, setSocketConnected] = useState(false);
+  const [typing, setTyping] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const [socket, setSocket] = useState(null);
   let compareSelectedChat;
   let hasEnterKeyPressed = false; // For preventing firefox browser from firing click events multiple times
@@ -80,6 +82,15 @@ export const HomePage = () => {
     socket.on("connected", () => {
       setSocketConnected(true);
       console.log("Socket Connection Established");
+    });
+
+    socket.on("typing", () => {
+      setIsTyping(true);
+      console.log("SOCKET TYPING STARTED, STATE: ", isTyping);
+    });
+    socket.on("stopTyping", () => {
+      setIsTyping(false);
+      console.log("SOCKET TYPING STOPPED, STATE: ", isTyping);
     });
 
     console.log("IO Again: ", socket);
@@ -165,6 +176,36 @@ export const HomePage = () => {
 
   const handleProfileModalClose = () => {
     setProfileModal(false);
+  };
+
+  const handleTypingState = (messageInputTextValue) => {
+    setMessageContent(messageInputTextValue);
+
+    if (!socketConnected) {
+      return;
+    }
+
+    if (!typing) {
+      setTyping(true);
+      socket.emit("typing", selectedChat._id);
+      console.log("TYPING STARTED");
+      console.log("IS TYPING IS: ", isTyping);
+    }
+
+    let typingTimeStarted = new Date().getTime();
+    let awaitDuration = 3000;
+    setTimeout(() => {
+      let typingTimeNow = new Date().getTime();
+      let timeDifference = typingTimeNow - typingTimeStarted;
+      console.log("TIME DIFFERENCE STARTED: ", timeDifference);
+      if (timeDifference >= awaitDuration && typing) {
+        setTyping(false);
+        console.log("TIME DIFFERENCE OVER: ", timeDifference);
+        socket.emit("stopTyping", selectedChat._id);
+        console.log("TYPING STOPPED");
+        console.log("IS TYPING IS: ", isTyping);
+      }
+    }, awaitDuration);
   };
 
   /* Code for settings menu popup */
@@ -427,17 +468,22 @@ export const HomePage = () => {
                 showProfileModal={showProfileModal}
               />
             ))}
+          {!typing && isTyping ? (
+            <div className="typing-indicator">User is typing.....</div>
+          ) : (
+            <></>
+          )}
         </div>
-
         {selectedChat && (
           <div className="container-input-send-message">
+            {/* {!typing && isTyping ? "Typing..." : <></>} */}
             <div className="send-message-input-wrapper">
               <input
                 className="input-send-message"
                 id="sendMessageInput"
                 placeholder="Write a message..."
                 autoComplete="off"
-                onChange={(e) => setMessageContent(e.target.value)}
+                onChange={(e) => handleTypingState(e.target.value)}
                 value={messageContent}
               />
               <div className="container-message-controls">

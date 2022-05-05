@@ -67,28 +67,42 @@ io.on("connection", (socket) => {
       return;
     }
 
-    chatUsers.forEach((user,i) => {
-     // console.log("Message Sender Id: ", newMessageReceived.messageSender._id);
+    chatUsers.forEach((user, i) => {
+      // console.log("Message Sender Id: ", newMessageReceived.messageSender._id);
 
-      //if (user._id == newMessageReceived.messageSender._id) return;
+      // [NO NEED TO UNCOMMENT THE BELOW STATEMENT, THIS LOGIC IS WRITTEN IN THE FRONTEND PART]
+      // if (user._id == newMessageReceived.messageSender._id) return;
 
-      console.log("\n\n\n\nIteration: ",i)
-      console.log("Chat Users: ", user.userName);
-      console.log("Message Sender: ", newMessageReceived.messageSender.userName);
-      console.log("Message Receiver: ", user.userName);
-      console.log("Message Content: ",newMessageReceived.messageContent)
-      console.log("Message Chat: ",chat.chatName);
-      console.log("-------------------------------");
-      
-      
+      // console.log("\n\n\n\nIteration: ", i);
+      // console.log("Chat Users: ", user.userName);
+      // console.log(
+      //   "Message Sender: ",
+      //   newMessageReceived.messageSender.userName
+      // );
+      // console.log("Message Receiver: ", user.userName);
+      // console.log("Message Content: ", newMessageReceived.messageContent);
+      // console.log("Message Chat: ", chat.chatName);
+      // console.log("-------------------------------");
+
       if (user._id != newMessageReceived.messageSender._id) {
-          socket.in(user._id).emit("messageReceived", newMessageReceived);
-          console.log("Message sent from: ",newMessageReceived.messageSender.userName);
-          console.log("Message sent to: ",user.userName);
-      };
-
-
-    
+        socket.in(user._id).emit("messageReceived", newMessageReceived);
+        // console.log(
+        //   "Message sent from: ",
+        //   newMessageReceived.messageSender.userName
+        // );
+        //console.log("Message sent to: ", user.userName);
+      }
     });
   });
+
+  socket.on("typing",(room) => {
+    socket.in(room).emit("typing");
+    console.log("Typing Started");
+  });
+
+  socket.on("stopTyping",(room) => {
+    socket.in(room).emit("stopTyping");
+    console.log("Typing Stopped");
+  });
+
 });

@@ -193,6 +193,38 @@
     width: 50vw !important;
 }
 
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--colorHomePrimary);
+    padding: 10px 20px;
+    font-size: 1.2rem;
+}
+
+.typing-indicator:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-animation: ellipsisAnim steps(4,end) 1000ms infinite;      
+    animation: ellipsisAnim steps(4,end) 1000ms infinite;
+    content: "\2026"; 
+    width: 0px;
+  }
+  
+  @keyframes ellipsisAnim {
+    to {
+      width: 20px;    
+    }
+  }
+  
+  @-webkit-keyframes ellipsisAnim {
+    to {
+      width: 20px;    
+    }
+  }
+
 /*Show Hide logic should only work on smaller screens*/
 .show {
     display: block;
@@ -224,11 +256,11 @@
     }
     .container-messages {
         display: none;
-    }  */ 
-    
+    }  */
+
     .modal {
         width: 90vw !important;
-    } 
+    }
 
     .show {
         display: block;

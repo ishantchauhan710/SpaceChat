@@ -54,7 +54,7 @@ export const loginUserAccount = async (
   
       localStorage.setItem("userInfo",JSON.stringify(data));
       navigate('/home');
-      showSuccess("Account created successfully!");
+      showSuccess("User logged in successfully!");
       setLoading(false);
     } catch (error) {
       showError(error.response.data.message);
