@@ -23,7 +23,8 @@ export const ChatComponent = ({
 
   return (
     <div className="chat" onClick={() => performClickTasks(chat)}>
-      <div className="online-status" style={{display: "none"}} />
+     <div className="online-status" style={{display: "none"}} />
+
       <img
         className="chat-user-profile-picture"
         src={
@@ -47,7 +48,9 @@ export const ChatComponent = ({
           </span>
         </div>
         <span className="chat-last-message">
-          {chat.lastMessage ? chat.lastMessage.messageContent : "Send a message"}
+          {chat.lastMessage
+            ? chat.lastMessage.messageContent
+            : "Send a message"}
         </span>
       </div>
       <CreateChatModalComponent />

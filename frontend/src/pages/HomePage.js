@@ -68,6 +68,7 @@ export const HomePage = () => {
     setSocket(io(BASE_URL));
   }, []);
 
+
   useEffect(() => {
     if (!socket) {
       return;
@@ -83,6 +84,8 @@ export const HomePage = () => {
       setSocketConnected(true);
       console.log("Socket Connection Established");
     });
+
+  
 
     socket.on("typing", () => {
       setIsTyping(true);

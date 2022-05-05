@@ -144,6 +144,7 @@
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .container-message-controls {
@@ -201,6 +202,10 @@
     background-color: var(--colorHomePrimary);
     padding: 10px 20px;
     font-size: 1.2rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 70px;
 }
 
 .typing-indicator:after {

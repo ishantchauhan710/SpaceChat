@@ -105,4 +105,8 @@ io.on("connection", (socket) => {
     console.log("Typing Stopped");
   });
 
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+  });
+
 });
