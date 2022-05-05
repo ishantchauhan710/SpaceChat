@@ -37,9 +37,12 @@ import {
 } from "@mui/material";
 import ProfileComponent from "../components/HomePage/ProfileComponent";
 import io from "socket.io-client";
+import { EditGroupChatModalComponent } from "../components/HomePage/EditGroupChatModalComponent";
 
 export const HomePage = () => {
   const [showCreateChatModal, setShowCreateChatModal] = useState(false);
+  const [showEditGroupChatModal, setShowEditGroupChatModal] = useState(false);
+
   const [chats, setChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState();
   const [messageContent, setMessageContent] = useState();
@@ -50,7 +53,7 @@ export const HomePage = () => {
   const [profileModalUser, setProfileModalUser] = useState();
   const [loadingChats, setLoadingChats] = useState(false);
   const [loadingMessages, setLoadingMessages] = useState(false);
-  const [updateChat,setUpdateChat] = useState(false);
+  const [updateChat, setUpdateChat] = useState(false);
   const [socketConnected, setSocketConnected] = useState(false);
   const [socket, setSocket] = useState(null);
   let compareSelectedChat;
@@ -91,6 +94,10 @@ export const HomePage = () => {
     setShowCreateChatModal(!showCreateChatModal);
   };
 
+  const handleEditGroupChatModalComponent = () => {
+    setShowEditGroupChatModal(!showEditGroupChatModal);
+  };
+
   const getChats = () => {
     getChatsAsync(currentUser, setChats, showError, setLoadingChats);
   };
@@ -109,6 +116,10 @@ export const HomePage = () => {
     );
 
     socket.emit("joinRoom", selectedChat._id);
+  };
+
+  const editChat = () => {
+    handleEditGroupChatModalComponent();
   };
 
   const sendMessage = async () => {
@@ -177,7 +188,6 @@ export const HomePage = () => {
     setCurrentUser(userInfo);
   }, []);
 
-
   useEffect(() => {
     if (!socket) {
       return;
@@ -201,7 +211,6 @@ export const HomePage = () => {
     });
 
     //return () => socket.emit('end');
-
   });
 
   useEffect(() => {
@@ -210,7 +219,7 @@ export const HomePage = () => {
       getChats();
       setUpdateChat(false);
     }
-  }, [currentUser,updateChat]);
+  }, [currentUser, updateChat]);
 
   useEffect(() => {
     //console.log("Selected Chat", selectedChat);
@@ -299,6 +308,17 @@ export const HomePage = () => {
           setUpdateChat={setUpdateChat}
           setChat={setChat}
         />
+
+        {selectedChat && (
+          <EditGroupChatModalComponent
+            open={showEditGroupChatModal}
+            handleClose={handleEditGroupChatModalComponent}
+            createChat={createChat}
+            setUpdateChat={setUpdateChat}
+            setChat={setChat}
+            selectedChat={selectedChat}
+          />
+        )}
       </div>
 
       <div className={`container-messages ${messageUIClass}`}>
@@ -317,7 +337,10 @@ export const HomePage = () => {
                       : selectedChat.chatUsers[0].userProfilePicture
                   }
                 />
-                <div className="container-app-bar-message-details">
+                <div
+                  className="container-app-bar-message-details"
+                  onClick={() => editChat()}
+                >
                   <span className="message-user-name">
                     {selectedChat &&
                       (selectedChat.isGroupChat

@@ -23,7 +23,7 @@ import { getAuthorizedConfig } from "../../constants/config";
 import { UserSearchResultComponent } from "./UserSearchResultComponent";
 import { createChatModalStyle } from "../../styles/modalStyles";
 
-export const CreateChatModalComponent = ({ open, handleClose, createChat, setUpdateChat, setChat }) => {
+export const CreateChatModalComponent = ({ open, handleClose, createChat, setUpdateChat, setChat}) => {
   const { currentUser, setCurrentUser } = AppState();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchGroupUserQuery, setSearchGroupUserQuery] = useState("");

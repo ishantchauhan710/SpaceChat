@@ -109,4 +109,34 @@ const createGroupChatController = expressAsyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createChatController, getChatsController, createGroupChatController };
+
+const updateGroupChatController = expressAsyncHandler(async (req, res) => {
+  if (!req.body.groupId || !req.body.groupUsers || !req.body.groupName) {
+    res.status(400);
+    throw new Error("Incomplete group details");
+  }
+
+  var groupUsers = JSON.parse(req.body.groupUsers);
+  
+  try {
+    const groupChat = await Chat.findByIdAndUpdate(req.body.groupId,{
+      chatName: req.body.groupName,
+      chatUsers: groupUsers
+    });
+
+    const updatedGroupChat = await Chat.findOne({
+      _id: groupChat._id,
+    })
+      .populate("chatUsers", "-userPassword")
+      .populate("chatAdmin", "-userPassword");
+
+    res.status(200).json(updatedGroupChat);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
+});
+
+
+
+module.exports = { createChatController, getChatsController, createGroupChatController, updateGroupChatController };

@@ -124,6 +124,7 @@
     align-items: center;
     justify-content: flex-start;
     flex: 1;
+    cursor: pointer;
 }
 
 .message-profile-picture {
