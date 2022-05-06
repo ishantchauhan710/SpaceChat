@@ -40,10 +40,10 @@ export const LandingPage = () => {
               <a href="#">Home</a>
             </li>
             <li>
-              <a href="#">About</a>
+              <a href="https://www.linkedin.com/in/ishantchauhan710?original_referer=https%3A%2F%2Fgithub.com%2F">About</a>
             </li>
             <li>
-              <a href="#">More</a>
+              <a href="https://github.com/ishantchauhan710">More</a>
             </li>
           </ul>
 
@@ -114,7 +114,7 @@ export const LandingPage = () => {
                   }}
                   className="landing-page-control-btn btn-view-source-code"
                 >
-                  View Source Code
+                  <a href="https://github.com/ishantchauhan710/SpaceChat" style={{textDecoration: "none", color: "white"}}>View Source Code</a>
                 </Button>
 
                 <AuthModalComponent
