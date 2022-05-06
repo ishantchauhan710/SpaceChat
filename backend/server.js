@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const path = require("path");
 
 const {
   urlNotFoundMiddleware,
@@ -17,10 +18,6 @@ dotenv.config();
 connectDB();
 
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
@@ -95,12 +92,12 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("typing",(room) => {
+  socket.on("typing", (room) => {
     socket.in(room).emit("typing");
     console.log("Typing Started");
   });
 
-  socket.on("stopTyping",(room) => {
+  socket.on("stopTyping", (room) => {
     socket.in(room).emit("stopTyping");
     console.log("Typing Stopped");
   });
@@ -108,5 +105,16 @@ io.on("connection", (socket) => {
   socket.off("setup", () => {
     console.log("USER DISCONNECTED");
   });
-
 });
+
+const __dirpath = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirpath, "/frontend/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirpath, "frontend", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running in development mode");
+  });
+}
