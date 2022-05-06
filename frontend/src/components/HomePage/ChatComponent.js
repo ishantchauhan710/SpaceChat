@@ -6,7 +6,8 @@ export const ChatComponent = ({
   chat,
   setChat,
   showMessagePanel,
-  currentUser
+  currentUser,
+  selectedChat
 }) => {
   // useEffect(() => {
   //   //console.log("Chats: ",chat);
@@ -22,7 +23,7 @@ export const ChatComponent = ({
   };
 
   return (
-    <div className="chat" onClick={() => performClickTasks(chat)}>
+    <div className={`${selectedChat!==undefined && selectedChat._id===chat._id?"chat-active":"chat"}`} onClick={() => performClickTasks(chat)}>
      <div className="online-status" style={{display: "none"}} />
 
       <img

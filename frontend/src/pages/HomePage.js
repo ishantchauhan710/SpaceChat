@@ -322,6 +322,7 @@ export const HomePage = () => {
                 setChat={setChat}
                 showMessagePanel={showMessagePanel}
                 currentUser={currentUser}
+                selectedChat={selectedChat}
               />
             ))}
           {loadingChats ? (

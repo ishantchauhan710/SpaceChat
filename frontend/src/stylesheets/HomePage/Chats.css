@@ -11,6 +11,16 @@
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
+.chat-active {
+    display: flex;
+    cursor: pointer;
+    padding: 13px 15px;
+    border-radius: 0px;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background-color: var(--colorMyMessage);
+}
+
 .chat:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
