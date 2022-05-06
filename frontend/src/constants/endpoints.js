@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:5000";
+export const BASE_URL = "https://spacechatapp.herokuapp.com/";
 
 export const SIGNUP_ENDPOINT = "/auth/signup";
 export const LOGIN_ENDPOINT = "/auth/login";
