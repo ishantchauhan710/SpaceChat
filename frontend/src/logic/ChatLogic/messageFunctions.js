@@ -26,7 +26,7 @@ export const getMessagesForChatAsync = async (
     setTimeout(() => {
       const messageDiv = document.getElementById("containerMessages");
       messageDiv.scrollTop = messageDiv.scrollHeight + 20;
-    }, 800);
+    }, 1000);
   } catch (e) {
     showError(e.message);
     setLoadingMessages(false);
@@ -67,7 +67,7 @@ export const sendMessageAsync = async (
     setTimeout(() => {
       const messageDiv = document.getElementById("containerMessages");
       messageDiv.scrollTop = messageDiv.scrollHeight + 20;
-    }, 800);
+    }, 1000);
   } catch (e) {
     showError(e.message);
   }

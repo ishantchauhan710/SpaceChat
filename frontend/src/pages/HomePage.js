@@ -133,7 +133,9 @@ export const HomePage = () => {
   };
 
   const editChat = () => {
-    handleEditGroupChatModalComponent();
+    if(selectedChat && selectedChat.isGroupChat) {
+      handleEditGroupChatModalComponent();
+    }
   };
 
   const sendMessage = async () => {
@@ -158,6 +160,7 @@ export const HomePage = () => {
   const showChatPanel = () => {
     setChatUIClass("show");
     setMessageUIClass("hide");
+    setSelectedChat();
   };
 
   const showMessagePanel = () => {
@@ -196,7 +199,7 @@ export const HomePage = () => {
     }
 
     let typingTimeStarted = new Date().getTime();
-    let awaitDuration = 3000;
+    let awaitDuration = 1000;
     setTimeout(() => {
       let typingTimeNow = new Date().getTime();
       let timeDifference = typingTimeNow - typingTimeStarted;
@@ -249,8 +252,6 @@ export const HomePage = () => {
         compareSelectedChat._id === newMessageReceived.messageChat._id
       ) {
         setMessages([...messages, newMessageReceived]);
-      } else {
-        console.log("NEW NOTIFICATION IS HERE");
       }
     });
 

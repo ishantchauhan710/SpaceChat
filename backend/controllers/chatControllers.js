@@ -29,6 +29,7 @@ const createChatController = expressAsyncHandler(async (req, res) => {
       chatName: "Single Chat",
       isGroupChat: false,
       chatUsers: [req.user._id, userId],
+      chatAdmin: userId
     };
   }
 
