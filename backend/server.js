@@ -26,6 +26,20 @@ app.use("/message", messageRoutes);
 
 const PORT = process.env.PORT;
 
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API running in development mode");
+  });
+}
+
 app.use(urlNotFoundMiddleware);
 app.use(handleErrorFoundMiddleware);
 
@@ -106,15 +120,3 @@ io.on("connection", (socket) => {
     console.log("USER DISCONNECTED");
   });
 });
-
-const __dirpath = path.resolve();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirpath, "/frontend/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirpath, "frontend", "build", "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running in development mode");
-  });
-}
