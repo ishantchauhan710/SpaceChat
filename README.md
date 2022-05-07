@@ -33,7 +33,7 @@ The project at its core is built on MERN Stack which stands for (MongoDB, Expres
 **SpaceChat** offers realtime communication! This is achieved using the power of socket.io which is a popular library to establish **bidirectional low-latency communication** between client and server!
 
 <br><br>
-<img src="/Screenshots/mockup_hd_3.png" width="100%" /><br>
+<img src="/Screenshots/mockup_hd_4.png" width="100%" /><br>
 **SpaceChat** lets you create one to one chats as well as group chats! All you need to do is to create on Group Chat tab in the create chat dialog box then type the group name and add the group members using their username or email, and then you are good to go!
 
 ## Screenshots (Desktop) :computer:
