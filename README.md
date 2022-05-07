@@ -36,6 +36,19 @@ The project at its core is built on MERN Stack which stands for (MongoDB, Expres
 <img src="/Screenshots/mockup_hd_3.png" width="100%" /><br>
 **SpaceChat** lets you create one to one chats as well as group chats! All you need to do is to create on Group Chat tab in the create chat dialog box then type the group name and add the group members using their username or email, and then you are good to go!
 
+## Screenshots (Desktop) :computer:
+|||
+|:----------------------------------------:|:-----------------------------------------: |
+| ![](Screenshots/landing_page.jpg) | ![](Screenshots/landing_page_modal.jpg)
+| ![](Screenshots/single_chat.jpg) | ![](Screenshots/group_chat.jpg)  
+| ![](Screenshots/real_time_chat.jpg) | ![](Screenshots/profile_modal.jpg) 
+| ![](Screenshots/create_single_user_chat.jpg) | ![](Screenshots/create_group_user_chat.jpg) 
+
+## Screenshots (Mobile) :iphone:
+||||
+|:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
+| ![](Screenshots/Mobile/login_modal.jpeg) | ![](Screenshots/Mobile/inbox.jpeg) | ![](Screenshots/Mobile/chat_screen.jpeg)
+| ![](Screenshots/Mobile/create_group_chat_modal.jpeg) | ![](Screenshots/Mobile/profile_modal.jpeg) | ![](Screenshots/Mobile/profile_logout_popup_menu.jpeg) 
 
 ## Supporting Libraries / Frameworks / Packages used &nbsp; 🛠
 * [Socket.io](https://socket.io/) - Socket.io is a library that in simple words allows you to send and recieve data from server without having need to refresh the page, using the concept of WebSockets!
@@ -130,20 +143,6 @@ The purpose of this project is to demonstrate how a person can
     │   ├── AppContext.js   # ReactJS ContextAPI file to allow all components access a particular react state easily
     │   └── index.js        # A ReactJS file to render all the data on web page
     └──
-
-## Screenshots (Desktop) :computer:
-|||
-|:----------------------------------------:|:-----------------------------------------: |
-| ![](Screenshots/landing_page.jpg) | ![](Screenshots/landing_page_modal.jpg)
-| ![](Screenshots/single_chat.jpg) | ![](Screenshots/group_chat.jpg)  
-| ![](Screenshots/real_time_chat.jpg) | ![](Screenshots/profile_modal.jpg) 
-| ![](Screenshots/create_single_user_chat.jpg) | ![](Screenshots/create_group_user_chat.jpg) 
-
-## Screenshots (Mobile) :iphone:
-||||
-|:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
-| ![](Screenshots/Mobile/login_modal.jpeg) | ![](Screenshots/Mobile/inbox.jpeg) | ![](Screenshots/Mobile/chat_screen.jpeg)
-| ![](Screenshots/Mobile/create_group_chat_modal.jpeg) | ![](Screenshots/Mobile/profile_modal.jpeg) | ![](Screenshots/Mobile/profile_logout_popup_menu.jpeg) 
 
 ## Deploying Project on Heroku :heavy_check_mark:
 It is super easy to deploy the project on heroku! <br>
