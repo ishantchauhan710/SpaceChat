@@ -169,7 +169,7 @@ And then open your heroku URL to see the website running live :)
 #### Note :bangbang:
 * The heroku website link that I have provided for this project on the top may run slow when you open it for the first time. It is also possible that you may see an empty red snackbar. This is because of slow internet connection or timeout error. This error will go away on its own if you wait for 1-2 minutes after opening the heroku link and then reload the web page
 * WebSockets / Realtime Communication Feature will not work on mobile devices as websockets are not forwarded by the http proxy. If you want to establish realtime communication on mobile devices, you can create an android or iOS app to do so and use the websocket libraries to achieve realtime communication
-
+* Sometimes you may see that the message sent is appearing twice in the chat! This may be possibly due to either slow internet connection or slow server. However, to get rid of this error, you can simply refresh the page!
 
 ## Contact
 For any queries, you can mail me at developerishant710@gmail.com
